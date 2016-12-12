@@ -42,7 +42,7 @@
             <version>${project.youtube.reporting.version}</version>
         </dependency>
 
-        <!-- This dependency is only used for the Topics API sample, which requires the Jackson JSON parser
+        <!-- This dependency is only used for the Topics API sample, which requires the Jackson JSON parser -->
         <dependency>
             <groupId>org.codehaus.jackson</groupId>
             <artifactId>jackson-mapper-asl</artifactId>
@@ -68,7 +68,7 @@
         </dependency>
 
     </dependencies>
--->
+
 
     <build>
         <plugins>
@@ -87,7 +87,7 @@
       <configuration>
         <archive>
           <manifest>
-            <mainClass>API.APIManager.java</mainClass>
+            <mainClass>API.APIManager</mainClass>
           </manifest>
         </archive>
         <descriptorRefs>

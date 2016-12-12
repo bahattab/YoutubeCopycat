@@ -7,7 +7,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import main.java.views.*;
+import views.*;
 
 public class UserInterface extends JFrame {
 	
