@@ -6,10 +6,10 @@ Groupe NaN : Timothy Garwood, Graziella Husson, Quentin Thareau et Valentina Zel
 
 *Fonctionnalités 
 
-	- Interface facile à utiliser et 'user-friendly'
+	- Interface facile à utiliser et 'user-friendly'  --> Squelette implémenté
 
-	- Pouvoir visionner des vidéos
-	 	- en mode connecté
+	- Pouvoir visionner des vidéos --> API Youtube plus difficile à appréhender que prévu
+	 	- en mode connecté --> Visionnage imparfait et donc non intégré dans la première release.
 	 	- en local
 
 	- Barre de recherche
@@ -51,3 +51,15 @@ Groupe NaN : Timothy Garwood, Graziella Husson, Quentin Thareau et Valentina Zel
  - Jour 5 : 
 	- Améliorations
 	- Vidéo de Soutenance
+
+
+*Install
+
+
+*Lancement
+
+RELEASE_DAY_1 : On a mis un .jar avec seulement l'interface. Pour les releases suivantes on expliquera comment compiler le projet avec Maven.
+
+
+
+
