@@ -42,7 +42,7 @@
             <version>${project.youtube.reporting.version}</version>
         </dependency>
 
-        <!-- This dependency is only used for the Topics API sample, which requires the Jackson JSON parser -->
+        <!-- This dependency is only used for the Topics API sample, which requires the Jackson JSON parser
         <dependency>
             <groupId>org.codehaus.jackson</groupId>
             <artifactId>jackson-mapper-asl</artifactId>
@@ -68,19 +68,33 @@
         </dependency>
 
     </dependencies>
+-->
 
     <build>
         <plugins>
-            <!-- Forces Maven to use Java 1.6 -->
+            <!-- Forces Maven to use Java 1.7 -->
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.6.0</version>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.7</source>
+                    <target>1.7</target>
                     <compilerArgument></compilerArgument>
                 </configuration>
             </plugin>
+    <plugin>
+      <artifactId>maven-assembly-plugin</artifactId>
+      <configuration>
+        <archive>
+          <manifest>
+            <mainClass>API.APIManager.java</mainClass>
+          </manifest>
+        </archive>
+        <descriptorRefs>
+          <descriptorRef>jar-with-dependencies</descriptorRef>
+        </descriptorRefs>
+      </configuration>
+    </plugin>
         </plugins>
     </build>
 </project>
