@@ -1,5 +1,6 @@
 # pcd2016 - A YouTube Copycat
 Projet de conception et de développement 2016.
+(This project is licensed under the terms of the Apache License 2.0)
 
 Groupe NaN : Timothy Garwood, Graziella Husson, Quentin Thareau et Valentina Zelaya
 
