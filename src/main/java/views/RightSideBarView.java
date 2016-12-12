@@ -1,4 +1,7 @@
+package main.java.views;
+
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -9,7 +12,9 @@ public class RightSideBarView extends JPanel{
 	private Box sideBox;
 	
 	public RightSideBarView(){
+		super(new FlowLayout(FlowLayout.RIGHT));
 		sideBox = Box.createVerticalBox();
+		sideBox.setPreferredSize(new Dimension(320,800));
 		JButton b = createNewPreference("first button");
 		sideBox.add(b);
 		this.add(sideBox);
@@ -19,24 +24,12 @@ public class RightSideBarView extends JPanel{
 		return sideBox;
 	}
 
-	JButton createNewPreference(String text){
+	public JButton createNewPreference(String text){
 		JButton newButton = new JButton();
 		newButton.setText(text);
 		newButton.setMaximumSize(new Dimension(500,30));
 		return newButton;
 	}
 	
-	public static void main(String[] args){
-		JFrame truc = new JFrame();
-		RightSideBarView V = new RightSideBarView();
-		JButton encore=V.createNewPreference("encore un");
-		JButton encore1=V.createNewPreference("fdufhzsduyfzogfyqerofqezyfpEZGQGUOZERQYEGFOU<GRYFOhhfqerfZHFIUZEIFLZefpZEUFIEFLZeu");
-		V.getSideBox().add(encore);
-		V.getSideBox().add(encore1);
-		truc.add(V);
-		truc.pack();
-		truc.setVisible(true);
-		System.out.println("truc");
-		truc.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}
+
 }
