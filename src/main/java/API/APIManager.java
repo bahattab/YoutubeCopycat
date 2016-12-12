@@ -73,8 +73,11 @@ public class APIManager {
          List<OurVideo> ourVideoList = new ArrayList<OurVideo>();
          if (searchResultList != null) {
         	 for (SearchResult searchResult : searchResultList) {
-        		 //OurVideo ourVideo = new OurVideo(searchResult.getSnippet().getTitle(), searchResult.getId() ,searchResult.getStatistics().getViewCount(), searchResult.getStatistics().getDislikeCount(), searchResult.getStatistics().getLikeCount(), searchResult.getStatistics().getCommentCount(), searchResult.getSnippet().getChannelTitle(), searchResult.getSnippet().getDescription(), searchResult.getSnippet().getPublishedAt());
-        		 OurVideo ourVideo = new OurVideo(searchResult.getSnippet().getTitle(), searchResult.getId().getVideoId(), searchResult.getSnippet().getChannelTitle(), searchResult.getSnippet().getDescription(), searchResult.getSnippet().getPublishedAt());
+        		 YouTube.Videos.List list = youtube.videos().list("statistics");
+        		 list.setId(searchResult.getId().getVideoId());
+        		 list.setKey(apiKey);            
+        		 Video v = list.execute().getItems().get(0);
+        		 OurVideo ourVideo = new OurVideo(searchResult.getSnippet().getTitle(), searchResult.getId().getVideoId(), v.getStatistics().getViewCount(), v.getStatistics().getDislikeCount(), v.getStatistics().getLikeCount(), v.getStatistics().getCommentCount(), searchResult.getSnippet().getChannelTitle(), searchResult.getSnippet().getDescription(), searchResult.getSnippet().getPublishedAt());
         		 ourVideoList.add(ourVideo);
              }
          }
