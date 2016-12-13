@@ -85,4 +85,39 @@ public class APIManager {
          }
          return ourVideoList;
 	 }
+
+    public List<OurVideo> searchPopular() throws IOException{
+		 Properties properties = new Properties();
+		 long length = 100;
+	        try {
+	            InputStream in = Search.class.getResourceAsStream("/" + PROPERTIES_FILENAME);
+	            properties.load(in);
+
+	        } catch (IOException e) {
+	            System.err.println("There was an error reading " + PROPERTIES_FILENAME + ": " + e.getCause()
+	                    + " : " + e.getMessage());
+	            System.exit(1);
+	        }
+		 YouTube.Search.List search = youtube.search().list("id,snippet");
+		 String apiKey = properties.getProperty("youtube.apikey");
+         search.setKey(apiKey);
+         search.setQ("popular on youtube");
+         search.setType("video");
+         search.setFields("items(id/kind,id/videoId,snippet)");
+         search.setMaxResults(length);
+         SearchListResponse searchResponse = search.execute();
+         List<SearchResult> searchResultList = searchResponse.getItems();
+         List<OurVideo> ourVideoList = new ArrayList<OurVideo>();
+         if (searchResultList != null) {
+        	 for (SearchResult searchResult : searchResultList) {
+        		 YouTube.Videos.List list = youtube.videos().list("statistics");
+        		 list.setId(searchResult.getId().getVideoId());
+        		 list.setKey(apiKey);            
+        		 Video v = list.execute().getItems().get(0);
+        		 OurVideo ourVideo = new OurVideo(searchResult.getSnippet().getTitle(), searchResult.getId().getVideoId(), v.getStatistics().getViewCount(), v.getStatistics().getDislikeCount(), v.getStatistics().getLikeCount(), v.getStatistics().getCommentCount(), searchResult.getSnippet().getChannelTitle(), searchResult.getSnippet().getDescription(), searchResult.getSnippet().getPublishedAt());
+        		 ourVideoList.add(ourVideo);
+             }
+         }
+         return ourVideoList;
+	 }
 }
