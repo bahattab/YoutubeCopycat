@@ -94,7 +94,7 @@
       <configuration>
         <archive>
           <manifest>
-            <mainClass>API.APIManager</mainClass>
+            <mainClass>app.YoutubeCopycat</mainClass>
           </manifest>
         </archive>
         <descriptorRefs>
