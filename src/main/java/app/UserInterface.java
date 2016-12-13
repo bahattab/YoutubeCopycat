@@ -44,6 +44,10 @@ public class UserInterface extends JFrame {
 		pack();
 		setVisible(true);
 	}
+
+	public CentralView getCenter() {
+		return center;
+	}
 	
 	public AppController getApp(){
 		return app;
