@@ -23,12 +23,13 @@ import elements.OurVideo;
 public class APIManager {
 	 private static final String PROPERTIES_FILENAME = "youtube.properties";
 	 private static YouTube youtube;
+	 private Properties properties;
 	 
 	 public APIManager() throws IOException{
 		// Read the developer key from the properties file.
-	        Properties properties = new Properties();
+	        properties = new Properties();
 	        try {
-	            InputStream in = Search.class.getResourceAsStream("/" + PROPERTIES_FILENAME);
+	            InputStream in = Search.class.getResourceAsStream("/" +PROPERTIES_FILENAME);
 	            properties.load(in);
 
 	        } catch (IOException e) {
@@ -52,16 +53,6 @@ public class APIManager {
 	 }
 	 
 	 public List<OurVideo> search(String queryTerm, long number_of_videos_returned ) throws IOException{
-		 Properties properties = new Properties();
-	        try {
-	            InputStream in = Search.class.getResourceAsStream("/" + PROPERTIES_FILENAME);
-	            properties.load(in);
-
-	        } catch (IOException e) {
-	            System.err.println("There was an error reading " + PROPERTIES_FILENAME + ": " + e.getCause()
-	                    + " : " + e.getMessage());
-	            System.exit(1);
-	        }
 		 YouTube.Search.List search = youtube.search().list("id,snippet");
 		 String apiKey = properties.getProperty("youtube.apikey");
          search.setKey(apiKey);
@@ -87,17 +78,7 @@ public class APIManager {
 	 }
 
     public List<OurVideo> searchPopular() throws IOException{
-		 Properties properties = new Properties();
 		 long length = 100;
-	        try {
-	            InputStream in = Search.class.getResourceAsStream("/" + PROPERTIES_FILENAME);
-	            properties.load(in);
-
-	        } catch (IOException e) {
-	            System.err.println("There was an error reading " + PROPERTIES_FILENAME + ": " + e.getCause()
-	                    + " : " + e.getMessage());
-	            System.exit(1);
-	        }
 		 YouTube.Search.List search = youtube.search().list("id,snippet");
 		 String apiKey = properties.getProperty("youtube.apikey");
          search.setKey(apiKey);
