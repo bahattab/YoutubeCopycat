@@ -15,13 +15,14 @@ public class OurVideo {
 	private String channelTitle;
 	private String videoDescription;
 	private DateTime publishedAt;
-	
+	private String miniature;
 	
 	public OurVideo(String name, String videoID, BigInteger viewCount,
 			BigInteger dislikeCount, BigInteger likeCount,
 			BigInteger commentCount, String channelTitle,
-			String videoDescription, DateTime publishedAt) {
+			String videoDescription, DateTime publishedAt, String miniature) {
 		super();
+		this.miniature=miniature;
 		this.name = name;
 		this.videoID = videoID;
 		this.viewCount = viewCount;
@@ -40,10 +41,12 @@ public class OurVideo {
 				+ ", viewCount=" + viewCount + ", dislikeCount=" + dislikeCount
 				+ ", likeCount=" + likeCount + ", commentCount=" + commentCount
 				+ ", channelTitle=" + channelTitle + ", videoDescription="
-				+ videoDescription + ", publishedAt=" + publishedAt + "]";
+				+ videoDescription + ", publishedAt=" + publishedAt + ", miniature="+miniature+"]";
 	}
 
-
+	public String getMiniature(){
+		return miniature;
+	}
 	public String getName() {
 		return name;
 	}

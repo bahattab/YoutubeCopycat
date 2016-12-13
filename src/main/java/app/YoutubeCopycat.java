@@ -4,8 +4,9 @@ package app;
 public class YoutubeCopycat {
 
 	public static void main(String[] args) {
-		UserInterface ui=new UserInterface();
-
+		AppController app = new AppController();
+		UserInterface ui=new UserInterface(app);
+		app.setUi(ui);
 	}
 
 }
