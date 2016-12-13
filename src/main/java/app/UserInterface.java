@@ -44,6 +44,11 @@ public class UserInterface extends JFrame {
 		pack();
 		setVisible(true);
 	}
+
+	public CentralView getCenter() {
+		// TODO Auto-generated method stub
+		return center;
+	}
 	
 	
 

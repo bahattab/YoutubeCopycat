@@ -9,15 +9,19 @@ import javax.swing.JTabbedPane;
 
 public class CentralView extends JTabbedPane {
 	
+	private VideoTab videoTab;
+	public VideoTab getVideoTab() {
+		return videoTab;
+	}
 	//private VideoPanel video;
 		
 	public CentralView() {
 		super();
 		
-		VideoTab  vidTab1=new VideoTab();
-		JPanel jplInnerPanel1 = vidTab1;
+		videoTab=new VideoTab();
+		JPanel jplInnerPanel1 = videoTab;
 		//jplInnerPanel1.add(video);
-		this.addTab("Video Player", vidTab1.getVideoIcon(), jplInnerPanel1);
+		this.addTab("Video Player", videoTab.getVideoIcon(), jplInnerPanel1);
 		this.setSelectedIndex(0);
 		
 		SearchTab searchTab1=new SearchTab();
