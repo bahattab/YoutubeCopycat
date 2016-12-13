@@ -13,16 +13,16 @@ public class CentralView extends JTabbedPane {
 		
 	public CentralView() {
 		super();
-		String vidIconPath="src/main/resources/icons/video.png";
-		ImageIcon videoIcon = new ImageIcon(vidIconPath);
-		JPanel jplInnerPanel1 = createInnerPanel("Video : ");
+		
+		VideoTab  vidTab1=new VideoTab();
+		JPanel jplInnerPanel1 = vidTab1;
 		//jplInnerPanel1.add(video);
-		this.addTab("Video Player", videoIcon, jplInnerPanel1);
+		this.addTab("Video Player", vidTab1.getVideoIcon(), jplInnerPanel1);
 		this.setSelectedIndex(0);
-		String srchIconPath="src/main/resources/icons/search.png";
-		ImageIcon searchIcon = new ImageIcon(srchIconPath);
-		JPanel jplInnerPanel2 = createInnerPanel("Seach Results: ");
-		this.addTab("Search Results", searchIcon, jplInnerPanel2);
+		
+		SearchTab searchTab1=new SearchTab();
+		JPanel jplInnerPanel2 = searchTab1;
+		this.addTab("Search Results", searchTab1.getSearchIcon(), jplInnerPanel2);
 	}
 	
 	protected JPanel createInnerPanel(String text) {
