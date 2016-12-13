@@ -16,14 +16,14 @@ public class UserInterface extends JFrame {
 	BottomView bottom;
 	LeftSideBarView left;
 	RightSideBarView right;
-	
-	
 	JPanel mainPanel;
+	AppController app;
 	
-	public UserInterface(){
+	public UserInterface(AppController app){
 		super("A Youtube Copycat");
-		center=new CentralView();
-		top=new TopView();
+		this.app=app;
+		center=new CentralView(app);
+		top=new TopView(app);
 		bottom=new BottomView();
 		left=new LeftSideBarView();
 		right=new RightSideBarView();
@@ -43,6 +43,34 @@ public class UserInterface extends JFrame {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		pack();
 		setVisible(true);
+	}
+
+	public CentralView getCenter() {
+		return center;
+	}
+	
+	public AppController getApp(){
+		return app;
+	}
+
+	public TopView getTop() {
+		return top;
+	}
+
+	public BottomView getBottom() {
+		return bottom;
+	}
+
+	public LeftSideBarView getLeft() {
+		return left;
+	}
+
+	public RightSideBarView getRight() {
+		return right;
+	}
+
+	public JPanel getMainPanel() {
+		return mainPanel;
 	}
 	
 	

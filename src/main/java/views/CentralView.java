@@ -7,22 +7,33 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
+import app.AppController;
+import app.UserInterface;
+
 public class CentralView extends JTabbedPane {
 	
-	//private VideoPanel video;
+
+	private SearchTab searchTab;
+	private AppController app;
+	private VideoTab videoTab;
+
+	public VideoTab getVideoTab() {
+		return videoTab;
+	}
 		
-	public CentralView() {
+	public CentralView(AppController app) {
 		super();
-		String vidIconPath="src/main/resources/icons/video.png";
-		ImageIcon videoIcon = new ImageIcon(vidIconPath);
-		JPanel jplInnerPanel1 = createInnerPanel("Video : ");
-		//jplInnerPanel1.add(video);
-		this.addTab("Video Player", videoIcon, jplInnerPanel1);
+		this.app=app;
+
+		videoTab=new VideoTab();
+		JPanel jplInnerPanel1 = videoTab;
+		this.addTab("Video Player", videoTab.getVideoIcon(), jplInnerPanel1);
+		
 		this.setSelectedIndex(0);
-		String srchIconPath="src/main/resources/icons/search.png";
-		ImageIcon searchIcon = new ImageIcon(srchIconPath);
-		JPanel jplInnerPanel2 = createInnerPanel("Seach Results: ");
-		this.addTab("Search Results", searchIcon, jplInnerPanel2);
+		
+		searchTab=new SearchTab();
+		JPanel jplInnerPanel2 = searchTab;
+		this.addTab("Search Results", searchTab.getSearchIcon(), jplInnerPanel2);
 	}
 	
 	protected JPanel createInnerPanel(String text) {
@@ -32,6 +43,10 @@ public class CentralView extends JTabbedPane {
 		jplPanel.setLayout(new GridLayout(1, 1));
 		jplPanel.add(jlbDisplay);
 		return jplPanel;
+	}
+	
+	public SearchTab getSearchTab(){
+		return searchTab;
 	}
 
 }
