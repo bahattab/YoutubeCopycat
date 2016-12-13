@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.swing.JPanel;
 import uk.co.caprica.vlcj.binding.LibVlc;
+import uk.co.caprica.vlcj.discovery.NativeDiscovery;
 import uk.co.caprica.vlcj.player.MediaPlayerFactory;
 import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
 import uk.co.caprica.vlcj.runtime.RuntimeUtil;
@@ -53,9 +54,18 @@ public class VideoPlayer extends JPanel {
 	 *  Linux: libvlc.so
 	 */
 	private void registerLibrary() {
-		NativeLibrary.addSearchPath(
-				RuntimeUtil.getLibVlcLibraryName(), "d:/vlc-2.2.1");
+		/**NativeLibrary.addSearchPath(
+				RuntimeUtil.getLibVlcLibraryName(), "C:\\Program Files (x86)\\VideoLAN\\VLC");
 		Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
+		*/
+		NativeDiscovery nd = new NativeDiscovery();
+		if(!nd.discover()){
+			System.out.println("VLC Not found");
+			//System.exit(-1);
+		}
+		String vlcLibName = RuntimeUtil.getLibVlcLibraryName();
+		String vlcLibCoreName = RuntimeUtil.getLibVlcCoreName();
+		Native.loadLibrary(vlcLibName, LibVlc.class);
 		LibXUtil.initialise();
 	}
 
@@ -98,11 +108,3 @@ public class VideoPlayer extends JPanel {
 	}
 	
 }
-
-
-
-
-
-   
-
-

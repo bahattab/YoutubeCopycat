@@ -114,7 +114,7 @@ public class APIManager {
         		 list.setId(searchResult.getId().getVideoId());
         		 list.setKey(apiKey);            
         		 Video v = list.execute().getItems().get(0);
-        		 OurVideo ourVideo = new OurVideo(searchResult.getSnippet().getTitle(), searchResult.getId().getVideoId(), v.getStatistics().getViewCount(), v.getStatistics().getDislikeCount(), v.getStatistics().getLikeCount(), v.getStatistics().getCommentCount(), searchResult.getSnippet().getChannelTitle(), searchResult.getSnippet().getDescription(), searchResult.getSnippet().getPublishedAt());
+        		 OurVideo ourVideo = new OurVideo(searchResult.getSnippet().getTitle(), searchResult.getId().getVideoId(), v.getStatistics().getViewCount(), v.getStatistics().getDislikeCount(), v.getStatistics().getLikeCount(), v.getStatistics().getCommentCount(), searchResult.getSnippet().getChannelTitle(), searchResult.getSnippet().getDescription(), searchResult.getSnippet().getPublishedAt(),searchResult.getSnippet().getThumbnails().getDefault().getUrl());
         		 ourVideoList.add(ourVideo);
              }
          }

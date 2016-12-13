@@ -53,10 +53,6 @@ public class UserInterface extends JFrame {
 		return app;
 	}
 
-	public CentralView getCenter() {
-		return center;
-	}
-
 	public TopView getTop() {
 		return top;
 	}
