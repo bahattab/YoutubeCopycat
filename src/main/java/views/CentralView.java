@@ -31,7 +31,7 @@ public class CentralView extends JTabbedPane {
 		
 		this.setSelectedIndex(0);
 		
-		searchTab=new SearchTab();
+		searchTab=new SearchTab(app);
 		JPanel jplInnerPanel2 = searchTab;
 		this.addTab("Search Results", searchTab.getSearchIcon(), jplInnerPanel2);
 	}
