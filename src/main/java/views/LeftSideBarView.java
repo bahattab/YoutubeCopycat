@@ -49,6 +49,13 @@ public class LeftSideBarView extends JPanel{
 		JButton b6=new JButton(icon6);
 		b6.setMaximumSize(new Dimension(80,30));
 		
+		b1.setToolTipText("Accueil");
+		b2.setToolTipText("Afficher la barre de recherche");
+		b3.setToolTipText("Passer en mode local ou en mode connecté");
+		b4.setToolTipText("Afficher des statistiques de videos");
+		b5.setToolTipText("Suggestions de vidéo");
+		b6.setToolTipText("Vidéos les plus visionnées aujourd'hui");
+		
 		b1.addMouseListener(new MouseAdapter(){
 	    	@Override
 	    	public void mousePressed(MouseEvent e){
