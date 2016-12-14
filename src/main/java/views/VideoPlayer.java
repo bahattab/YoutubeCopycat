@@ -21,6 +21,7 @@ import com.sun.jna.NativeLibrary;
 public class VideoPlayer extends JPanel {
 	private Canvas videoSurface;
 	private EmbeddedMediaPlayer mediaPlayer;
+	private PlayerControlsPanel controlsPanel;
 	
 	public VideoPlayer() {
 		registerLibrary();
@@ -34,6 +35,8 @@ public class VideoPlayer extends JPanel {
 		this.add(videoSurface,BorderLayout.CENTER);
 		
 		mediaPlayer = createPlayer(vlcArgs, videoSurface);
+		controlsPanel=new PlayerControlsPanel(mediaPlayer);
+		this.add(controlsPanel,BorderLayout.SOUTH);
 		}
 
 
@@ -41,7 +44,8 @@ public class VideoPlayer extends JPanel {
 	 *  Runs the audio/video file
 	 */
 	public void play(final String filename) {
-	
+		if (mediaPlayer.isPlaying())
+			mediaPlayer.stop();
 		mediaPlayer.playMedia(filename);
 		
 	}

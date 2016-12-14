@@ -15,7 +15,7 @@ public class UserInterface extends JFrame {
 	TopView top;
 	BottomView bottom;
 	LeftSideBarView left;
-	RightSideBarView right;
+	PlaylistRightSideBarView right;
 	JPanel mainPanel;
 	AppController app;
 	
@@ -25,8 +25,8 @@ public class UserInterface extends JFrame {
 		center=new CentralView(app);
 		top=new TopView(app);
 		bottom=new BottomView();
-		left=new LeftSideBarView();
-		right=new RightSideBarView();
+		left=new LeftSideBarView(app);
+		right=new PlaylistRightSideBarView(app);
 		
 		mainPanel=new JPanel();
 		this.setPreferredSize(new Dimension(1500,1000));
@@ -65,7 +65,7 @@ public class UserInterface extends JFrame {
 		return left;
 	}
 
-	public RightSideBarView getRight() {
+	public PlaylistRightSideBarView getRight() {
 		return right;
 	}
 

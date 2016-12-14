@@ -1,11 +1,12 @@
 package elements;
 
 
+import java.io.Serializable;
 import java.math.BigInteger; 
 
 import com.google.api.client.util.DateTime;
 
-public class OurVideo {
+public class OurVideo implements Serializable{
 	private String name;
 	private String videoID;
 	private BigInteger viewCount;
@@ -16,11 +17,13 @@ public class OurVideo {
 	private String videoDescription;
 	private DateTime publishedAt;
 	private String miniature;
+	private Boolean onlineStatus = true;
+	private String duration;
 	
 	public OurVideo(String name, String videoID, BigInteger viewCount,
 			BigInteger dislikeCount, BigInteger likeCount,
 			BigInteger commentCount, String channelTitle,
-			String videoDescription, DateTime publishedAt, String miniature) {
+			String videoDescription, DateTime publishedAt, String miniature,String duration) {
 		super();
 		this.miniature=miniature;
 		this.name = name;
@@ -32,6 +35,7 @@ public class OurVideo {
 		this.channelTitle = channelTitle;
 		this.videoDescription = videoDescription;
 		this.publishedAt = publishedAt;
+		this.duration=duration;
 	}
 
 
@@ -43,7 +47,11 @@ public class OurVideo {
 				+ ", channelTitle=" + channelTitle + ", videoDescription="
 				+ videoDescription + ", publishedAt=" + publishedAt + ", miniature="+miniature+"]";
 	}
-
+	
+	public String getDuration(){
+		return duration;
+	}
+	
 	public String getMiniature(){
 		return miniature;
 	}
@@ -89,6 +97,14 @@ public class OurVideo {
 
 	public DateTime getPublishedAt() {
 		return publishedAt;
+	}
+
+	public void setOnlineStatus(Boolean onlineStatus) {
+		this.onlineStatus = onlineStatus;
+	}
+
+	public Boolean isOnline(){
+		return onlineStatus;
 	}
 	
 }

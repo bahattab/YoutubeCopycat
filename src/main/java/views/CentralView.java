@@ -1,5 +1,7 @@
 package views;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 
 import javax.swing.ImageIcon;
@@ -25,13 +27,13 @@ public class CentralView extends JTabbedPane {
 		super();
 		this.app=app;
 
-		videoTab=new VideoTab();
+		videoTab=new VideoTab(app);
 		JPanel jplInnerPanel1 = videoTab;
 		this.addTab("Video Player", videoTab.getVideoIcon(), jplInnerPanel1);
 		
 		this.setSelectedIndex(0);
 		
-		searchTab=new SearchTab();
+		searchTab=new SearchTab(app);
 		JPanel jplInnerPanel2 = searchTab;
 		this.addTab("Search Results", searchTab.getSearchIcon(), jplInnerPanel2);
 	}
