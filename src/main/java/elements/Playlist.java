@@ -35,5 +35,9 @@ public class Playlist {
 	public String toString() {
 		return "Playlist [videos=" + videos + "]";
 	}
+	
+	public int size(){
+		return videos.size();
+	}
 
 }

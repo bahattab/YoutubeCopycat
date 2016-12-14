@@ -17,11 +17,12 @@ public class OurVideo {
 	private DateTime publishedAt;
 	private String miniature;
 	private Boolean onlineStatus = true;
+	private String duration;
 	
 	public OurVideo(String name, String videoID, BigInteger viewCount,
 			BigInteger dislikeCount, BigInteger likeCount,
 			BigInteger commentCount, String channelTitle,
-			String videoDescription, DateTime publishedAt, String miniature) {
+			String videoDescription, DateTime publishedAt, String miniature,String duration) {
 		super();
 		this.miniature=miniature;
 		this.name = name;
@@ -33,6 +34,7 @@ public class OurVideo {
 		this.channelTitle = channelTitle;
 		this.videoDescription = videoDescription;
 		this.publishedAt = publishedAt;
+		this.duration=duration;
 	}
 
 
@@ -44,7 +46,11 @@ public class OurVideo {
 				+ ", channelTitle=" + channelTitle + ", videoDescription="
 				+ videoDescription + ", publishedAt=" + publishedAt + ", miniature="+miniature+"]";
 	}
-
+	
+	public String getDuration(){
+		return duration;
+	}
+	
 	public String getMiniature(){
 		return miniature;
 	}

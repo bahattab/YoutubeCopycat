@@ -76,3 +76,4 @@ public class PlaylistRightSideBarView extends JPanel{
 	
 
 }
+

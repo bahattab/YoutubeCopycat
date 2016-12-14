@@ -20,6 +20,7 @@ public class OurVideoComponent extends Box{
 	OurVideo video;
 	AppController app;
 	JLabel jname;
+	JLabel jduration;
 	JLabel jchannel;
 	JLabel miniaturelabel;
 
@@ -34,16 +35,25 @@ public class OurVideoComponent extends Box{
 		BufferedImage miniature = ImageIO.read(new URL(video.getMiniature()));
 		//ImageIcon miniature = new ImageIcon(ImageIO.read(getClass().getResource("https://i.ytimg.com/vi/5Nrv5teMc9Y/default.jpg")));
 		miniaturelabel = new JLabel(new ImageIcon(miniature));
+		jduration=new JLabel("     Duration = "+video.getDuration().substring(2));
 		this.add(miniaturelabel);
 		
 		jname = new JLabel("     Title = "+video.getName());
 		vbox.add(jname);
 		jchannel = new JLabel("     Channel = "+video.getChannelTitle());
 		vbox.add(jchannel);
+		vbox.add(jduration);
 		this.add(vbox);
 	}
 	
-
+	public void setJduration(String jdur){
+		this.jduration.setText(jdur);
+	}
+	
+	public String getJduration(){
+		return jduration.getText();
+	}
+	
 	public void setJname(String jname) {
 		this.jname.setText(jname);
 	}

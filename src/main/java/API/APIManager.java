@@ -67,13 +67,13 @@ public class APIManager {
          List<OurVideo> ourVideoList = new ArrayList<OurVideo>();
          if (searchResultList != null) {
         	 for (SearchResult searchResult : searchResultList) {
-        		 YouTube.Videos.List list = youtube.videos().list("statistics");
+        		 YouTube.Videos.List list = youtube.videos().list("statistics, ContentDetails");
         		 list.setId(searchResult.getId().getVideoId());
         		 list.setKey(apiKey);            
         		 Video v = list.execute().getItems().get(0);
         		 
-        		 OurVideo ourVideo = new OurVideo(searchResult.getSnippet().getTitle(), searchResult.getId().getVideoId(), v.getStatistics().getViewCount(), v.getStatistics().getDislikeCount(), v.getStatistics().getLikeCount(), v.getStatistics().getCommentCount(), searchResult.getSnippet().getChannelTitle(), searchResult.getSnippet().getDescription(), searchResult.getSnippet().getPublishedAt(),searchResult.getSnippet().getThumbnails().getDefault().getUrl());
-        		 ourVideoList.add(ourVideo);
+        		 OurVideo ourVideo = new OurVideo(searchResult.getSnippet().getTitle(), searchResult.getId().getVideoId(), v.getStatistics().getViewCount(), v.getStatistics().getDislikeCount(), v.getStatistics().getLikeCount(), v.getStatistics().getCommentCount(), searchResult.getSnippet().getChannelTitle(), searchResult.getSnippet().getDescription(), searchResult.getSnippet().getPublishedAt(),searchResult.getSnippet().getThumbnails().getDefault().getUrl(),v.getContentDetails().getDuration());
+            	 ourVideoList.add(ourVideo);
              }
          }
          return ourVideoList;
@@ -93,12 +93,12 @@ public class APIManager {
          List<OurVideo> ourVideoList = new ArrayList<OurVideo>();
          if (searchResultList != null) {
         	 for (Video searchResult : searchResultList) {
-        		 YouTube.Videos.List list = youtube.videos().list("statistics");
+        		 YouTube.Videos.List list = youtube.videos().list("statistics, ContentDetails");
         		 list.setId(searchResult.getId());
         		 list.setKey(apiKey);            
         		 Video v = list.execute().getItems().get(0);
-        		 OurVideo ourVideo = new OurVideo(searchResult.getSnippet().getTitle(), searchResult.getId(), v.getStatistics().getViewCount(), v.getStatistics().getDislikeCount(), v.getStatistics().getLikeCount(), v.getStatistics().getCommentCount(), searchResult.getSnippet().getChannelTitle(), searchResult.getSnippet().getDescription(), searchResult.getSnippet().getPublishedAt(),searchResult.getSnippet().getThumbnails().getDefault().getUrl());
-        		 ourVideoList.add(ourVideo);
+        		 OurVideo ourVideo = new OurVideo(searchResult.getSnippet().getTitle(), searchResult.getId(), v.getStatistics().getViewCount(), v.getStatistics().getDislikeCount(), v.getStatistics().getLikeCount(), v.getStatistics().getCommentCount(), searchResult.getSnippet().getChannelTitle(), searchResult.getSnippet().getDescription(), searchResult.getSnippet().getPublishedAt(),searchResult.getSnippet().getThumbnails().getDefault().getUrl(),v.getContentDetails().getDuration());
+            	 ourVideoList.add(ourVideo);
              }
          }
          return ourVideoList;
@@ -119,13 +119,13 @@ public class APIManager {
         List<OurVideo> ourVideoList = new ArrayList<OurVideo>();
         if (searchResultList != null) {
        	 for (SearchResult searchResult : searchResultList) {
-       		 YouTube.Videos.List list = youtube.videos().list("statistics");
+       		 YouTube.Videos.List list = youtube.videos().list("statistics, ContentDetails");
        		 list.setId(searchResult.getId().getVideoId());
        		 list.setKey(apiKey);            
        		 Video v = list.execute().getItems().get(0);
        		 
-       		 OurVideo ourVideo = new OurVideo(searchResult.getSnippet().getTitle(), searchResult.getId().getVideoId(), v.getStatistics().getViewCount(), v.getStatistics().getDislikeCount(), v.getStatistics().getLikeCount(), v.getStatistics().getCommentCount(), searchResult.getSnippet().getChannelTitle(), searchResult.getSnippet().getDescription(), searchResult.getSnippet().getPublishedAt(),searchResult.getSnippet().getThumbnails().getDefault().getUrl());
-       		 ourVideoList.add(ourVideo);
+       		OurVideo ourVideo = new OurVideo(searchResult.getSnippet().getTitle(), searchResult.getId().getVideoId(), v.getStatistics().getViewCount(), v.getStatistics().getDislikeCount(), v.getStatistics().getLikeCount(), v.getStatistics().getCommentCount(), searchResult.getSnippet().getChannelTitle(), searchResult.getSnippet().getDescription(), searchResult.getSnippet().getPublishedAt(),searchResult.getSnippet().getThumbnails().getDefault().getUrl(),v.getContentDetails().getDuration());
+       		ourVideoList.add(ourVideo);
             }
         }
         return ourVideoList;

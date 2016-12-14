@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 
 import API.APIManager;
 import elements.OurVideo;
+import elements.PlaylistVideoComponent;
 import views.Home;
 
 public class AppController {
@@ -74,5 +75,9 @@ public class AppController {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public void removeVideoFromPlaylist(OurVideo video, PlaylistVideoComponent plvc){
+		plvc.remove(video);
 	}
 }
