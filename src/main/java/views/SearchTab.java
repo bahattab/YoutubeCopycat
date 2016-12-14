@@ -1,8 +1,10 @@
 package views;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -47,7 +49,7 @@ public class SearchTab extends JPanel{
 		this.app=app;
 		String srchIconPath="src/main/resources/icons/search.png";
 		searchIcon = new ImageIcon(srchIconPath);
-		result = new JPanel();
+		result = new JPanel(new BorderLayout());
 		result.setSize(new Dimension(1000, 700));
 		jsc = new JScrollPane(result);
 		this.add(jsc);
@@ -58,7 +60,10 @@ public class SearchTab extends JPanel{
 		jsc.setVisible(true);
 	}
 	
-	public void update(List<OurVideo> list) throws IOException{
+	public void update(List<OurVideo> list, String tabTitle) throws IOException{
+		
+		JLabel resultsTitle=new JLabel(tabTitle);
+		resultsTitle.setFont(new Font("Courier",Font.BOLD + Font.ITALIC,20));
 		
 		//result.setLayout(new GridLayout(25,1));	
 		Box bigvbox=Box.createVerticalBox();
@@ -74,6 +79,7 @@ public class SearchTab extends JPanel{
 			
 		}	
 		result.removeAll();
+		result.add(resultsTitle,BorderLayout.NORTH);
 		result.add(bigvbox);
 		result.repaint();
 		result.revalidate();

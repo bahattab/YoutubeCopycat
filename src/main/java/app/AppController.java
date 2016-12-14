@@ -22,8 +22,12 @@ public class AppController {
 	
 	public void search() throws IOException{
 		
+		
+		String keyword=ui.getTop().getSearchField().getText();
 		List<OurVideo> list = api.search(ui.getTop().getSearchField().getText(), 25);
-		ui.getCenter().getSearchTab().update(list);
+		ui.getCenter().setSelectedIndex(1);
+		ui.getCenter().getSearchTab().update(list,"Results for "+"\'"+keyword+"\'"+" search");
+		
 	}
 
 	public void setUi(UserInterface ui) {

@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
@@ -31,11 +33,35 @@ public class TopView extends JPanel{
 		this.app=app;
 		this.setMaximumSize(new Dimension(1800,200));
 		searchField=new JTextField(50);
-		srchLabel=new JLabel("Type keywords here");
+		searchField.setToolTipText("Type keywords here");
 		srchButton=new JButton();
 		srchButton.setText("Search");
-		srchLabel.setCursor(Cursor.getDefaultCursor());
-	    searchField.add(srchLabel, BorderLayout.LINE_END);
+
+	    
+	    searchField.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent e) {
+				
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER){
+					try {
+						getApp().search();
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+					JTextField tf=(JTextField)e.getSource();
+					tf.setText("");
+			    }
+			}
+		});
 	    srchButton.addMouseListener(new MouseAdapter(){
 	    	@Override
 	    	public void mousePressed(MouseEvent e){
