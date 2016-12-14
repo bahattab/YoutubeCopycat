@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import API.APIManager;
 import elements.OurVideo;
@@ -79,5 +77,15 @@ public class AppController {
 	
 	public void removeVideoFromPlaylist(OurVideo video, PlaylistVideoComponent plvc){
 		plvc.remove(video);
+	}
+
+	public void addToPlaylist(OurVideo ourVideo) {
+		try {
+			ui.getRight().updatePlaylist(ourVideo);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 }
