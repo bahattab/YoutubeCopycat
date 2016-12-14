@@ -80,23 +80,23 @@ public class APIManager {
 
     public List<OurVideo> searchPopular() throws IOException{
 		 long length = 40;
-		 YouTube.Search.List search = youtube.search().list("id,snippet");
+		 YouTube.Videos.List search = youtube.videos().list("id,snippet");
 		 String apiKey = properties.getProperty("youtube.apikey");
+		 search.setChart("mostPopular");
          search.setKey(apiKey);
-         search.setQ("popular on youtube");
-         search.setType("video");
-         search.setFields("items(id/kind,id/videoId,snippet)");
+         search.setRegionCode("FR");
+         search.setFields("items(id,snippet)");
          search.setMaxResults(length);
-         SearchListResponse searchResponse = search.execute();
-         List<SearchResult> searchResultList = searchResponse.getItems();
+         VideoListResponse searchResponse = search.execute();
+         List<Video> searchResultList = searchResponse.getItems();
          List<OurVideo> ourVideoList = new ArrayList<OurVideo>();
          if (searchResultList != null) {
-        	 for (SearchResult searchResult : searchResultList) {
+        	 for (Video searchResult : searchResultList) {
         		 YouTube.Videos.List list = youtube.videos().list("statistics");
-        		 list.setId(searchResult.getId().getVideoId());
+        		 list.setId(searchResult.getId());
         		 list.setKey(apiKey);            
         		 Video v = list.execute().getItems().get(0);
-        		 OurVideo ourVideo = new OurVideo(searchResult.getSnippet().getTitle(), searchResult.getId().getVideoId(), v.getStatistics().getViewCount(), v.getStatistics().getDislikeCount(), v.getStatistics().getLikeCount(), v.getStatistics().getCommentCount(), searchResult.getSnippet().getChannelTitle(), searchResult.getSnippet().getDescription(), searchResult.getSnippet().getPublishedAt(),searchResult.getSnippet().getThumbnails().getDefault().getUrl());
+        		 OurVideo ourVideo = new OurVideo(searchResult.getSnippet().getTitle(), searchResult.getId(), v.getStatistics().getViewCount(), v.getStatistics().getDislikeCount(), v.getStatistics().getLikeCount(), v.getStatistics().getCommentCount(), searchResult.getSnippet().getChannelTitle(), searchResult.getSnippet().getDescription(), searchResult.getSnippet().getPublishedAt(),searchResult.getSnippet().getThumbnails().getDefault().getUrl());
         		 ourVideoList.add(ourVideo);
              }
          }
