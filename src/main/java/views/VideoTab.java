@@ -36,7 +36,7 @@ public class VideoTab extends JPanel{
 		super();
 		this.app=app;
 		this.setLayout(new BorderLayout());
-		URL vidIconPath=SearchTab.class.getResource("/icons/search.png");
+		URL vidIconPath=SearchTab.class.getResource("/icons/video.png");
 		videoIcon = new ImageIcon(vidIconPath);
 		videoPlayer=new VideoPlayer();
 		this.add(videoPlayer);
