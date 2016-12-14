@@ -1,6 +1,15 @@
 package elements;
 
+import java.awt.Dimension;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import javax.imageio.ImageIO;
 import javax.swing.Box;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 
@@ -10,11 +19,28 @@ public class OurVideoComponent extends Box{
 
 	OurVideo video;
 	AppController app;
+	JLabel jname;
+	JLabel jchannel;
+	JLabel miniaturelabel;
 
-	public OurVideoComponent(int arg0, OurVideo video, AppController app) {
+	public OurVideoComponent(int arg0, OurVideo video, AppController app) throws MalformedURLException, IOException {
 		super(arg0);
 		this.video=video;
 		this.app=app;
+		this.setMaximumSize(new Dimension(1000,300));
+		BevelBorder border = new BevelBorder(0);
+		this.setBorder(border);
+		Box vbox=Box.createVerticalBox();
+		BufferedImage miniature = ImageIO.read(new URL(video.getMiniature()));
+		//ImageIcon miniature = new ImageIcon(ImageIO.read(getClass().getResource("https://i.ytimg.com/vi/5Nrv5teMc9Y/default.jpg")));
+		miniaturelabel = new JLabel(new ImageIcon(miniature));
+		this.add(miniaturelabel);
+		
+		jname = new JLabel("     Title = "+video.getName());
+		vbox.add(jname);
+		jchannel = new JLabel("     Channel = "+video.getChannelTitle());
+		vbox.add(jchannel);
+		this.add(vbox);
 	}
 	
 	public OurVideo getVideo() {
@@ -33,3 +59,4 @@ public class OurVideoComponent extends Box{
 		this.app = app;
 	}
 }
+

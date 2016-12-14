@@ -64,24 +64,10 @@ public class SearchTab extends JPanel{
 		Box bigvbox=Box.createVerticalBox();
 		for (int i = 0; i < list.size(); i++) {
 			final OurVideoComponent hbox = new OurVideoComponent(0,list.get(i),app);
-			hbox.setMaximumSize(new Dimension(1000,300));
-			BevelBorder border = new BevelBorder(0);
-			hbox.setBorder(border);
-			Box vbox=Box.createVerticalBox();
-			BufferedImage miniature = ImageIO.read(new URL(list.get(i).getMiniature()));
-			//ImageIcon miniature = new ImageIcon(ImageIO.read(getClass().getResource("https://i.ytimg.com/vi/5Nrv5teMc9Y/default.jpg")));
-			JLabel miniaturelabel = new JLabel(new ImageIcon(miniature));
-			hbox.add(miniaturelabel);
-			
-			JLabel jname = new JLabel("     Title = "+list.get(i).getName());
-			vbox.add(jname);
-			JLabel jchannel = new JLabel("     Channel = "+list.get(i).getChannelTitle());
-			vbox.add(jchannel);
-			hbox.add(vbox);
 			hbox.addMouseListener(new MouseAdapter(){
 		    	@Override
 		    	public void mousePressed(MouseEvent e){
-		    		//app.readOurVideo(hbox.getVideo());
+		    		app.readOurVideo(hbox.getVideo());
 		    	}
 		    });
 			bigvbox.add(hbox);
