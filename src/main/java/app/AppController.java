@@ -76,8 +76,8 @@ public class AppController {
 		
 	}
 	
-	public void removeVideoFromPlaylist(OurVideo video, PlaylistVideoComponent plvc){
-		plvc.remove(video);
+	public void removeVideoFromPlaylist(PlaylistVideoComponent pvc) {
+		ui.getRight().remove(pvc);
 	}
 
 	public void addToPlaylist(OurVideo ourVideo) {

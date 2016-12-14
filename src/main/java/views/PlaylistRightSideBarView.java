@@ -1,6 +1,6 @@
 package views;
 
-import java.awt.Color;
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
@@ -9,17 +9,18 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 
 import javax.swing.Box;
-import javax.swing.JButton;
-import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
 import app.AppController;
 import elements.OurVideo;
-import elements.OurVideoComponent;
 import elements.Playlist;
 import elements.PlaylistVideoComponent;
+import elements.deletePlaylistButton;
+import elements.importPlaylistButton;
+import elements.savePlaylistButton;
 
 
 public class PlaylistRightSideBarView extends JPanel{
@@ -30,18 +31,34 @@ public class PlaylistRightSideBarView extends JPanel{
 	private Box bigvbox=Box.createVerticalBox();
 	
 	public PlaylistRightSideBarView(AppController app){
-		super(new FlowLayout(FlowLayout.RIGHT));
+		super();
+		this.setLayout(new BorderLayout());
 		playlist = new Playlist();
 		this.app=app;
-		result = new JPanel();
-		result.setSize(new Dimension(350, 800));
+		
+		Box topPanel = Box.createVerticalBox();
+		
+		topPanel.add(new JLabel("Your Playlist"));
+		Box hbox = Box.createHorizontalBox();
+		hbox.add(new importPlaylistButton(this));
+		hbox.add(new savePlaylistButton(playlist));
+		hbox.add(new deletePlaylistButton(this));
+		topPanel.add(hbox);
+		this.add(topPanel,BorderLayout.NORTH);
+		
+		
+		this.result = new JPanel();
+		result.setLayout(new FlowLayout(FlowLayout.CENTER));
+		//result.setLayout(new BoxLayout(result,BoxLayout.Y_AXIS));
+		result.setPreferredSize(new Dimension(335,100));
 		jsc = new JScrollPane(result);
 		this.add(jsc);
 
-		jsc.setPreferredSize(new Dimension(350,800));
+		jsc.setPreferredSize(new Dimension(355,800));
+		//jsc.setMaximumSize(new Dimension(350,800));
 		jsc.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
-		bigvbox.setSize(new Dimension(350,800));
+		//bigvbox.setSize(new Dimension(350,800));
 		jsc.setVisible(true);
 	}
 	
@@ -59,20 +76,43 @@ public class PlaylistRightSideBarView extends JPanel{
 		    		app.readOurVideo(playlistComp.getVideo());
 		    	}
 		    });
-			playlistComp.setAlignmentX(0);
-			bigvbox.add(playlistComp);
-			result.add(bigvbox);
+			//playlistComp.setAlignmentX(0);
+			//bigvbox.add(playlistComp);
+			result.add(playlistComp);
 			result.repaint();
 			result.revalidate();
 		}
+		
+
+	}
+	public void remove(PlaylistVideoComponent pvc){
+		playlist.removeVideo(pvc.getVideo());
+		result.remove(pvc);
+		result.repaint();
+		result.revalidate();
 	}
 
-	public JButton createNewPreference(String text){
-		JButton newButton = new JButton();
-		newButton.setText(text);
-		newButton.setMaximumSize(new Dimension(500,30));
-		return newButton;
+	public void setPlaylist(Playlist playlistChoice) {
+		playlist.removeAll();
+		result.removeAll();
+		if (playlistChoice!=null)
+			for (OurVideo ov : playlistChoice.getVideos()){
+				final PlaylistVideoComponent playlistComp = new PlaylistVideoComponent(playlist, ov, app);
+				playlistComp.addMouseListener(new MouseAdapter(){
+		    	@Override
+		    	public void mousePressed(MouseEvent e){
+		    		app.readOurVideo(playlistComp.getVideo());
+		    	}
+		    });
+				result.add(new PlaylistVideoComponent(playlistChoice, ov, app));
+			}
+		result.repaint();
+		result.revalidate();
+		
+		
 	}
+
+	
 	
 
 }

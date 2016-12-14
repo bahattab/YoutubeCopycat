@@ -1,5 +1,4 @@
 package elements;
-import java.io.*;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -9,6 +8,7 @@ import java.net.MalformedURLException;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+
 
 import app.AppController;
 
@@ -48,7 +48,7 @@ public class PlaylistVideoComponent extends Box{
 			remove.addMouseListener(new MouseAdapter(){
 		    	@Override
 		    	public void mousePressed(MouseEvent e){
-		    		app.removeVideoFromPlaylist(video,plvc);
+		    		app.removeVideoFromPlaylist(plvc);
 		    	}
 		    });
 			bigvbox.add(remove);
@@ -62,6 +62,12 @@ public class PlaylistVideoComponent extends Box{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		this.addMouseListener(new MouseAdapter(){
+	    	public void mousePressed(MouseEvent e){
+	    		app.readOurVideo(((PlaylistVideoComponent) e.getSource()).getVideo());
+	    	}
+		});
 	}
 		
 	public OurVideo getVideo() {
