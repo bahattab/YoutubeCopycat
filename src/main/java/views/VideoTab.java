@@ -2,6 +2,7 @@ package views;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Dimension;
 import java.awt.Font;
 
 import javax.swing.Box;
@@ -10,13 +11,17 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import app.AppController;
+
 import elements.OurVideo;
+import elements.addToPlaylistButton;
 
 public class VideoTab extends JPanel{
 	
 	private VideoPlayer videoPlayer;
 	private ImageIcon videoIcon;
 	private JPanel videoDetails;
+	private AppController app;
 	
 	public ImageIcon getVideoIcon() {
 		return videoIcon;
@@ -26,24 +31,25 @@ public class VideoTab extends JPanel{
 		this.videoIcon = videoIcon;
 	}
 
-	public VideoTab(){
+	public VideoTab(AppController app){
 		super();
+		this.app=app;
 		this.setLayout(new BorderLayout());
 		String vidIconPath="src/main/resources/icons/video.png";
 		videoIcon = new ImageIcon(vidIconPath);
 		videoPlayer=new VideoPlayer();
 		this.add(videoPlayer);
 		videoDetails = new JPanel();
-		videoDetails.setLayout(new BoxLayout(videoDetails, BoxLayout.Y_AXIS));
+		videoDetails.setLayout(new BorderLayout());
 		this.add(videoDetails,BorderLayout.SOUTH);
 	}
 
-	public void setDetails(OurVideo ourVideo){
-		System.out.println("VideoTab : setting details for "+ ourVideo.getName());
+public void setDetails(OurVideo ourVideo){
+		System.out.println("VideoTab : setting details for "+ ourVideo.getName()+"    ");
 		videoDetails.removeAll();
-		JLabel Title = new JLabel(ourVideo.getName());
-		Title.setFont(new Font("Arial",0,22));
-		videoDetails.add(Title);
+		
+		JLabel title = new JLabel(ourVideo.getName()); 
+		title.setFont(new Font("Arial",Font.BOLD|Font.LAYOUT_LEFT_TO_RIGHT,16));
 		Box vbox1= Box.createVerticalBox();
 		vbox1.add(new JLabel("Published on : "+ourVideo.getPublishedAt().toString()));
 		vbox1.add(new JLabel("Published by : "+ourVideo.getChannelTitle()));
@@ -55,7 +61,12 @@ public class VideoTab extends JPanel{
 		hbox.add(vbox1);
 		hbox.add(Box.createHorizontalGlue());
 		hbox.add(vbox2);
-		videoDetails.add(hbox);
+		Box vBox = Box.createVerticalBox();
+		
+		vBox.add(hbox);
+		videoDetails.add(title,BorderLayout.NORTH);
+		videoDetails.add(vBox);
+		videoDetails.add(new addToPlaylistButton(ourVideo, app),BorderLayout.EAST);
 	}
 	
 	

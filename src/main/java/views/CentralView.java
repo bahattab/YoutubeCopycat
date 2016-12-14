@@ -1,6 +1,8 @@
 package views;
 
-import java.awt.GridLayout;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.GridLayout;;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -25,7 +27,7 @@ public class CentralView extends JTabbedPane {
 		super();
 		this.app=app;
 
-		videoTab=new VideoTab();
+		videoTab=new VideoTab(app);
 		JPanel jplInnerPanel1 = videoTab;
 		this.addTab("Video Player", videoTab.getVideoIcon(), jplInnerPanel1);
 		

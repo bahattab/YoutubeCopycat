@@ -47,6 +47,7 @@ public class SearchTab extends JPanel{
 	public SearchTab(AppController app){
 		super();
 		this.app=app;
+		this.setLayout(new BorderLayout());
 		String srchIconPath="src/main/resources/icons/search.png";
 		searchIcon = new ImageIcon(srchIconPath);
 		result = new JPanel(new BorderLayout());
