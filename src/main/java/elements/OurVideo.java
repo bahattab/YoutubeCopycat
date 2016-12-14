@@ -1,11 +1,12 @@
 package elements;
 
 
+import java.io.Serializable;
 import java.math.BigInteger; 
 
 import com.google.api.client.util.DateTime;
 
-public class OurVideo {
+public class OurVideo implements Serializable{
 	private String name;
 	private String videoID;
 	private BigInteger viewCount;

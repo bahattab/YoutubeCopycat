@@ -1,8 +1,15 @@
 package elements;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Playlist {
+public class Playlist implements Serializable{
 
 	ArrayList<OurVideo> videos;
 	
@@ -40,4 +47,33 @@ public class Playlist {
 		return videos.size();
 	}
 
+	public void saveOnFile(){
+		File fichier= new File("playlist");
+		System.out.println(fichier);
+	       try {
+	         ObjectOutputStream flotEcriture = 
+	             new ObjectOutputStream(
+	                new FileOutputStream(fichier));
+	         flotEcriture.writeObject(this);
+	         flotEcriture.close();
+	       } catch (IOException e) {
+	         System.out.println(" erreur :" + e.toString());
+	       }  
+	}
+	
+	public static void main(String[] args) {
+		     File fichier= new File("playlist");
+		     try {
+		       ObjectInputStream flotLecture = 
+		             new ObjectInputStream(
+		                new FileInputStream(fichier));
+		       Object lu = flotLecture.readObject();
+		       Playlist playlist=(Playlist)lu;
+		       System.out.println(playlist);
+		       flotLecture.close();
+		     } catch (Exception e) {
+		       System.out.println(" erreur :" +e.toString());
+		     }    
+		
+	}
 }

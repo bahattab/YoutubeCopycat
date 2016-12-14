@@ -90,4 +90,8 @@ public class PlaylistVideoComponent extends Box{
 		bigvbox.remove(remove);
 			
 	}
+
+	public Playlist getPlaylist() {
+		return playlist;
+	}
 }
