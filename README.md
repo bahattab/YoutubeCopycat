@@ -18,11 +18,11 @@ Groupe NaN : Timothy Garwood, Graziella Husson, Quentin Thareau et Valentina Zel
 	- Pouvoir visionner des vidéos --> API Youtube plus difficile à appréhender que prévu
 	 	- en mode connecté 
 			- Première release : on a essayé d'utiliser un objet type WebView de JavaFX... on a décidé de ne pas garder 
-					    cette implémentation car non seulement elle nous obligeait à mélanger JavaFX et Swing,
+						cette implémentation car non seulement elle nous obligeait à mélanger JavaFX et Swing,
 						mais cela marché moyennement.
 			--> Visionnage imparfait et donc non intégré dans la première release
 			- Deuxième release : on a décidé d'utiliser la librairie vlcj qui permet d'utiliser un lecteur VLC dans une application Java.
-					    Puisque VLC est capable de lire des vidéos à partir d'une URL mais aussi à partir d'un chemin fichier, cette implémentation est plus adaptée au cahier de charges.
+					Puisque VLC est capable de lire des vidéos à partir d'une URL mais aussi à partir d'un chemin fichier, cette implémentation est plus adaptée au cahier de charges.
 
 		
 	 	- en local
@@ -32,18 +32,22 @@ Groupe NaN : Timothy Garwood, Graziella Husson, Quentin Thareau et Valentina Zel
 			Se connecte à l'API Youtube et fait une requete de recherche avec les mots clé rentrés par l'utilisateur. Affiche les résultats dans des box de manière lisible.
 	 	- en mode local
 	
-	- Playlist 
+	- Playlist --> Jour 3 : Complètement implémentée !
 		- Pouvoir sauvegarder des vidéos dans une playlist affichée sur le côté droit de l'écran 
 		- Pouvoir lancer une video de la playlist
-		- Pouvoir enlever une vidéo de la playlist 
+		- Pouvoir enlever une vidéo de la playlist
+
+		--> Jour3 : Pouvoir sauvegarder une playlist et la reouvrir dans l'application 
+
 	
 	- Multithreading --> Implémentée par libvlc dans la release 2
-	    Lancer des vidéos et la recherche sans que l'exécution de l'une ou l'autre soit stoppée.
-	    	VLC : l'utilisation de vlc permet directement de faire des recherches sans stoper une vidéo et vice versa.
+		Lancer des vidéos et la recherche sans que l'exécution de l'une ou l'autre soit stoppée.
+		VLC : l'utilisation de vlc permet directement de faire des recherches sans stoper une vidéo et vice versa.
 
 	- Affichage de statistiques
-	 	- de la vidéo (nombre de vues,...)
-	 	- most watched, suggestions ?
+		- de la vidéo (nombre de vues,...) --> Jour 3: c'est fait ! Ces statistiques s'affichent en dessous de la vidéo qui est jouée
+		- suggestions  --> Jour 3 : Implémentée ! Le bouton avec un coeur permet d'afficher dans l'onglet résultats des vidéos qui ressemblent à celles qui sont sur la Playlist.
+		- most watched sur Youtube 
 
 	- Base de données locale pour le mode local
 
@@ -87,10 +91,33 @@ Groupe NaN : Timothy Garwood, Graziella Husson, Quentin Thareau et Valentina Zel
 		-> Quentin
 		
 	Résultats :
-	-
+
+	- On peut désormais visionner une vidéo donnée comme résultat d'une recherche en cliquant dessus
+	- On peut déclencher la lecture d'une vidéo à partir d'un objet avec un ID de vidéo
+	- On a ajouté des boutons de contrôle pour la vidéo vlc (pause, stop, suivant, barre de volume)
+	- la fonctionnalité de playlist a été COMPLETEMENT implémentée, c'est-à-dire qu'on peut :
+		- Ajouter la vidéo visionnée à la playlist
+		- Enlever une vidéo de la playlist
+		- Sauvergarder la playlist
+		- Recharger une playlist
+	--> Ce fut l'étape la plus complexe d'aujourd'hui : on s'est mis tous d'accord sur comment les objets devraient intéragir entre eux pour que cela marche bien 
+	- Nous avons rajouté un bouton "suggestions" (avec un coeur comme icône) qui permet d'afficher sur l'onglet de résultats des vidéos qui ressemblent à celles d'une playlist
+
+
 
  - Jour 4 :
+	Objectifs:
 	- Base de données pour version locale 
+	--> (Jour 3) Finalement, on ne fera pas une base de données locale comme on en avait l'intention car de notre point de vue, mettre en place une donnée de base SQL et la classe qui l'interface est un travail très long et qui apporte peu au fonctionnement de l'application.
+	--> (Jour 3) On permettra à la place à l'utilisateur d'ajouter ses vidéos locales aux playlists qu'il peut ensuite sauvergarder et importer.
+	--> (Jour 3) Ouverture des videos locales
+		-> Graziella
+	--> (Jour 3) Boutton et fonctionnalité vidéo populaires d'aujourd'hui en France (et dans le monde ?)
+		->Quentin
+	--> (Jour 3) Perfectionner les playlists et l'interface
+		->Timothy 
+	--> (Jour 3) Pop-up avec les commentaires de la vidéo
+		-> Valentina
 
  - Jour 5 : 
 	- Améliorations
@@ -98,12 +125,28 @@ Groupe NaN : Timothy Garwood, Graziella Husson, Quentin Thareau et Valentina Zel
 
 
 *Install
-Pour pouvoir avoir accès à l'API Youtube en executant le .jar, il faut avoir une clé dans un fichier youtube.properties situé dans le même dossier que le .jar. Ce fichier est disponible dans la racine de notre repository (il contient déjà une clé de démonstration).
+
+ - Pour pouvoir avoir accès à l'API Youtube en executant le .jar, il faut avoir une clé dans un fichier youtube.properties situé dans le même dossier que le .jar. Ce fichier est disponible dans la release de chaque jour, avec le binaire .jar et il contient déjà une clé de démonstration.
+ - Pour pouvoir visionner la vidéo, vous devrez installer VLC sur votre machine :
+  - sudo apt-get install vlc 
+ - L'application marche sous Windows et Linux. Néanmoins, pour les utilisateurs de Ubuntu et dérivés, VLC peut être configuré pour ne pas lire des vidéos depuis YouTube. Si vous avez un écran noir à la lecture d'une vidéo, veuillez exécuter les commandes suivantes dans un terminal (Linux) : 
+  - sudo apt-get install curl
+  - sudo rm /usr/lib/vlc/lua/playlist/youtube.*
+  - sudo curl "http://git.videolan.org/?p=vlc.git;a=blob_plain;f=share/lua/playlist/youtube.lua;hb=HEAD" -o /usr/lib/vlc/lua/playlist/youtube.lua
+
+Enjoy ! 
 
 *Lancement
 
-RELEASE_DAY_1 : On a mis un .jar avec seulement l'interface. Pour les releases suivantes on expliquera comment compiler le projet avec Maven.
-RELEASE_DAY_2 : Un .jar contenant une interface utilisateur est fournie. La fonctionnalité de recherche est disponible et celle de lecture de video est en cours d'implémentation. Une vidéo test est lancée dès le lancement de l'application (lien codé en dur). Dans les jours qui suivent, il sera possible de lancer n'importe quelle vidéo.
+ - RELEASE_DAY_1 : On a mis un .jar avec seulement l'interface. Pour les releases suivantes on expliquera comment compiler le projet avec Maven.
+ - RELEASE_DAY_2 : Un .jar contenant une interface utilisateur est fournie. La fonctionnalité de recherche est disponible et celle de lecture de video est en cours d'implémentation. Une vidéo test est lancée dès le lancement de l'application (lien codé en dur). Dans les jours qui suivent, il sera possible de lancer n'importe quelle vidéo. Le fichier youtube.properties contenant la clé d'accès à l'API Youtube doit être placée dans le même dossier que le .jar.
+ - RELEASE_DAY_3 : Un .jar contenant une interface utilisateur est fournie. Le fichier youtube.properties contenant la clé d'accès à l'API Youtube doit être placée dans le même dossier que le .jar. Dans cette version l'utilisateur peut :
+  - Un message d'information s'affiche lorsque on lance l'application et présente les différentes fonctionnalités. On peut le retrouver en cliquant sur le bouton home
+  - Une vidéo est lancée par défaut sur le video player
+  - La recherche est totalement fonctionnelle et vous pouvez lancer une vidéo depuis les résultats en ciquant dessus.
+  - Une vidéo lancée peut être ajoutée à la Playlist courante (affichée à droite). Cette playlist peut être sauvergardée et rechargée par l'utilisateur ultérieurement. 
+  - Un bouton "Suggestions" (avec un icône de coeur) permet de générer des suggestions à partir de la playlist courante que vous avez constituée.
+
 
 
 
