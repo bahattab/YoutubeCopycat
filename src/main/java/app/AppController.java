@@ -1,7 +1,11 @@
 package app;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import API.APIManager;
 import elements.OurVideo;
@@ -29,7 +33,24 @@ public class AppController {
 		ui.getCenter().getSearchTab().update(list,"Results for "+"\'"+keyword+"\'"+" search");
 		
 	}
-
+	
+	public void connexVideo() throws IOException{
+		List<OurVideo> list = new ArrayList<>();
+		List<OurVideo> bigList = new ArrayList<>();
+		for(OurVideo v : ui.getRight().getPlaylist().getVideos()){
+			list = api.ConnexVideo(v);
+			for(int i = 0;i<list.size();i++){
+				bigList.add(list.get(i));
+			}
+		}
+		Collections.shuffle(bigList);
+		for(int i=0;i<10;i++){
+			list.add(bigList.get(i));
+		}
+		ui.getCenter().getSearchTab().update(bigList, "Videoes you might like");
+		ui.getCenter().setSelectedIndex(1);
+	}
+	
 	public void setUi(UserInterface ui) {
 		this.ui = ui;
 	}
