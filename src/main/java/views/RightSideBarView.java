@@ -8,11 +8,16 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import elements.Playlist;
+
+
 public class RightSideBarView extends JPanel{
 	private Box sideBox;
+	private Playlist playlist;
 	
 	public RightSideBarView(){
 		super(new FlowLayout(FlowLayout.RIGHT));
+		playlist = new Playlist();
 		sideBox = Box.createVerticalBox();
 		sideBox.setPreferredSize(new Dimension(320,800));
 		JButton b = createNewPreference("first button");
@@ -22,6 +27,10 @@ public class RightSideBarView extends JPanel{
 	
 	public Box getSideBox() {
 		return sideBox;
+	}
+	
+	public Playlist getPlaylist(){
+		return playlist;
 	}
 
 	public JButton createNewPreference(String text){

@@ -4,22 +4,24 @@ import java.util.ArrayList;
 
 public class Playlist {
 	
-	ArrayList<OurVideo> playlist;
+	ArrayList<OurVideo> videos;
 	
-	public Playlist(){
-		playlist = new ArrayList<OurVideo>();
+	public ArrayList<OurVideo> getVideos() {
+		return videos;
 	}
-	
-	public ArrayList<OurVideo> getPlaylist(){
-		return playlist;
+
+	public Playlist(){
+		videos = new ArrayList<OurVideo>();
 	}
 	
 	public void addVideo(OurVideo video){
-		playlist.add(video);
+		videos.add(video);
 	}
 	
 	public void removeVideo(OurVideo video){
-		playlist.remove(video);
+		videos.remove(video);
 	}
+	
+	
 
 }

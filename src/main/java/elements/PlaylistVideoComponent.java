@@ -1,10 +1,11 @@
 package elements;
 
+import javax.swing.Box;
 import javax.swing.JButton;
 
 import app.AppController;
 
-public class PlaylistComponent{
+public class PlaylistVideoComponent extends Box{
 	
 	Playlist playlist;
 	OurVideoComponent video;
@@ -12,8 +13,9 @@ public class PlaylistComponent{
 	JButton play = new JButton();
 	JButton remove = new JButton();
 
-	public PlaylistComponent(Playlist playlist, OurVideoComponent video, AppController app, JButton play, JButton remove) {
-		this.video=video;
+	public PlaylistVideoComponent(Playlist playlist, OurVideo video, AppController app, JButton play, JButton remove) {
+		super(0);
+		this.video = new OurVideoComponent(0,video,app);
 		this.app=app;
 		this.play=play;
 		this.remove=remove;
