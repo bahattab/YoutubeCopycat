@@ -16,6 +16,7 @@ public class OurVideo {
 	private String videoDescription;
 	private DateTime publishedAt;
 	private String miniature;
+	private Boolean onlineStatus = true;
 	
 	public OurVideo(String name, String videoID, BigInteger viewCount,
 			BigInteger dislikeCount, BigInteger likeCount,
@@ -89,6 +90,14 @@ public class OurVideo {
 
 	public DateTime getPublishedAt() {
 		return publishedAt;
+	}
+
+	public void setOnlineStatus(Boolean onlineStatus) {
+		this.onlineStatus = onlineStatus;
+	}
+
+	public Boolean isOnline(){
+		return onlineStatus;
 	}
 	
 }
