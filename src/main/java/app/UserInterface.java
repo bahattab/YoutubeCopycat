@@ -25,7 +25,7 @@ public class UserInterface extends JFrame {
 		center=new CentralView(app);
 		top=new TopView(app);
 		bottom=new BottomView();
-		left=new LeftSideBarView();
+		left=new LeftSideBarView(app);
 		right=new RightSideBarView();
 		
 		mainPanel=new JPanel();

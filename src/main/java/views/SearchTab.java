@@ -81,7 +81,7 @@ public class SearchTab extends JPanel{
 			hbox.addMouseListener(new MouseAdapter(){
 		    	@Override
 		    	public void mousePressed(MouseEvent e){
-		    		app.readOurVideo(hbox.getVideo());
+		    		//app.readOurVideo(hbox.getVideo());
 		    	}
 		    });
 			bigvbox.add(hbox);

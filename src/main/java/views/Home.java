@@ -11,7 +11,4 @@ public class Home extends JPanel{
 		JOptionPane.showMessageDialog(null, message, "Use conditions",1);
 	}
 	
-	public static void main(String[] args) {
-		Home home = new Home();
-	}
 }
