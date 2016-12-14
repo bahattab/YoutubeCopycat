@@ -68,7 +68,7 @@ public class SearchTab extends JPanel{
 		//result.setLayout(new GridLayout(25,1));	
 		Box bigvbox=Box.createVerticalBox();
 		for (int i = 0; i < list.size(); i++) {
-			final OurVideoComponent hbox = new OurVideoComponent(0,list.get(i),app);
+			final OurVideoComponent hbox = new OurVideoComponent(list.get(i),app);
 			hbox.addMouseListener(new MouseAdapter(){
 		    	@Override
 		    	public void mousePressed(MouseEvent e){

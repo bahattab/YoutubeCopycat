@@ -3,7 +3,7 @@ package elements;
 import java.util.ArrayList;
 
 public class Playlist {
-	
+
 	ArrayList<OurVideo> videos;
 	
 	public ArrayList<OurVideo> getVideos() {
@@ -22,6 +22,18 @@ public class Playlist {
 		videos.remove(video);
 	}
 	
+	public boolean existsIn(OurVideo video){
+		for(OurVideo myVideo : videos){
+			if(myVideo.getVideoID().equals(video.getVideoID())){
+				return true;
+			}
+		}
+		return false;
+	}
 	
+	@Override
+	public String toString() {
+		return "Playlist [videos=" + videos + "]";
+	}
 
 }

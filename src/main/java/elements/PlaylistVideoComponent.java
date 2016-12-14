@@ -1,4 +1,8 @@
 package elements;
+import java.io.*;
+import java.awt.Dimension;
+import java.io.IOException;
+import java.net.MalformedURLException;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -13,13 +17,35 @@ public class PlaylistVideoComponent extends Box{
 	JButton play = new JButton();
 	JButton remove = new JButton();
 
-	public PlaylistVideoComponent(Playlist playlist, OurVideo video, AppController app, JButton play, JButton remove) {
+	public PlaylistVideoComponent(Playlist playlist, OurVideo video, AppController app) {
 		super(0);
-		this.video = new OurVideoComponent(0,video,app);
-		this.app=app;
-		this.play=play;
-		this.remove=remove;
-		this.playlist=playlist;
+		Box bigvbox=Box.createVerticalBox();
+		try {
+			this.video = new OurVideoComponent(video,app);
+			this.video.setMaximumSize(new Dimension(320,300));
+			System.out.println(this.video.getJname().length());
+			if(this.video.getJname().length()>40){
+				this.video.setJname((this.video.getJname().substring(13,39))+"[...]");
+			}else{
+				this.video.setJname(this.video.getJname().substring(13));
+			}
+			if(this.video.getJchannel().length()>40){
+				this.video.setJchannel((this.video.getJchannel().substring(15,39))+"[...]");
+			}else{
+				this.video.setJchannel(this.video.getJchannel().substring(15));
+			}
+			this.video.setAlignmentX(0);
+			this.playlist=playlist;
+			this.app=app;
+			bigvbox.add(this.video);
+			this.add(bigvbox);
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 		
 	public OurVideo getVideo() {
@@ -39,11 +65,10 @@ public class PlaylistVideoComponent extends Box{
 	}
 	
 	public void play(){
-		
+		app.readOurVideo(video.getVideo());
 	}
 	
 	public void remove(){
 		playlist.removeVideo(video.getVideo());
 	}
 }
-

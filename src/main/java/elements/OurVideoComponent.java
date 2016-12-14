@@ -23,8 +23,8 @@ public class OurVideoComponent extends Box{
 	JLabel jchannel;
 	JLabel miniaturelabel;
 
-	public OurVideoComponent(int arg0, OurVideo video, AppController app) throws MalformedURLException, IOException {
-		super(arg0);
+	public OurVideoComponent(OurVideo video, AppController app) throws MalformedURLException, IOException {
+		super(0);
 		this.video=video;
 		this.app=app;
 		this.setMaximumSize(new Dimension(1000,300));
@@ -43,6 +43,31 @@ public class OurVideoComponent extends Box{
 		this.add(vbox);
 	}
 	
+
+	public void setJname(String jname) {
+		this.jname.setText(jname);
+	}
+
+	public void setJchannel(String jchannel) {
+		this.jchannel.setText(jchannel);
+	}
+
+	public void setMiniaturelabel(JLabel miniaturelabel) {
+		this.miniaturelabel = miniaturelabel;
+	}
+
+	public String getJname() {
+		return jname.getText();
+	}
+
+	public String getJchannel() {
+		return jchannel.getText();
+	}
+
+	public JLabel getMiniaturelabel() {
+		return miniaturelabel;
+	}
+
 	public OurVideo getVideo() {
 		return video;
 	}
