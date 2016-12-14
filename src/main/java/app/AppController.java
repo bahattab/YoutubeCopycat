@@ -33,4 +33,21 @@ public class AppController {
 	public void home(){
 		Home home = new Home();
 	}
+
+	public void readOurVideo(OurVideo ourVideo){
+		System.out.println("AppController : reading video "+ourVideo.getName());
+		ui.getCenter().getVideoTab().setDetails(ourVideo);
+		ui.getCenter().setSelectedIndex(0);
+		String url = "";
+		if (ourVideo.isOnline())
+			url = "https://www.youtube.com/watch?v=";
+		url=url+ourVideo.getVideoID();
+		try {
+			ui.getCenter().getVideoTab().playVideo(url);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 }

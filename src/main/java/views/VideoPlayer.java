@@ -44,7 +44,8 @@ public class VideoPlayer extends JPanel {
 	 *  Runs the audio/video file
 	 */
 	public void play(final String filename) {
-	
+		if (mediaPlayer.isPlaying())
+			mediaPlayer.stop();
 		mediaPlayer.playMedia(filename);
 		
 	}
