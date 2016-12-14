@@ -43,10 +43,11 @@ public class AppController {
 			}
 		}
 		Collections.shuffle(bigList);
+		list = new ArrayList<OurVideo>();
 		for(int i=0;i<10;i++){
 			list.add(bigList.get(i));
 		}
-		ui.getCenter().getSearchTab().update(bigList, "Videoes you might like");
+		ui.getCenter().getSearchTab().update(list, "Videoes you might like");
 		ui.getCenter().setSelectedIndex(1);
 	}
 	
