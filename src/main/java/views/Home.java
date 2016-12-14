@@ -22,7 +22,7 @@ public class Home extends JPanel{
 		mainPanel=new JPanel(new BorderLayout());
 		descriptPanel=new JPanel(new GridLayout(5,1));
 		featuresPanel=Box.createHorizontalBox();
-		JLabel descript=new JLabel("Bienvenu sur Youtube Copycat, une application Java qui permet de visionner des videos depuis YouTube et depuis votre ordinateur ! ");
+		JLabel descript=new JLabel("Bienvenue sur Youtube Copycat, une application Java qui permet de visionner des videos depuis YouTube et depuis votre ordinateur ! ");
 		JLabel f=new JLabel("Cette application a les fonctionnalités suivantes :");
 		JLabel l1=new JLabel("");
 		

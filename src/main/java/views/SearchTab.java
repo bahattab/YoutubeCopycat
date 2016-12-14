@@ -48,8 +48,9 @@ public class SearchTab extends JPanel{
 		super();
 		this.app=app;
 		this.setLayout(new BorderLayout());
-		String srchIconPath="src/main/resources/icons/search.png";
-		searchIcon = new ImageIcon(srchIconPath);
+		
+		URL searchIconPath=SearchTab.class.getResource("/icons/search.png");
+		searchIcon = new ImageIcon(searchIconPath);
 		result = new JPanel(new BorderLayout());
 		result.setSize(new Dimension(1000, 700));
 		jsc = new JScrollPane(result);
@@ -64,7 +65,7 @@ public class SearchTab extends JPanel{
 	public void update(List<OurVideo> list, String tabTitle) throws IOException{
 		
 		JLabel resultsTitle=new JLabel(tabTitle);
-		resultsTitle.setFont(new Font("Courier",Font.BOLD + Font.ITALIC,20));
+		resultsTitle.setFont(new Font("Courier",Font.BOLD + Font.ITALIC,21));
 		
 		//result.setLayout(new GridLayout(25,1));	
 		Box bigvbox=Box.createVerticalBox();

@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.net.URL;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -35,7 +36,7 @@ public class VideoTab extends JPanel{
 		super();
 		this.app=app;
 		this.setLayout(new BorderLayout());
-		String vidIconPath="src/main/resources/icons/video.png";
+		URL vidIconPath=SearchTab.class.getResource("/icons/search.png");
 		videoIcon = new ImageIcon(vidIconPath);
 		videoPlayer=new VideoPlayer();
 		this.add(videoPlayer);
