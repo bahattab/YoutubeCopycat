@@ -30,7 +30,9 @@ public class LocalSearchButton extends JButton{
 
 			DateTime date = new DateTime(System.currentTimeMillis());
 			BigInteger zero = new BigInteger("0");
-			OurVideo video = new OurVideo(choose.getAbsolutePath(), choose.getAbsolutePath(), zero, zero, zero, zero, "You", "Local video", date, "https://upload.wikimedia.org/wikipedia/commons/d/d5/Cyclic_quadrilateral.png", "100"); 
+			String path = choose.getAbsolutePath();
+			OurVideo video = new OurVideo(path, path, zero, zero, zero, zero, "You", "Local video", date, "https://upload.wikimedia.org/wikipedia/commons/d/d5/Cyclic_quadrilateral.png", "100"); 
+			video.setOnlineStatus(false);
 			app.readOurVideo(video);
 			}
 		});
