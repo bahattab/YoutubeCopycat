@@ -28,7 +28,7 @@ public class PlaylistRightSideBarView extends JPanel{
 	private AppController app;
 	private JPanel result;
 	private JScrollPane jsc;
-	private Box bigvbox=Box.createVerticalBox();
+	private JLabel label;
 	
 	public PlaylistRightSideBarView(AppController app){
 		super();
@@ -53,11 +53,12 @@ public class PlaylistRightSideBarView extends JPanel{
 		result.setPreferredSize(new Dimension(335,100));
 		jsc = new JScrollPane(result);
 		this.add(jsc);
-
-		jsc.setPreferredSize(new Dimension(355,800));
+		label = new JLabel("You don't have any playlist yet");
+		label.setHorizontalAlignment(WIDTH/2);
+		result.add(label);
+		jsc.setPreferredSize(new Dimension(355,100));
 		//jsc.setMaximumSize(new Dimension(350,800));
 		jsc.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-
 		//bigvbox.setSize(new Dimension(350,800));
 		jsc.setVisible(true);
 	}
@@ -67,6 +68,7 @@ public class PlaylistRightSideBarView extends JPanel{
 	}
 	
 	public void updatePlaylist(OurVideo video) throws MalformedURLException, IOException{
+		result.remove(label);
 		if(!(playlist.existsIn(video))){
 			playlist.addVideo(video);
 			final PlaylistVideoComponent playlistComp = new PlaylistVideoComponent(playlist, video, app);

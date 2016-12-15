@@ -67,7 +67,6 @@ public class AppController {
 		if (ourVideo.isOnline())
 			url = "https://www.youtube.com/watch?v=";
 		url=url+ourVideo.getVideoID();
-		System.out.println(url);
 		try {
 			ui.getCenter().getVideoTab().playVideo(url);
 		} catch (InterruptedException e) {
