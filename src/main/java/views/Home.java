@@ -36,15 +36,20 @@ public class Home extends JPanel{
 		JPanel con=new JPanel();
 		JPanel most=new JPanel();
 		
-		
-		URL home=LeftSideBarView.class.getResource("/icons/home.png");
+		System.out.println("1");
+		URL home=Home.class.getResource("/home.png");
+		System.out.println("2");
 		URL search=LeftSideBarView.class.getResource("/icons/search.png");
+		System.out.println("3");
 		URL connect=LeftSideBarView.class.getResource("/icons/local.png");
 		URL stats=LeftSideBarView.class.getResource("/icons/stats.png");
 		URL connexes= LeftSideBarView.class.getResource("/icons/connexes.png");
 		URL mostWatched=LeftSideBarView.class.getResource("/icons/popular_today.png");
-		
+		System.out.println("1");
+
 		ImageIcon icon1 = new ImageIcon(home);
+		System.out.println("2");
+
 		ImageIcon icon2 = new ImageIcon(search);
 		ImageIcon icon3 = new ImageIcon(connect);
 		ImageIcon icon4 = new ImageIcon(stats);

@@ -32,7 +32,6 @@ public class savePlaylistButton extends JButton {
 	
 	public void saveOnFile(String fileName, Playlist playlist){
 		File fichier= new File(fileName);
-		System.out.println(fichier);
 	       try {
 	         ObjectOutputStream flotEcriture = 
 	             new ObjectOutputStream(

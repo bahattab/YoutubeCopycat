@@ -57,7 +57,6 @@ public class SearchTab extends JPanel{
 		result.setSize(new Dimension(1000, 700));
 		jsc = new JScrollPane(result);
 		this.add(jsc);
-		jsc.setBackground(Color.BLUE);
 		jsc.setPreferredSize(new Dimension(1000,700));
 		jsc.setVisible(true);
 	}

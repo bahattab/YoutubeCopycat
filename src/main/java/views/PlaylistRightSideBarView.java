@@ -95,6 +95,7 @@ public class PlaylistRightSideBarView extends JPanel{
 	}
 
 	public void setPlaylist(Playlist playlistChoice) {
+		result.remove(label);
 		playlist.removeAll();
 		result.removeAll();
 		if (playlistChoice!=null)
