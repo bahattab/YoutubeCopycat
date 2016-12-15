@@ -24,8 +24,10 @@ import javax.swing.ImageIcon;
 
 
 public class LeftSideBarView extends JPanel{
-	
-	public LeftSideBarView(final AppController app){
+	private AppController app;
+	public LeftSideBarView(final AppController appC){
+		super();
+		this.app=appC;
 		Color color = new Color(0,0, 0, 0);
 		this.setBackground(color);
 		this.setSize(100,800);

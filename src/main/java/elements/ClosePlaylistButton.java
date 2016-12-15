@@ -10,9 +10,11 @@ import app.AppController;
 import views.PlaylistRightSideBarView;
 
 public class ClosePlaylistButton extends JButton {
+	private AppController app;
 
-	public ClosePlaylistButton(final AppController app) {
+	public ClosePlaylistButton(final AppController appC) {
 		super("Close");
+		this.app=appC;
 		addActionListener(new ActionListener() {
 			
 			@Override

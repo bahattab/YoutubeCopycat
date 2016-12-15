@@ -11,7 +11,7 @@ public class YoutubeCopycat {
 		UserInterface ui=new UserInterface(app);
 		app.setUi(ui);
 		try{
-			ui.getCenter().getVideoTab().playVideo("https://www.youtube.com/watch?v=eWM2joNb9NE");
+			ui.getCenter().getVideoTab().playVideo("https://www.youtube.com/watch?v=KzV_UCQFY6w");
 		}catch (InterruptedException interrupt){
 			System.out.println("playing was interrupted");
 		}	

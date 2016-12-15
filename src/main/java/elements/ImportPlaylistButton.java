@@ -19,9 +19,10 @@ import app.AppController;
 import views.PlaylistRightSideBarView;
 
 public class ImportPlaylistButton extends JButton {
-
+	private AppController app;
 	public ImportPlaylistButton(final AppController appController) {
 		super("Import");
+		this.app=appController;
 		addActionListener(new ActionListener() {
 			
 			@Override

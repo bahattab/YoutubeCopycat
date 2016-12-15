@@ -93,9 +93,10 @@ public class PlayerControlsPanel extends JPanel {
     private JButton fullScreenButton;
 
     private JButton subTitlesButton;
-    */
+   
 
     private JFileChooser fileChooser;
+     */
 
     private boolean mousePressedPlaying = false;
 

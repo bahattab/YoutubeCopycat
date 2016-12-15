@@ -37,15 +37,15 @@ public class Home extends JPanel{
 		JPanel most=new JPanel();
 		
 		URL home=Home.class.getResource("/icons/home.png");
-		URL search=LeftSideBarView.class.getResource("/icons/search.png");
-		URL connect=LeftSideBarView.class.getResource("/icons/local.png");
+		URL search=LeftSideBarView.class.getResource("/icons/local_search.png");
+		URL settings=LeftSideBarView.class.getResource("/icons/settings.png");
 		URL stats=LeftSideBarView.class.getResource("/icons/stats.png");
 		URL connexes= LeftSideBarView.class.getResource("/icons/connexes.png");
 		URL mostWatched=LeftSideBarView.class.getResource("/icons/popular_today.png");
 
 		ImageIcon icon1 = new ImageIcon(home);
 		ImageIcon icon2 = new ImageIcon(search);
-		ImageIcon icon3 = new ImageIcon(connect);
+		ImageIcon icon3 = new ImageIcon(settings);
 		ImageIcon icon4 = new ImageIcon(stats);
 		ImageIcon icon5 = new ImageIcon(connexes);
 		ImageIcon icon6 = new ImageIcon(mostWatched);
@@ -60,7 +60,7 @@ public class Home extends JPanel{
 		
 		JLabel hLabel2=new JLabel("Accéder à cette page d'accueil");
 		JLabel sLabel2=new JLabel("Chercher et ajouter une video de votre ordinateur sur la playlist courante");
-		JLabel cLabel2=new JLabel("Passer en mode connecté");
+		JLabel cLabel2=new JLabel("Changer votre clé API YouTube (voir INSTALL pour savoir comment l'avoir)");
 		JLabel stLabel2=new JLabel("Consulter les statistiques de YouTube");
 		JLabel conLabel2=new JLabel("Afficher les suggestions de vidéos en rapport avec votre playlist");
 		JLabel mostLabel2=new JLabel("Afficher les vidéos les plus visionnées sur YouTube aujourd'hui");
@@ -80,8 +80,8 @@ public class Home extends JPanel{
 		con.add(conLabel);
 		con.add(conLabel2);
 		
-		most.add(conLabel);
-		most.add(conLabel2);
+		most.add(mostLabel);
+		most.add(mostLabel2);
 		
 		Box vbox= Box.createVerticalBox();
 		

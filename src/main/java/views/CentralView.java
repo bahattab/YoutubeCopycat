@@ -1,6 +1,7 @@
 package views;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 
 import javax.swing.JLabel;
@@ -23,6 +24,7 @@ public class CentralView extends JTabbedPane {
 		
 	public CentralView(AppController app) {
 		super();
+		this.setMaximumSize(new Dimension(1500,800));
 		this.app=app;
 		this.setBackground(new Color(150,150,150));
 		videoTab=new VideoTab(app);

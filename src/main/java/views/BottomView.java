@@ -28,6 +28,7 @@ public class BottomView extends JPanel {
 		bLabel2.setForeground(Color.WHITE);
 		bLabel1.setAlignmentX(Component.CENTER_ALIGNMENT);
 		bLabel2.setAlignmentX(Component.CENTER_ALIGNMENT);
+		this.add(Box.createVerticalStrut(20));
 		this.add(bLabel1);
 		this.add(bLabel2);
 	}
