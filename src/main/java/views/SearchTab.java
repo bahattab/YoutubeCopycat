@@ -47,11 +47,13 @@ public class SearchTab extends JPanel{
 	public SearchTab(AppController app){
 		super();
 		this.app=app;
+		this.setBackground(Color.WHITE);
 		this.setLayout(new BorderLayout());
 		URL searchIconPath=SearchTab.class.getResource("/icons/search.png");
 		searchIcon = new ImageIcon(searchIconPath);
 		result = new JPanel(new BorderLayout());
 		JLabel label = new JLabel("This is where search results are displayed. There's no result yet.");
+		label.setFont(new Font("Corbel",Font.BOLD,15));
 		label.setHorizontalAlignment(WIDTH/2);
 		result.add(label);
 		result.setSize(new Dimension(1000, 700));

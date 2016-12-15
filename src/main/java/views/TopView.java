@@ -1,25 +1,21 @@
 package views;
 
-import java.awt.BorderLayout;
-import java.awt.Cursor;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
-import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import API.APIManager;
 import app.AppController;
-import app.UserInterface;
-import elements.OurVideo;
 
 public class TopView extends JPanel{
 	
@@ -30,12 +26,18 @@ public class TopView extends JPanel{
 	
 	public TopView(AppController app){
 		super(new FlowLayout(FlowLayout.CENTER));
+		this.setOpaque(false);
 		this.app=app;
 		this.setMaximumSize(new Dimension(1800,200));
 		searchField=new JTextField(50);
 		searchField.setToolTipText("Type keywords here");
 		srchButton=new JButton();
 		srchButton.setText("Search");
+		srchButton.setFont(new Font("Corbel",Font.BOLD,15));
+		srchButton.setBorderPainted(false);
+		srchButton.setFocusPainted(false);
+		srchButton.setContentAreaFilled(true);
+		srchButton.setBackground(Color.LIGHT_GRAY);
 
 	    
 	    searchField.addKeyListener(new KeyListener() {

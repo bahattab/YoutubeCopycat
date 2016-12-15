@@ -1,8 +1,10 @@
 package views;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
@@ -39,14 +41,28 @@ public class PlaylistRightSideBarView extends JPanel{
 		this.setLayout(new BorderLayout());
 		playlist = new Playlist();
 		this.app=app;
-		
+		this.setOpaque(false);
 		Box topPanel = Box.createVerticalBox();
 		
-		topPanel.add(new JLabel("Your Playlist"));
+		JLabel topPanelLabel = new JLabel("Your Playlist");
+		topPanel.add(topPanelLabel);
+		topPanelLabel.setForeground(Color.WHITE);
 		Box hbox = Box.createHorizontalBox();
 		importPlaylistButton = new ImportPlaylistButton(app);
+		importPlaylistButton.setFont(new Font("Corbel",Font.BOLD,15));
+		importPlaylistButton.setFocusPainted(false);
+		importPlaylistButton.setContentAreaFilled(true);
+		importPlaylistButton.setBackground(Color.LIGHT_GRAY);
 		savePlaylistButton = new SavePlaylistButton(app);
+		savePlaylistButton.setFont(new Font("Corbel",Font.BOLD,15));
+		savePlaylistButton.setFocusPainted(false);
+		savePlaylistButton.setContentAreaFilled(true);
+		savePlaylistButton.setBackground(Color.LIGHT_GRAY);
 		closePlaylistButton =  new ClosePlaylistButton(app);
+		closePlaylistButton.setFont(new Font("Corbel",Font.BOLD,15));
+		closePlaylistButton.setFocusPainted(false);
+		closePlaylistButton.setContentAreaFilled(true);
+		closePlaylistButton.setBackground(Color.LIGHT_GRAY);
 		hbox.add(importPlaylistButton);
 		hbox.add(savePlaylistButton);
 		hbox.add(closePlaylistButton);
@@ -62,15 +78,16 @@ public class PlaylistRightSideBarView extends JPanel{
 		this.add(jsc);
 		
 		label = new JLabel("You don't have any playlist yet");
+		label.setFont(new Font("Corbel",Font.BOLD,15));
 		label.setHorizontalAlignment(WIDTH/2);
 		result.add(label);
 		jsc.setPreferredSize(new Dimension(355,100));
 		//jsc.setMaximumSize(new Dimension(350,800));
-		jsc.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		//jsc.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		//bigvbox.setSize(new Dimension(350,800));
 
 		jsc.setPreferredSize(new Dimension(355,800));
-		jsc.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		//jsc.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
 		jsc.setVisible(true);
 	}

@@ -1,6 +1,5 @@
 package app;
 
-import views.Home;
 
 public class YoutubeCopycat {
 
@@ -10,8 +9,7 @@ public class YoutubeCopycat {
 		UserInterface ui=new UserInterface(app);
 		app.setUi(ui);
 		try{
-			ui.getCenter().getVideoTab().playVideo("https://www.youtube.com/watch?v=RtRb51L3hPQ");
-			
+			ui.getCenter().getVideoTab().playVideo("https://www.youtube.com/watch?v=eWM2joNb9NE");
 		}catch (InterruptedException interrupt){
 			System.out.println("playing was interrupted");
 		}
