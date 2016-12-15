@@ -8,12 +8,15 @@ import java.io.FileReader;
 import java.io.FileWriter;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -50,19 +53,24 @@ public class AppController {
 	public void connexVideo() throws IOException{
 		List<OurVideo> list = new ArrayList<>();
 		List<OurVideo> bigList = new ArrayList<>();
-		for(OurVideo v : ui.getRight().getPlaylist().getVideos()){
-			list = api.ConnexVideo(v);
-			for(int i = 0;i<list.size();i++){
-				bigList.add(list.get(i));
+		List<OurVideo> fatList = new ArrayList<>();
+		if(ui.getRight().getPlaylist().getVideos().isEmpty()){
+			ui.getLeft().suggestionsHelp();
+		}else{
+			for(OurVideo v : ui.getRight().getPlaylist().getVideos()){
+				list = api.ConnexVideo(v);
+				for(int i = 0;i<list.size();i++){
+					bigList.add(list.get(i));
+				}
 			}
+			Collections.shuffle(bigList);
+			list = new ArrayList<OurVideo>();
+			for(int i=0;i<10;i++){
+				list.add(bigList.get(i));
+			}
+			ui.getCenter().getSearchTab().update(list, "Videoes you might like");
+			ui.getCenter().setSelectedIndex(1);
 		}
-		Collections.shuffle(bigList);
-		list = new ArrayList<OurVideo>();
-		for(int i=0;i<10;i++){
-			list.add(bigList.get(i));
-		}
-		ui.getCenter().getSearchTab().update(list, "Videoes you might like");
-		ui.getCenter().setSelectedIndex(1);
 	}
 
 	public void popularVideo() throws IOException{
@@ -135,13 +143,14 @@ public class AppController {
 		}
 		
 	}
+	
 	public void saveOnFile(String fileName, Playlist playlist){
 		URL path = getClass().getProtectionDomain().getCodeSource().getLocation();
 		File dir = new File("playlists");
 		dir.mkdir();
 		File fichier =new  File(dir+ "/"+ fileName);
 		
-		System.out.println(fichier);
+		System.out.println(fichier);	
 	       try {
 	         ObjectOutputStream flotEcriture = 
 	             new ObjectOutputStream(
@@ -154,4 +163,47 @@ public class AppController {
 
 
 	}
+	
+	public HashMap<String, Playlist> loadPlaylist(){
+		System.out.println("loadPlaylist");
+		ArrayList<Playlist> l = new ArrayList<Playlist>();
+		File repertoire = new File("playlists");
+		File[] files=repertoire.listFiles();
+		String[] f = null;
+		HashMap<String, Playlist> hm = new HashMap<>(0);
+		//String[] dir = new java.io.File("playlist").list( );
+        /*for (int i=0; i<files.length; i++)
+        {
+            f[i] = files[i].toString();
+	    }*/
+		for(int i=0;i<files.length;i++){
+			try{	
+				ObjectInputStream flotLecture = new ObjectInputStream( new FileInputStream(files[i]));
+				Object lu= new Object();
+				try {
+					lu = flotLecture.readObject();
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				}
+				//f[i] = files[i].toString();
+				Playlist playlistChoice=(Playlist)lu;
+				hm.put(files[i].toString(), playlistChoice);				
+			}catch(IOException e){
+				System.out.println(" erreur :" + e.toString());
+		}
+		}
+		return hm;
+	}
+
+	public void fillPlaylistTab() {
+		
+		System.out.println("fillPlayListTab");
+		try {
+			ui.getCenter().getPlaylistTab().update(loadPlaylist(), this);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 }
