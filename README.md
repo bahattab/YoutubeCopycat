@@ -49,7 +49,9 @@ Groupe NaN : Timothy Garwood, Graziella Husson, Quentin Thareau et Valentina Zel
 		- suggestions  --> Jour 3 : Implémentée ! Le bouton avec un coeur permet d'afficher dans l'onglet résultats des vidéos qui ressemblent à celles qui sont sur la Playlist.
 		- most watched sur Youtube 
 
-	- Base de données locale pour le mode local
+	- Base de données locale pour le mode local --> Implémentée dans la release 4
+		Lancer des vidéos locale en parcourant un explorer de fichier. Nous avons préféré cette option à l'utilisation d'une base de donnée, qui serait longue à implémenter contrairement à l'utilisation de liste d'objets java.
+		Sauvegarde d'une playlist en local, import d'une playlist locale dans l'application.
 
 
 
@@ -131,9 +133,12 @@ Groupe NaN : Timothy Garwood, Graziella Husson, Quentin Thareau et Valentina Zel
 	- L'importation et la sauvegarde de playlist a été améliorée.
 	
  - Jour 5 : 
-	- Améliorations
-	- Vidéo de Soutenance
-
+ 	Objectifs :
+	- Améliorations visuelles
+	- Amélioration de la fonctionnalité "settings"
+	- Ajouter la fonctionnalité permettant de cliquer sur "suivant" dans une playlist.
+	- Montage Vidéo de Soutenance + Démo finale
+	Resultats :
 
 *Install
 
