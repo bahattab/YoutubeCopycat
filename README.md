@@ -121,7 +121,14 @@ Groupe NaN : Timothy Garwood, Graziella Husson, Quentin Thareau et Valentina Zel
 
 		
 	Resultats:
-	- Une vidéo locale peut maintenant être lu par le lecteur. Cette vidéo peut aussi être ajoutée à la playlist.
+	- Une vidéo locale peut maintenant être lue par le lecteur. Cette vidéo peut aussi être ajoutée à la playlist.
+	- Une version graphiquement plus jolie est maintenant disponible. 
+	- Un bouton "settings" permet d'ajouter à la main une clé API youtube. Cette fonctionnalité n'est pas encore totalement disponible.
+	- Un bouton permettant d'afficher les 10 vidéos les plus vues aujourd'hui est implémentée.
+	- Un tab contenant des listes de playlists est aussi disponible. Il contient les playlists que l'utilisateur a enregistré et lui permet d'en choisir une a charger.
+	- L'interface est maintenant plus claire, avec des indications sur les boutons.
+	- La diagramme de classe a été mis à jour afin de prendre en compte les nouvelles fonctionnalités que nous n'avions pas prévu d'ajouter (comme l'ajout d'une liste de playlist visible, etc.)
+	- L'importation et la sauvegarde de playlist a été améliorée.
 	
  - Jour 5 : 
 	- Améliorations
@@ -143,13 +150,24 @@ Enjoy !
 *Lancement
 
  - RELEASE_DAY_1 : On a mis un .jar avec seulement l'interface. Pour les releases suivantes on expliquera comment compiler le projet avec Maven.
+ 
  - RELEASE_DAY_2 : Un .jar contenant une interface utilisateur est fournie. La fonctionnalité de recherche est disponible et celle de lecture de video est en cours d'implémentation. Une vidéo test est lancée dès le lancement de l'application (lien codé en dur). Dans les jours qui suivent, il sera possible de lancer n'importe quelle vidéo. Le fichier youtube.properties contenant la clé d'accès à l'API Youtube doit être placée dans le même dossier que le .jar.
- - RELEASE_DAY_3 : Un .jar contenant une interface utilisateur est fournie. Le fichier youtube.properties contenant la clé d'accès à l'API Youtube doit être placée dans le même dossier que le .jar. Dans cette version l'utilisateur peut :
+ 
+ - RELEASE_DAY_3 : Un .jar contenant une interface utilisateur est fournie. Le fichier youtube.properties contenant la clé d'accès à l'API Youtube doit être placé dans le même dossier que le .jar. Dans cette version l'utilisateur peut :
   - Un message d'information s'affiche lorsque on lance l'application et présente les différentes fonctionnalités. On peut le retrouver en cliquant sur le bouton home
   - Une vidéo est lancée par défaut sur le video player
   - La recherche est totalement fonctionnelle et vous pouvez lancer une vidéo depuis les résultats en ciquant dessus.
   - Une vidéo lancée peut être ajoutée à la Playlist courante (affichée à droite). Cette playlist peut être sauvergardée et rechargée par l'utilisateur ultérieurement. 
   - Un bouton "Suggestions" (avec un icône de coeur) permet de générer des suggestions à partir de la playlist courante que vous avez constituée.
+  
+  -RELEASE_DAY_4 : Un .jar contenant une interface utilisateur est fournie. Le fichier youtube.properties contenant la clé d'accès à l'API Youtube doit être placé dans le même dossier que le .jar. Un message d'information s'affiche lorsque on lance l'application et présente les différentes fonctionnalités. On peut le retrouver en cliquant sur le bouton home. Une vidéo est lancée par défaut sur le video player Dans cette version, l'utilisateur peut : 
+  - rechercher des vidéos par mot clé; et lancer une vidéo depuis les résultats en ciquant dessus.
+  - ajouter à la Playlist courante (affichée à droite) la vidéo lue. Cette playlist peut être sauvergardée et rechargée par l'utilisateur ultérieurement. Il peut aussi supprimer la playlist courante d'un seul clique. 
+  - voir des suggestions à partir de la playlist courante à l'appuie d'un bouton "Suggestions" (avec un icône de coeur).
+  - voir les 10 vidéos les plus vues dans la journée l'appuie d'un bouton "Most popular videos" (avec un icône de podium).
+  - voir une liste de playlists dans un onglet prévu à cet effet et charger l'une d'entre elle dans la playlist courante.
+  - lire une vidéo locale en appuyant sur le bouton "local search" qui ouvre un explorer de fichier. L'utilisateur peut alors choisir un fichier a charger. Il pourra ensuite lire la video et l'ajouter à sa playlist de la même façon que pour les vidéos en ligne.
+  
 
 
 
