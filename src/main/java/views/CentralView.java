@@ -15,7 +15,8 @@ public class CentralView extends JTabbedPane {
 	private SearchTab searchTab;
 	private AppController app;
 	private VideoTab videoTab;
-
+	private PlaylistTab OurPlaylist;
+	
 	public VideoTab getVideoTab() {
 		return videoTab;
 	}
@@ -33,6 +34,11 @@ public class CentralView extends JTabbedPane {
 		searchTab=new SearchTab(app);
 		JPanel jplInnerPanel2 = searchTab;
 		this.addTab("Search Results", searchTab.getSearchIcon(), jplInnerPanel2);
+	
+		OurPlaylist = new PlaylistTab(app);
+		JPanel jplInnerPannel3 = OurPlaylist;
+		this.addTab("My Playlists", OurPlaylist.getSearchIcon(),jplInnerPannel3);
+		
 	}
 	
 	protected JPanel createInnerPanel(String text) {
@@ -46,6 +52,10 @@ public class CentralView extends JTabbedPane {
 	
 	public SearchTab getSearchTab(){
 		return searchTab;
+	}
+	
+	public PlaylistTab getOurPlaylist(){
+		return OurPlaylist;
 	}
 
 }

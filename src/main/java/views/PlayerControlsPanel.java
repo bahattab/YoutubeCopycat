@@ -49,6 +49,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.filechooser.FileFilter;
 
+import app.AppController;
 import uk.co.caprica.vlcj.binding.LibVlcConst;
 import uk.co.caprica.vlcj.filter.swing.SwingFileFilterFactory;
 import uk.co.caprica.vlcj.player.MediaPlayer;
@@ -81,6 +82,8 @@ public class PlayerControlsPanel extends JPanel {
     private JButton toggleMuteButton;
     private JSlider volumeSlider;
     
+    private AppController app;
+    
     /*
     private JButton captureButton;
 
@@ -96,7 +99,8 @@ public class PlayerControlsPanel extends JPanel {
 
     private boolean mousePressedPlaying = false;
 
-    public PlayerControlsPanel(EmbeddedMediaPlayer mediaPlayer) {
+    public PlayerControlsPanel(EmbeddedMediaPlayer mediaPlayer,AppController appC) {
+    	this.app=appC;
         this.mediaPlayer = mediaPlayer;
 
         createUI();
@@ -126,10 +130,12 @@ public class PlayerControlsPanel extends JPanel {
         positionSlider.setToolTipText("Position");
 
         chapterLabel = new JLabel("00/00");
-
+        
+        
+        // Previous video in Playlist
         previousChapterButton = new JButton();
         previousChapterButton.setIcon(new ImageIcon("src/main/resources/icons/control_start_blue.png"));
-        previousChapterButton.setToolTipText("Go to previous chapter");
+        previousChapterButton.setToolTipText("Go to previous video");
 
         rewindButton = new JButton();
         rewindButton.setIcon(new ImageIcon(getClass().getClassLoader().getResource("icons/control_rewind_blue.png")));
@@ -150,7 +156,8 @@ public class PlayerControlsPanel extends JPanel {
         fastForwardButton = new JButton();
         fastForwardButton.setIcon(new ImageIcon(getClass().getClassLoader().getResource("icons/control_fastforward_blue.png")));
         fastForwardButton.setToolTipText("Skip forward");
-
+        
+     // Next video in Playlist
         nextChapterButton = new JButton();
         nextChapterButton.setIcon(new ImageIcon(getClass().getClassLoader().getResource("icons/control_end_blue.png")));
         nextChapterButton.setToolTipText("Go to next chapter");
@@ -366,6 +373,7 @@ public class PlayerControlsPanel extends JPanel {
         nextChapterButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+            	app.playNextVideoFromPlaylist();
                 mediaPlayer.nextChapter();
             }
         });

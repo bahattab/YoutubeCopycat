@@ -1,5 +1,6 @@
 package views;
 import java.awt.Color;
+import java.awt.BorderLayout;
 //import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -11,6 +12,7 @@ import java.net.URL;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import app.AppController;
@@ -106,6 +108,20 @@ public class LeftSideBarView extends JPanel{
 				
 			}
 		});
+
+
+b6.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e){
+				try {
+					app.popularVideo();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				
+			}
+		});
 		
 		this.add(b1);
 		this.add(b2);
@@ -114,6 +130,28 @@ public class LeftSideBarView extends JPanel{
 		this.add(b5);
 		this.add(b6);
 		//this.add(Box.createHorizontalGlue());
+	}
+	
+	public void suggestionsHelp(){
+		JPanel mainPanel=new JPanel(new BorderLayout());
+		JPanel message=new JPanel(new GridLayout(5,1));
+		Box helpPanel=Box.createHorizontalBox();
+		JLabel descript=new JLabel("La fonctionnalité de suggestion de vidéos n'est disponible que quand l'espace \"Playlist\" situé à droite de l'écran n'est pas vide. Veuillez donc créer une playlist pour commencer !");
+		JLabel l2=new JLabel(" Pour ajouter des nouvelles vidéos à votre playlist vous pouvez faire une recherche, cliquer sur une vidéo pour la lancer et cliquer sur le bouton situé en dessous du video player");
+		URL add=LeftSideBarView.class.getResource("/icons/add.png");
+		ImageIcon icon1 = new ImageIcon(add);
+		JLabel f=new JLabel(icon1);
+		JLabel l3=new JLabel("En cliquant sur ce bouton vous aurez des suggestions de vidéos qui ressemblent à celles de votre playlist");
+		
+		message.add(descript);
+		message.add(l2);
+		message.add(f);
+		message.add(l3);
+		
+		
+		mainPanel.add(message);
+		
+JOptionPane.showMessageDialog(null, mainPanel, "Suggestions de vidéos",1);
 	}
 
 	
