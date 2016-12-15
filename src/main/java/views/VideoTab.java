@@ -72,7 +72,10 @@ public void setDetails(OurVideo ourVideo){
 		vBox.add(hbox);
 		videoDetails.add(title,BorderLayout.NORTH);
 		videoDetails.add(vBox);
-		videoDetails.add(new addToPlaylistButton(ourVideo, app),BorderLayout.EAST);
+		URL add=SearchTab.class.getResource("/icons/add.png");
+		
+		ImageIcon addI = new ImageIcon(add);
+		videoDetails.add(new addToPlaylistButton(ourVideo, app,addI),BorderLayout.EAST);
 	}
 	
 	
