@@ -50,6 +50,11 @@ public class AppController {
 	public void connexVideo() throws IOException{
 		List<OurVideo> list = new ArrayList<>();
 		List<OurVideo> bigList = new ArrayList<>();
+		
+		if (ui.getRight().getPlaylist().getVideos().isEmpty()){
+			ui.getLeft().suggestionsHelp();
+		}
+		else{
 		for(OurVideo v : ui.getRight().getPlaylist().getVideos()){
 			list = api.ConnexVideo(v);
 			for(int i = 0;i<list.size();i++){
@@ -61,8 +66,9 @@ public class AppController {
 		for(int i=0;i<10;i++){
 			list.add(bigList.get(i));
 		}
-		ui.getCenter().getSearchTab().update(list, "Videoes you might like");
+		ui.getCenter().getSearchTab().update(list, "Videos you might like");
 		ui.getCenter().setSelectedIndex(1);
+		}
 	}
 
 	public void popularVideo() throws IOException{
@@ -109,6 +115,12 @@ public class AppController {
 		}
 		
 	}
+	
+	public void playNextVideoFromPlaylist(){
+		if (ui.getRight().getPlaylist().getVideos().isEmpty()){
+			
+		}
+	}
 
 
 	public void setAPIKey(String key) throws IOException{
@@ -141,7 +153,7 @@ public class AppController {
 		dir.mkdir();
 		File fichier =new  File(dir+ "/"+ fileName);
 		
-		System.out.println(fichier);
+		//System.out.println(fichier);
 	       try {
 	         ObjectOutputStream flotEcriture = 
 	             new ObjectOutputStream(

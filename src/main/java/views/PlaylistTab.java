@@ -38,7 +38,7 @@ public class PlaylistTab extends JPanel {
 		super();
 		this.app=app;
 		this.setLayout(new BorderLayout());
-		URL PlaylistIconPath=SearchTab.class.getResource("/icons/search.png");
+		URL PlaylistIconPath=SearchTab.class.getResource("/icons/playlist.png");
 		PlaylistIcon = new ImageIcon(PlaylistIconPath);
 		result = new JPanel(new BorderLayout());
 		JLabel label = new JLabel("This is where search results are displayed. There's no result yet.");
