@@ -12,90 +12,70 @@ import javax.swing.JButton;
 
 import app.AppController;
 
-public class PlaylistVideoComponent extends Box{
-	
+public class PlaylistVideoComponent extends OurVideoComponent{
+
 	private Playlist playlist;
-	private OurVideoComponent video;
 	private AppController app;
 	private JButton remove = new JButton();
-	private Box bigvbox;
 
-	public PlaylistVideoComponent(Playlist playlist, final OurVideo video, final AppController app) {
-		super(0);
-		bigvbox=Box.createVerticalBox();
-		try {
-			this.video = new OurVideoComponent(video,app);
-			this.video.setMaximumSize(new Dimension(320,300));
-			if(this.video.getJname().length()>40){
-				this.video.setJname((this.video.getJname().substring(13,39))+"[...]");
-			}else{
-				this.video.setJname(this.video.getJname().substring(13));
-			}
-			if(this.video.getJchannel().length()>40){
-				this.video.setJchannel("by "+(this.video.getJchannel().substring(15,39))+"[...]");
-			}else{
-				this.video.setJchannel("by "+this.video.getJchannel().substring(15));
-			}
-			this.video.setJduration(this.video.getJduration().substring(16));
-			this.video.setAlignmentX(0);
-			this.playlist=playlist;
-			this.app=app;
-			remove = new JButton();
-			remove.setIcon(new ImageIcon("src/main/resources/icons/delete.png"));
-			remove.setToolTipText("Remove the video below from your playlist");
-			remove.setMaximumSize(new Dimension(30,10));
-			final PlaylistVideoComponent plvc = this;
-			remove.addMouseListener(new MouseAdapter(){
-		    	@Override
-		    	public void mousePressed(MouseEvent e){
-		    		app.removeVideoFromPlaylist(plvc);
-		    	}
-		    });
-			bigvbox.add(remove);
+	public PlaylistVideoComponent(Playlist playlist, OurVideo video, final AppController app) throws MalformedURLException, IOException {
+		super(video,app);
+		this.video=video;
+		setMaximumSize(new Dimension(325,150));
+		setPreferredSize(new Dimension(325, 100));
+		if (video.getName().length()>23)
+			jname.setText(video.getName().substring(0,20)+"[...]");
+		else jname.setText(video.getName());
 
-			bigvbox.add(this.video);
-			this.add(bigvbox);
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
+		if (video.getChannelTitle().length()>23)
+			jchannel.setText(video.getChannelTitle().substring(0,20)+"[...]");
+		else jchannel.setText(video.getChannelTitle());
 		
+		jname.setSize(new Dimension(jname.getHeight(),80));
+		jchannel.setSize(new Dimension(jchannel.getHeight(),80));
+		
+		setJduration(video.getDuration());
+		this.playlist=playlist;
+		this.app=app;
+
+		Box vbox = Box.createVerticalBox();
+		remove = new JButton();
+		ImageIcon cross = new ImageIcon(PlaylistVideoComponent.class.getResource("/icons/remove.png"));
+
+
+		remove.setIcon(cross);
+		remove.setToolTipText("Remove the video below from your playlist");
+		remove.setBorder(null);
+		remove.setOpaque(false);
+
+		final PlaylistVideoComponent plvc = this;
+		remove.addMouseListener(new MouseAdapter(){
+			@Override
+			public void mousePressed(MouseEvent e){
+				app.removeVideoFromPlaylist(plvc);
+			}
+		});
+
+		vbox.add(remove);
+		vbox.add(Box.createVerticalGlue());
+		this.add(Box.createHorizontalGlue());
+		this.add(vbox);
+
+
 		this.addMouseListener(new MouseAdapter(){
-	    	public void mousePressed(MouseEvent e){
-	    		app.readOurVideo(((PlaylistVideoComponent) e.getSource()).getVideo());
-	    	}
+			public void mousePressed(MouseEvent e){
+				app.readOurVideo(((PlaylistVideoComponent) e.getSource()).getVideo());
+			}
 		});
 	}
-		
-	public OurVideo getVideo() {
-		return video.getVideo();
-	}
+
 
 	public AppController getApp() {
 		return app;
 	}
 
-	public void setVideo(OurVideo video) {
-		this.video.setVideo(video);
-	}
 
-	public void setApp(AppController app) {
-		this.app = app;
-	}
-	
-	public void play(){
-		app.readOurVideo(video.getVideo());
-	}
-	
-	public void remove(OurVideo video){
-		playlist.removeVideo(this.video.getVideo());
-		bigvbox.remove(this.video);
-		bigvbox.remove(remove);
-			
-	}
 
 	public Playlist getPlaylist() {
 		return playlist;

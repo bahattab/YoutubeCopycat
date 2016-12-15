@@ -56,24 +56,24 @@ public class OurVideoComponent extends Box{
 		return jduration.getText();
 	}
 	
-	public void setJname(String jname) {
-		this.jname.setText(jname);
-	}
-
-	public void setJchannel(String jchannel) {
-		this.jchannel.setText(jchannel);
-	}
+//	public void setJname(String jname) {
+//		this.jname.setText(jname);
+//	}
+//
+//	public void setJchannel(String jchannel) {
+//		this.jchannel.setText(jchannel);
+//	}
 
 	public void setMiniaturelabel(JLabel miniaturelabel) {
 		this.miniaturelabel = miniaturelabel;
 	}
 
-	public String getJname() {
-		return jname.getText();
+	public  JLabel getJname() {
+		return jname;
 	}
 
-	public String getJchannel() {
-		return jchannel.getText();
+	public  JLabel getJchannel() {
+		return jchannel;
 	}
 
 	public JLabel getMiniaturelabel() {
