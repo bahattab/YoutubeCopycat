@@ -37,7 +37,7 @@ public class Home extends JPanel{
 		JPanel most=new JPanel();
 		
 		System.out.println("1");
-		URL home=Home.class.getResource("/home.png");
+		URL home=Home.class.getResource("/icons/home.png");
 		System.out.println("2");
 		URL search=LeftSideBarView.class.getResource("/icons/search.png");
 		System.out.println("3");

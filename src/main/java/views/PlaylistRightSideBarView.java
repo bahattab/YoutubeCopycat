@@ -31,6 +31,7 @@ public class PlaylistRightSideBarView extends JPanel{
 	ImportPlaylistButton importPlaylistButton;
 	SavePlaylistButton savePlaylistButton;
 	ClosePlaylistButton closePlaylistButton;
+	JLabel label;
 	//private Box bigvbox=Box.createVerticalBox();
 	
 	public PlaylistRightSideBarView(AppController app){
@@ -60,7 +61,7 @@ public class PlaylistRightSideBarView extends JPanel{
 		jsc = new JScrollPane(result);
 		this.add(jsc);
 		
-		JLabel label = new JLabel("You don't have any playlist yet");
+		label = new JLabel("You don't have any playlist yet");
 		label.setHorizontalAlignment(WIDTH/2);
 		result.add(label);
 		jsc.setPreferredSize(new Dimension(355,100));
