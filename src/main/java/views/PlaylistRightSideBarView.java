@@ -113,7 +113,7 @@ public class PlaylistRightSideBarView extends JPanel{
 	}
 	
 	public void updatePlaylist(OurVideo video) throws MalformedURLException, IOException{
-		result.remove(label);
+		//result.remove(label);
 		if(!(playlist.existsIn(video))){
 			playlist.addVideo(video);
 			final PlaylistVideoComponent playlistComp = new PlaylistVideoComponent(playlist, video, app);
@@ -139,7 +139,7 @@ public class PlaylistRightSideBarView extends JPanel{
 	}
 
 	public void setPlaylist(Playlist playlistChoice) {
-		result.remove(label);
+		//result.remove(label);
 		playlist.removeAll();
 		bigvbox.removeAll();
 		if (playlistChoice!=null)
