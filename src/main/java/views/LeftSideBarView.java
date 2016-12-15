@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import app.AppController;
+import elements.LocalSearchButton;
 
 import javax.swing.Box;
 import javax.swing.ImageIcon;
@@ -25,7 +26,7 @@ public class LeftSideBarView extends JPanel{
 		this.setLayout(new GridLayout(10,1));	
 		
 		URL home=LeftSideBarView.class.getResource("/icons/home.png");
-		URL search=LeftSideBarView.class.getResource("/icons/search.png");
+		URL search=LeftSideBarView.class.getResource("/icons/local_search.png");
 		URL local=LeftSideBarView.class.getResource("/icons/local.png");
 		URL stats=LeftSideBarView.class.getResource("/icons/stats.png");
 		URL connexes= LeftSideBarView.class.getResource("/icons/connexes.png");
@@ -39,8 +40,11 @@ public class LeftSideBarView extends JPanel{
 		ImageIcon icon6 = new ImageIcon(mostWatched);
 		JButton b1=new JButton(icon1);
 		b1.setMaximumSize(new Dimension(80,30));
-		JButton b2=new JButton(icon2);
+		
+		
+		LocalSearchButton b2=new LocalSearchButton(icon2,app);
 		b2.setMaximumSize(new Dimension(80,30));
+		
 		JButton b3=new JButton(icon3);
 		b3.setMaximumSize(new Dimension(80,30));
 		JButton b4=new JButton(icon4);
@@ -51,7 +55,7 @@ public class LeftSideBarView extends JPanel{
 		b6.setMaximumSize(new Dimension(80,30));
 		
 		b1.setToolTipText("Accueil");
-		b2.setToolTipText("Afficher la barre de recherche");
+		b2.setToolTipText("Faire une recherche locale");
 		b3.setToolTipText("Passer en mode local ou en mode connecté");
 		b4.setToolTipText("Afficher des statistiques de videos");
 		b5.setToolTipText("Suggestions de vidéo");
@@ -88,3 +92,4 @@ public class LeftSideBarView extends JPanel{
 
 	
 }
+
