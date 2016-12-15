@@ -82,6 +82,20 @@ public class LeftSideBarView extends JPanel{
 				
 			}
 		});
+
+
+b6.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e){
+				try {
+					app.popularVideo();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				
+			}
+		});
 		
 		this.add(b1);
 		this.add(b2);
