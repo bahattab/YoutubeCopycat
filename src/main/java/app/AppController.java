@@ -1,12 +1,19 @@
 package app;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import API.APIManager;
 import elements.OurVideo;
+import elements.Playlist;
 import elements.PlaylistVideoComponent;
 import views.Home;
 
@@ -88,5 +95,39 @@ public class AppController {
 			e.printStackTrace();
 		}
 		
+	}
+
+	public void setPlaylist(Playlist playlistChoice) {
+		ui.getRight().setPlaylist(null);		
+		ui.getRight().setPlaylist(playlistChoice);		
+	}
+
+	public void savePlaylist() {
+		Playlist playlist = ui.getRight().getPlaylist();
+		if (playlist.getVideos().isEmpty()){
+			JOptionPane.showMessageDialog(null, "Your playlist is empty !");
+		}else{
+		
+		String name = JOptionPane.showInputDialog("Please choose a name for this playlist :");
+		saveOnFile(name, playlist);
+		}
+		
+	}
+	public void saveOnFile(String fileName, Playlist playlist){
+		URL path = getClass().getProtectionDomain().getCodeSource().getLocation();
+		File dir = new File("playlists");
+		dir.mkdir();
+		File fichier =new  File(dir+ "/"+ fileName);
+		
+		System.out.println(fichier);
+	       try {
+	         ObjectOutputStream flotEcriture = 
+	             new ObjectOutputStream(
+	                new FileOutputStream(fichier));
+	         flotEcriture.writeObject(playlist);
+	         flotEcriture.close();
+	       } catch (IOException e) {
+	         System.out.println(" erreur :" + e.toString());
+	       }
 	}
 }
