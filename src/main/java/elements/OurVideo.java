@@ -2,7 +2,9 @@ package elements;
 
 
 import java.io.Serializable;
-import java.math.BigInteger; 
+import java.math.BigInteger;
+import java.time.Duration;
+import java.time.Period;
 
 import com.google.api.client.util.DateTime;
 
@@ -35,7 +37,41 @@ public class OurVideo implements Serializable{
 		this.channelTitle = channelTitle;
 		this.videoDescription = videoDescription;
 		this.publishedAt = publishedAt;
-		this.duration=duration;
+		if(!duration.equals("")){
+			this.duration = convertDuration(duration);
+		}
+		
+	}
+
+
+	private String convertDuration(String duration2) {
+		String fDuration="";
+		long seconds = Duration.parse(duration2).getSeconds();
+		if(seconds>3600){
+			long hours = Math.round((Duration.parse(duration2).getSeconds())/3600);
+			if(hours>9){
+				fDuration=fDuration+String.valueOf(hours)+":";
+			}
+			else{
+				fDuration=fDuration+"0"+String.valueOf(hours)+":";
+			}
+			seconds=seconds - hours*3600;
+		}
+		if(seconds>60){
+			long minutes =  Math.round((Duration.parse(duration2).getSeconds())/60);
+			if(minutes>9){
+				fDuration=fDuration+String.valueOf(minutes)+":";
+			}else{
+				fDuration=fDuration+"0"+String.valueOf(minutes)+":";
+			}
+			seconds=seconds - minutes*60;
+		}
+		if(seconds>9){
+			fDuration=fDuration+String.valueOf(seconds);
+		}else{
+			fDuration=fDuration+"0"+String.valueOf(seconds);
+		}
+		return fDuration;
 	}
 
 

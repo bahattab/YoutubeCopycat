@@ -53,7 +53,11 @@ public void setDetails(OurVideo ourVideo){
 		JLabel title = new JLabel(ourVideo.getName()); 
 		title.setFont(new Font("Arial",Font.BOLD|Font.LAYOUT_LEFT_TO_RIGHT,16));
 		Box vbox1= Box.createVerticalBox();
-		vbox1.add(new JLabel("Published on : "+ourVideo.getPublishedAt().toString()));
+		if(ourVideo.isOnline()){
+			vbox1.add(new JLabel("Published on : "+ourVideo.getPublishedAt().toStringRfc3339().substring(0, 10)));
+		}else{
+			vbox1.add(new JLabel("Published on : "+ourVideo.getPublishedAt().toString().substring(0, 10)));
+		}
 		vbox1.add(new JLabel("Published by : "+ourVideo.getChannelTitle()));
 		Box vbox2= Box.createVerticalBox();
 		vbox2.add(new JLabel(ourVideo.getViewCount()+" views"));
