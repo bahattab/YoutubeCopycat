@@ -35,14 +35,16 @@ public class OurVideoComponent extends Box{
 		BufferedImage miniature = ImageIO.read(new URL(video.getMiniature()));
 		//ImageIcon miniature = new ImageIcon(ImageIO.read(getClass().getResource("https://i.ytimg.com/vi/5Nrv5teMc9Y/default.jpg")));
 		miniaturelabel = new JLabel(new ImageIcon(miniature));
-		jduration=new JLabel("     Duration = "+video.getDuration().substring(2));
+		jduration=new JLabel("     Duration = "+video.getDuration());
 		this.add(miniaturelabel);
 		
 		jname = new JLabel("     Title = "+video.getName());
 		vbox.add(jname);
 		jchannel = new JLabel("     Channel = "+video.getChannelTitle());
 		vbox.add(jchannel);
-		vbox.add(jduration);
+		if(video.isOnline()){
+			vbox.add(jduration);
+		}
 		this.add(vbox);
 	}
 	
