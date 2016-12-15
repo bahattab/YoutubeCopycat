@@ -51,7 +51,7 @@ public class AppController {
 		ui.getCenter().setSelectedIndex(1);
 	}
 
-public void popularVideo() throws IOException{
+	public void popularVideo() throws IOException{
 		List<OurVideo> list = api.searchPopular();
 		ui.getCenter().setSelectedIndex(1);;
 		ui.getCenter().getSearchTab().update(list,"Most popular videos at this time");

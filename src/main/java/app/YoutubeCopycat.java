@@ -1,6 +1,7 @@
 package app;
 
 import views.Home;
+import views.PlaylistTab;
 
 public class YoutubeCopycat {
 
@@ -14,7 +15,7 @@ public class YoutubeCopycat {
 			
 		}catch (InterruptedException interrupt){
 			System.out.println("playing was interrupted");
-		}
+		}	
 
 
 	}
