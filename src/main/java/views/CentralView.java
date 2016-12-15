@@ -1,16 +1,14 @@
 package views;
 
-import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 import app.AppController;
-import app.UserInterface;
 
 public class CentralView extends JTabbedPane {
 	
@@ -26,8 +24,9 @@ public class CentralView extends JTabbedPane {
 		
 	public CentralView(AppController app) {
 		super();
+		this.setMaximumSize(new Dimension(1500,800));
 		this.app=app;
-
+		this.setBackground(new Color(150,150,150));
 		videoTab=new VideoTab(app);
 		JPanel jplInnerPanel1 = videoTab;
 		this.addTab("Video Player", videoTab.getVideoIcon(), jplInnerPanel1);

@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.math.BigInteger;
 
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -28,7 +27,7 @@ public class LocalSearchButton extends JButton{
 			DateTime date = new DateTime(System.currentTimeMillis());
 			BigInteger zero = new BigInteger("0");
 			String path = choose.getAbsolutePath();
-			OurVideo video = new OurVideo(path, path, zero, zero, zero, zero, "You", "Local video", date, "https://upload.wikimedia.org/wikipedia/commons/d/d5/Cyclic_quadrilateral.png", "100"); 
+			OurVideo video = new OurVideo(choose.getName(), path, zero, zero, zero, zero, "You", "Local video", date, "https://upload.wikimedia.org/wikipedia/commons/d/d5/Cyclic_quadrilateral.png", ""); 
 			video.setOnlineStatus(false);
 			app.readOurVideo(video);
 			}

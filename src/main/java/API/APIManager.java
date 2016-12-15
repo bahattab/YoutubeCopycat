@@ -57,8 +57,6 @@ public class APIManager {
 	 public List<OurVideo> search(String queryTerm, long number_of_videos_returned ) throws IOException{
 		 YouTube.Search.List search = youtube.search().list("id,snippet");
 		 String apiKey = properties.getProperty("youtube.apikey");
-		 System.out.println(apiKey);
-		 System.out.println(this);
          search.setKey(apiKey);
          search.setQ(queryTerm);
          search.setType("video");

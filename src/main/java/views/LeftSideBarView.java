@@ -1,6 +1,8 @@
 package views;
+
+import java.awt.Color;
+
 import java.awt.BorderLayout;
-//import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
@@ -23,8 +25,12 @@ import javax.swing.ImageIcon;
 
 
 public class LeftSideBarView extends JPanel{
-	
-	public LeftSideBarView(final AppController app){
+	private AppController app;
+	public LeftSideBarView(final AppController appC){
+		super();
+		this.app=appC;
+		Color color = new Color(0,0, 0, 0);
+		this.setBackground(color);
 		this.setSize(100,800);
 		this.setLayout(new GridLayout(10,1));	
 		
@@ -41,21 +47,42 @@ public class LeftSideBarView extends JPanel{
 		ImageIcon icon4 = new ImageIcon(stats);
 		ImageIcon icon5 = new ImageIcon(connexes);
 		ImageIcon icon6 = new ImageIcon(mostWatched);
+		
 		JButton b1=new JButton(icon1);
 		b1.setMaximumSize(new Dimension(80,30));
+		b1.setBackground(new Color(115,21,21));
+		b1.setBorderPainted(false);
+		b1.setFocusPainted(false);
 		
 		LocalSearchButton b2=new LocalSearchButton(icon2,app);
 		b2.setMaximumSize(new Dimension(80,30));
+		b2.setBackground(new Color(115,21,21));
+		b2.setBorderPainted(false);
+		b2.setFocusPainted(false);
 		
 		SettingsButton b3=new SettingsButton(icon3,app);
 		b3.setMaximumSize(new Dimension(80,30));
+		b3.setBackground(new Color(115,21,21));
+		b3.setBorderPainted(false);
+		b3.setFocusPainted(false);
 		
 		JButton b4=new JButton(icon4);
 		b4.setMaximumSize(new Dimension(80,30));
+		b4.setBackground(new Color(115,21,21));
+		b4.setBorderPainted(false);
+		b4.setFocusPainted(false);
+		
 		JButton b5=new JButton(icon5);
 		b5.setMaximumSize(new Dimension(80,30));
+		b5.setBackground(new Color(115,21,21));
+		b5.setBorderPainted(false);
+		b5.setFocusPainted(false);
+		
 		JButton b6=new JButton(icon6);
 		b6.setMaximumSize(new Dimension(80,30));
+		b6.setBackground(new Color(115,21,21));
+		b6.setBorderPainted(false);
+		b6.setFocusPainted(false);
 		
 		b1.setToolTipText("Accueil");
 		b2.setToolTipText("Faire une recherche locale");
@@ -127,7 +154,9 @@ b6.addMouseListener(new MouseAdapter() {
 		
 		mainPanel.add(message);
 		
+
 		JOptionPane.showMessageDialog(null, mainPanel, "Suggestions de vidéos",1);
+
 	}
 
 	

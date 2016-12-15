@@ -32,14 +32,14 @@ public class VideoTab extends JPanel{
 		this.videoIcon = videoIcon;
 	}
 
-	public VideoTab(AppController app){
+	public VideoTab(AppController appC){
 		super();
-		this.app=app;
+		this.app=appC;
 		this.setLayout(new BorderLayout());
 		URL vidIconPath=SearchTab.class.getResource("/icons/video.png");
 		
 		videoIcon = new ImageIcon(vidIconPath);
-		videoPlayer=new VideoPlayer();
+		videoPlayer=new VideoPlayer(this.app);
 		this.add(videoPlayer);
 		videoDetails = new JPanel();
 		videoDetails.setLayout(new BorderLayout());
@@ -53,7 +53,11 @@ public void setDetails(OurVideo ourVideo){
 		JLabel title = new JLabel(ourVideo.getName()); 
 		title.setFont(new Font("Arial",Font.BOLD|Font.LAYOUT_LEFT_TO_RIGHT,16));
 		Box vbox1= Box.createVerticalBox();
-		vbox1.add(new JLabel("Published on : "+ourVideo.getPublishedAt().toString()));
+		if(ourVideo.isOnline()){
+			vbox1.add(new JLabel("Published on : "+ourVideo.getPublishedAt().toStringRfc3339().substring(0, 10)));
+		}else{
+			vbox1.add(new JLabel("Published on : "+ourVideo.getPublishedAt().toString().substring(0, 10)));
+		}
 		vbox1.add(new JLabel("Published by : "+ourVideo.getChannelTitle()));
 		Box vbox2= Box.createVerticalBox();
 		vbox2.add(new JLabel(ourVideo.getViewCount()+" views"));
@@ -68,7 +72,10 @@ public void setDetails(OurVideo ourVideo){
 		vBox.add(hbox);
 		videoDetails.add(title,BorderLayout.NORTH);
 		videoDetails.add(vBox);
-		videoDetails.add(new addToPlaylistButton(ourVideo, app),BorderLayout.EAST);
+		URL add=SearchTab.class.getResource("/icons/add.png");
+		
+		ImageIcon addI = new ImageIcon(add);
+		videoDetails.add(new addToPlaylistButton(ourVideo, app,addI),BorderLayout.EAST);
 	}
 	
 	

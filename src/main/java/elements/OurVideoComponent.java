@@ -35,14 +35,16 @@ public class OurVideoComponent extends Box{
 		BufferedImage miniature = ImageIO.read(new URL(video.getMiniature()));
 		//ImageIcon miniature = new ImageIcon(ImageIO.read(getClass().getResource("https://i.ytimg.com/vi/5Nrv5teMc9Y/default.jpg")));
 		miniaturelabel = new JLabel(new ImageIcon(miniature));
-		jduration=new JLabel("     Duration = "+video.getDuration().substring(2));
+		jduration=new JLabel("     Duration = "+video.getDuration());
 		this.add(miniaturelabel);
 		
 		jname = new JLabel("     Title = "+video.getName());
 		vbox.add(jname);
 		jchannel = new JLabel("     Channel = "+video.getChannelTitle());
 		vbox.add(jchannel);
-		vbox.add(jduration);
+		if(video.isOnline()){
+			vbox.add(jduration);
+		}
 		this.add(vbox);
 	}
 	
@@ -54,24 +56,24 @@ public class OurVideoComponent extends Box{
 		return jduration.getText();
 	}
 	
-	public void setJname(String jname) {
-		this.jname.setText(jname);
-	}
-
-	public void setJchannel(String jchannel) {
-		this.jchannel.setText(jchannel);
-	}
+//	public void setJname(String jname) {
+//		this.jname.setText(jname);
+//	}
+//
+//	public void setJchannel(String jchannel) {
+//		this.jchannel.setText(jchannel);
+//	}
 
 	public void setMiniaturelabel(JLabel miniaturelabel) {
 		this.miniaturelabel = miniaturelabel;
 	}
 
-	public String getJname() {
-		return jname.getText();
+	public  JLabel getJname() {
+		return jname;
 	}
 
-	public String getJchannel() {
-		return jchannel.getText();
+	public  JLabel getJchannel() {
+		return jchannel;
 	}
 
 	public JLabel getMiniaturelabel() {

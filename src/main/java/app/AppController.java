@@ -53,15 +53,15 @@ public class AppController {
 	public void connexVideo() throws IOException{
 		List<OurVideo> list = new ArrayList<>();
 		List<OurVideo> bigList = new ArrayList<>();
-		List<OurVideo> fatList = new ArrayList<>();
-		if(ui.getRight().getPlaylist().getVideos().isEmpty()){
+		
+		if (ui.getRight().getPlaylist().getVideos().isEmpty()){
 			ui.getLeft().suggestionsHelp();
-		}else{
-			for(OurVideo v : ui.getRight().getPlaylist().getVideos()){
-				list = api.ConnexVideo(v);
-				for(int i = 0;i<list.size();i++){
-					bigList.add(list.get(i));
-				}
+		}
+		else{
+		for(OurVideo v : ui.getRight().getPlaylist().getVideos()){
+			list = api.ConnexVideo(v);
+			for(int i = 0;i<list.size();i++){
+				bigList.add(list.get(i));
 			}
 			Collections.shuffle(bigList);
 			list = new ArrayList<OurVideo>();
@@ -70,6 +70,14 @@ public class AppController {
 			}
 			ui.getCenter().getSearchTab().update(list, "Videoes you might like");
 			ui.getCenter().setSelectedIndex(1);
+		}
+		Collections.shuffle(bigList);
+		list = new ArrayList<OurVideo>();
+		for(int i=0;i<10;i++){
+			list.add(bigList.get(i));
+		}
+		ui.getCenter().getSearchTab().update(list, "Videos you might like");
+		ui.getCenter().setSelectedIndex(1);
 		}
 	}
 
@@ -103,7 +111,8 @@ public class AppController {
 		}
 		
 	}
-	
+
+    
 	public void removeVideoFromPlaylist(PlaylistVideoComponent pvc) {
 		ui.getRight().remove(pvc);
 	}
@@ -116,6 +125,12 @@ public class AppController {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public void playNextVideoFromPlaylist(){
+		if (ui.getRight().getPlaylist().getVideos().isEmpty()){
+			
+		}
 	}
 
 
@@ -149,8 +164,7 @@ public class AppController {
 		File dir = new File("playlists");
 		dir.mkdir();
 		File fichier =new  File(dir+ "/"+ fileName);
-		
-		System.out.println(fichier);	
+	   
 	       try {
 	         ObjectOutputStream flotEcriture = 
 	             new ObjectOutputStream(
