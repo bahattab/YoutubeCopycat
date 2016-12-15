@@ -2,7 +2,6 @@ package views;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
@@ -12,8 +11,6 @@ import javax.swing.Box;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
-
 import app.AppController;
 import elements.OurVideo;
 import elements.Playlist;
@@ -31,13 +28,15 @@ public class PlaylistRightSideBarView extends JPanel{
 	ImportPlaylistButton importPlaylistButton;
 	SavePlaylistButton savePlaylistButton;
 	ClosePlaylistButton closePlaylistButton;
-	//private Box bigvbox=Box.createVerticalBox();
+	private Box bigvbox=Box.createVerticalBox();
+	
 	
 	public PlaylistRightSideBarView(AppController app){
 		super();
 		this.setLayout(new BorderLayout());
 		playlist = new Playlist();
 		this.app=app;
+		bigvbox = Box.createVerticalBox();
 		
 		Box topPanel = Box.createVerticalBox();
 		
@@ -49,19 +48,28 @@ public class PlaylistRightSideBarView extends JPanel{
 		hbox.add(importPlaylistButton);
 		hbox.add(savePlaylistButton);
 		hbox.add(closePlaylistButton);
+		int border = hbox.getWidth()+2;
+		
 		topPanel.add(hbox);
+		topPanel.add(Box.createHorizontalStrut(border));
+
 		this.add(topPanel,BorderLayout.NORTH);
 		
 		
-		this.result = new JPanel();
-		result.setLayout(new FlowLayout(FlowLayout.CENTER));
+		this.result = new JPanel(new BorderLayout());
+		result.add(bigvbox);
+		//result.setLayout(new FlowLayout(FlowLayout.CENTER));
+		//result.getLayout().(new Dimension(335,700));
 		//result.setLayout(new BoxLayout(result,BoxLayout.Y_AXIS));
-		result.setPreferredSize(new Dimension(335,100));
+		result.setSize(new Dimension(338,100));
+		//result.setPreferredSize(new Dimension(338,100));
+		//result.setMaximumSize(new Dimension(335,10000));
+		//bigvbox.add(result);
 		jsc = new JScrollPane(result);
 		this.add(jsc);
 
 		jsc.setPreferredSize(new Dimension(355,800));
-		jsc.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		//jsc.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
 		jsc.setVisible(true);
 	}
@@ -81,7 +89,7 @@ public class PlaylistRightSideBarView extends JPanel{
 		    	}
 		    });
 			
-			result.add(playlistComp);
+			bigvbox.add(playlistComp);
 			result.repaint();
 			result.revalidate();
 		}
@@ -90,14 +98,14 @@ public class PlaylistRightSideBarView extends JPanel{
 	}
 	public void remove(PlaylistVideoComponent pvc){
 		playlist.removeVideo(pvc.getVideo());
-		result.remove(pvc);
+		bigvbox.remove(pvc);
 		result.repaint();
 		result.revalidate();
 	}
 
 	public void setPlaylist(Playlist playlistChoice) {
 		playlist.removeAll();
-		result.removeAll();
+		bigvbox.removeAll();
 		if (playlistChoice!=null)
 			for (OurVideo ov : playlistChoice.getVideos()){
 				try {
