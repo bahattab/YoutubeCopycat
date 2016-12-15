@@ -1,5 +1,11 @@
 package app;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -67,7 +73,6 @@ public class AppController {
 		if (ourVideo.isOnline())
 			url = "https://www.youtube.com/watch?v=";
 		url=url+ourVideo.getVideoID();
-		System.out.println(url);
 		try {
 			ui.getCenter().getVideoTab().playVideo(url);
 		} catch (InterruptedException e) {
@@ -89,5 +94,13 @@ public class AppController {
 			e.printStackTrace();
 		}
 		
+	}
+
+	public void setAPIKey(String key) throws IOException{
+		BufferedWriter bw = new BufferedWriter(new FileWriter(new File("/youtube.properties")));
+		String nom = "youtube.apikey="+key;
+		bw.write(nom);
+		bw.close();
+		api = new APIManager();
 	}
 }
