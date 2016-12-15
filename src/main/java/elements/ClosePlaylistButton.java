@@ -5,17 +5,21 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
+import app.AppController;
+
 import views.PlaylistRightSideBarView;
 
-public class deletePlaylistButton extends JButton {
+public class ClosePlaylistButton extends JButton {
+	private AppController app;
 
-	public deletePlaylistButton(final PlaylistRightSideBarView playlistRightSideBarView) {
-		super("Delete");
+	public ClosePlaylistButton(final AppController appC) {
+		super("Close");
+		this.app=appC;
 		addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-			       playlistRightSideBarView.setPlaylist(null);
+			       app.setPlaylist(null);
 				
 			}
 		});

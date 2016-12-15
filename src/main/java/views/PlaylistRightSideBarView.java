@@ -1,8 +1,10 @@
 package views;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
@@ -12,15 +14,13 @@ import javax.swing.Box;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
-
 import app.AppController;
 import elements.OurVideo;
 import elements.Playlist;
 import elements.PlaylistVideoComponent;
-import elements.deletePlaylistButton;
-import elements.importPlaylistButton;
-import elements.savePlaylistButton;
+import elements.ClosePlaylistButton;
+import elements.ImportPlaylistButton;
+import elements.SavePlaylistButton;
 
 
 public class PlaylistRightSideBarView extends JPanel{
@@ -28,37 +28,83 @@ public class PlaylistRightSideBarView extends JPanel{
 	private AppController app;
 	private JPanel result;
 	private JScrollPane jsc;
+	ImportPlaylistButton importPlaylistButton;
+	SavePlaylistButton savePlaylistButton;
+	ClosePlaylistButton closePlaylistButton;
+
+	//JLabel label;
+	//private Box bigvbox=Box.createVerticalBox();
+
 	private Box bigvbox=Box.createVerticalBox();
+	
 	
 	public PlaylistRightSideBarView(AppController app){
 		super();
 		this.setLayout(new BorderLayout());
 		playlist = new Playlist();
 		this.app=app;
+
+		this.setOpaque(false);
+
+		bigvbox = Box.createVerticalBox();
 		
+
 		Box topPanel = Box.createVerticalBox();
 		
-		topPanel.add(new JLabel("Your Playlist"));
+		JLabel topPanelLabel = new JLabel("Your Playlist");
+		topPanel.add(topPanelLabel);
+		topPanelLabel.setForeground(Color.WHITE);
 		Box hbox = Box.createHorizontalBox();
-		hbox.add(new importPlaylistButton(this));
-		hbox.add(new savePlaylistButton(playlist));
-		hbox.add(new deletePlaylistButton(this));
+		importPlaylistButton = new ImportPlaylistButton(app);
+		importPlaylistButton.setFont(new Font("Corbel",Font.BOLD,15));
+		importPlaylistButton.setFocusPainted(false);
+		importPlaylistButton.setContentAreaFilled(true);
+		importPlaylistButton.setBackground(Color.LIGHT_GRAY);
+		savePlaylistButton = new SavePlaylistButton(app);
+		savePlaylistButton.setFont(new Font("Corbel",Font.BOLD,15));
+		savePlaylistButton.setFocusPainted(false);
+		savePlaylistButton.setContentAreaFilled(true);
+		savePlaylistButton.setBackground(Color.LIGHT_GRAY);
+		closePlaylistButton =  new ClosePlaylistButton(app);
+		closePlaylistButton.setFont(new Font("Corbel",Font.BOLD,15));
+		closePlaylistButton.setFocusPainted(false);
+		closePlaylistButton.setContentAreaFilled(true);
+		closePlaylistButton.setBackground(Color.LIGHT_GRAY);
+		hbox.add(importPlaylistButton);
+		hbox.add(savePlaylistButton);
+		hbox.add(closePlaylistButton);
+		int border = hbox.getWidth()+2;
+		
 		topPanel.add(hbox);
+		topPanel.add(Box.createHorizontalStrut(border));
+
 		this.add(topPanel,BorderLayout.NORTH);
 		
 		
-		this.result = new JPanel();
-		result.setLayout(new FlowLayout(FlowLayout.CENTER));
+		this.result = new JPanel(new BorderLayout());
+		result.add(bigvbox);
+		//result.setLayout(new FlowLayout(FlowLayout.CENTER));
+		//result.getLayout().(new Dimension(335,700));
 		//result.setLayout(new BoxLayout(result,BoxLayout.Y_AXIS));
-		result.setPreferredSize(new Dimension(335,100));
+		result.setSize(new Dimension(338,100));
+		//result.setPreferredSize(new Dimension(338,100));
+		//result.setMaximumSize(new Dimension(335,10000));
+		//bigvbox.add(result);
 		jsc = new JScrollPane(result);
 		this.add(jsc);
+		
+		//label = new JLabel("You don't have any playlist yet");
+		//label.setFont(new Font("Corbel",Font.BOLD,15));
+		//label.setHorizontalAlignment(WIDTH/2);
+		//result.add(label);
+		jsc.setPreferredSize(new Dimension(355,100));
+		//jsc.setMaximumSize(new Dimension(350,800));
+		//jsc.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		//bigvbox.setSize(new Dimension(350,800));
 
 		jsc.setPreferredSize(new Dimension(355,800));
-		//jsc.setMaximumSize(new Dimension(350,800));
-		jsc.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		//jsc.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
-		//bigvbox.setSize(new Dimension(350,800));
 		jsc.setVisible(true);
 	}
 	
@@ -67,6 +113,7 @@ public class PlaylistRightSideBarView extends JPanel{
 	}
 	
 	public void updatePlaylist(OurVideo video) throws MalformedURLException, IOException{
+		//result.remove(label);
 		if(!(playlist.existsIn(video))){
 			playlist.addVideo(video);
 			final PlaylistVideoComponent playlistComp = new PlaylistVideoComponent(playlist, video, app);
@@ -76,9 +123,8 @@ public class PlaylistRightSideBarView extends JPanel{
 		    		app.readOurVideo(playlistComp.getVideo());
 		    	}
 		    });
-			//playlistComp.setAlignmentX(0);
-			//bigvbox.add(playlistComp);
-			result.add(playlistComp);
+			
+			bigvbox.add(playlistComp);
 			result.repaint();
 			result.revalidate();
 		}
@@ -87,29 +133,36 @@ public class PlaylistRightSideBarView extends JPanel{
 	}
 	public void remove(PlaylistVideoComponent pvc){
 		playlist.removeVideo(pvc.getVideo());
-		result.remove(pvc);
+		bigvbox.remove(pvc);
 		result.repaint();
 		result.revalidate();
 	}
 
 	public void setPlaylist(Playlist playlistChoice) {
+		//result.remove(label);
 		playlist.removeAll();
-		result.removeAll();
+		bigvbox.removeAll();
 		if (playlistChoice!=null)
 			for (OurVideo ov : playlistChoice.getVideos()){
-				final PlaylistVideoComponent playlistComp = new PlaylistVideoComponent(playlist, ov, app);
-				playlistComp.addMouseListener(new MouseAdapter(){
-		    	@Override
-		    	public void mousePressed(MouseEvent e){
-		    		app.readOurVideo(playlistComp.getVideo());
-		    	}
-		    });
-				result.add(new PlaylistVideoComponent(playlistChoice, ov, app));
+				try {
+					updatePlaylist(ov);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		result.repaint();
 		result.revalidate();
 		
 		
+	}
+	
+	public void toggleClose(){
+		closePlaylistButton.doClick();
+	}
+	
+	public void toggleSave(){
+		savePlaylistButton.doClick();
 	}
 
 	

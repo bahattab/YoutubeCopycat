@@ -18,13 +18,17 @@ import uk.co.caprica.vlcj.runtime.x.LibXUtil;
 import com.sun.jna.Native;
 import com.sun.jna.NativeLibrary;
 
+import app.AppController;
+
 public class VideoPlayer extends JPanel {
 	private Canvas videoSurface;
 	private EmbeddedMediaPlayer mediaPlayer;
 	private PlayerControlsPanel controlsPanel;
+	private AppController app;
 	
-	public VideoPlayer() {
+	public VideoPlayer(AppController appC) {
 		registerLibrary();
+		this.app=appC;
 		this.setLayout(new BorderLayout());
 		videoSurface = new Canvas();
 		videoSurface.setBackground(Color.BLACK);
@@ -35,7 +39,7 @@ public class VideoPlayer extends JPanel {
 		this.add(videoSurface,BorderLayout.CENTER);
 		
 		mediaPlayer = createPlayer(vlcArgs, videoSurface);
-		controlsPanel=new PlayerControlsPanel(mediaPlayer);
+		controlsPanel=new PlayerControlsPanel(mediaPlayer,app);
 		this.add(controlsPanel,BorderLayout.SOUTH);
 		}
 
