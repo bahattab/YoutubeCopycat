@@ -119,6 +119,10 @@ Groupe NaN : Timothy Garwood, Graziella Husson, Quentin Thareau et Valentina Zel
 	--> (Jour 3) Pop-up avec les commentaires de la vidéo
 		-> Valentina
 
+		
+	Resultats:
+	- Une vidéo locale peut maintenant être lu par le lecteur. Cette vidéo peut aussi être ajoutée à la playlist.
+	
  - Jour 5 : 
 	- Améliorations
 	- Vidéo de Soutenance
