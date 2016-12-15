@@ -2,13 +2,18 @@ package app;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.io.File;
+import java.io.IOException;
 
-import javax.swing.BoxLayout;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import views.*;
 
+import views.*;
 public class UserInterface extends JFrame {
 	
 	CentralView center;
@@ -20,7 +25,15 @@ public class UserInterface extends JFrame {
 	AppController app;
 	
 	public UserInterface(AppController app){
-		super("A Youtube Copycat");
+		setLayout(new BorderLayout());
+		JLabel background = new JLabel();
+		try {
+			background = new JLabel();
+			background.setIcon(new ImageIcon(ImageIO.read(new File("src/main/resources/icons/Background.jpg"))));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.app=app;
 		center=new CentralView(app);
 		top=new TopView(app);
@@ -29,8 +42,10 @@ public class UserInterface extends JFrame {
 		right=new PlaylistRightSideBarView(app);
 		
 		mainPanel=new JPanel();
-		this.setPreferredSize(new Dimension(1500,1000));
-		
+		this.setPreferredSize(new Dimension(1500,900));
+		background.setPreferredSize(new Dimension(1200,700));
+		mainPanel.setPreferredSize(new Dimension(1550,825));
+
 		mainPanel.setLayout(new BorderLayout());
 		
 		mainPanel.add(center,BorderLayout.CENTER);
@@ -38,8 +53,11 @@ public class UserInterface extends JFrame {
 		mainPanel.add(bottom,BorderLayout.SOUTH);
 		mainPanel.add(left,BorderLayout.WEST);
 		mainPanel.add(right,BorderLayout.EAST);
-		this.add(mainPanel);
-
+		mainPanel.setOpaque(false);
+		
+		background.setLayout(new FlowLayout());
+		background.add(mainPanel);
+		this.add(background);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		pack();
 		setVisible(true);
