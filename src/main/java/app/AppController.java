@@ -50,7 +50,13 @@ public class AppController {
 		ui.getCenter().getSearchTab().update(list, "Videoes you might like");
 		ui.getCenter().setSelectedIndex(1);
 	}
-	
+
+public void popularVideo() throws IOException{
+		List<OurVideo> list = api.searchPopular();
+		ui.getCenter().setSelectedIndex(1);;
+		ui.getCenter().getSearchTab().update(list,"Most popular videos at this time");
+	}
+    
 	public void setUi(UserInterface ui) {
 		this.ui = ui;
 	}
