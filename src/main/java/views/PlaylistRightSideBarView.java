@@ -152,7 +152,7 @@ public class PlaylistRightSideBarView extends JPanel{
 					e.printStackTrace();
 				}
 			}
-		this.remove(jsc);
+		this.add(jsc);
 		this.repaint();
 		
 		
