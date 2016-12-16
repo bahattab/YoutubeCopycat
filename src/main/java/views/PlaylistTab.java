@@ -4,6 +4,7 @@ package views;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.event.MouseAdapter;
@@ -74,6 +75,7 @@ public class PlaylistTab extends JPanel {
 		PlaylistIcon = new ImageIcon(PlaylistIconPath);
 		result = new JPanel(new BorderLayout());
 		JLabel label = new JLabel("Your playlists will be displayed here. You have no playlists yet !");
+		label.setFont(new Font("Corbel",Font.BOLD,15));
 		label.setHorizontalAlignment(WIDTH/2);
 		result.add(label);
 		result.setSize(new Dimension(1000, 700));
@@ -86,7 +88,6 @@ public class PlaylistTab extends JPanel {
 	public void update(final HashMap<String, Playlist> hashMap, final AppController app) throws IOException{
 		JLabel playlist=new JLabel("Your playlists");
 		playlist.setFont(new Font("Courier",Font.BOLD + Font.ITALIC,21));
-		playlist.add(Box.createVerticalStrut(10));
 	    bigvbox=Box.createVerticalBox();
 		for ( String k : hashMap.keySet()) {
 			final PlaylistComponent plc = new PlaylistComponent(hashMap.get(k),k,app);
