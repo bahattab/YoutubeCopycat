@@ -11,7 +11,6 @@ import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.border.BevelBorder;
-import javax.swing.border.Border;
 
 import app.AppController;
 
