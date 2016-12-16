@@ -7,8 +7,6 @@ import javax.swing.JButton;
 
 import app.AppController;
 
-import views.PlaylistRightSideBarView;
-
 public class ClosePlaylistButton extends JButton {
 	private AppController app;
 

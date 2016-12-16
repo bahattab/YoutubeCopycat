@@ -2,12 +2,6 @@ package app;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-import javax.print.DocFlavor.URL;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;

@@ -1,22 +1,16 @@
 package elements;
 
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.net.URL;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 
 import app.AppController;
-
-import views.PlaylistRightSideBarView;
 
 public class ImportPlaylistButton extends JButton {
 	private AppController app;

@@ -24,7 +24,6 @@ public class Home extends JPanel{
 		featuresPanel=Box.createHorizontalBox();
 		JLabel descript=new JLabel("Welcome to Youtube Copycat, a JAVA application capable of display Youtube videos and local videos! ");
 		JLabel f=new JLabel("This application can:");
-		JLabel l1=new JLabel("");
 		
 		descriptPanel.add(descript);
 		descriptPanel.add(f);
