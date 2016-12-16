@@ -46,6 +46,9 @@ public class OurVideo implements Serializable{
 
 	private String convertDuration(int seconds) {
 		String fDuration="";
+		if(seconds<60){
+			fDuration=fDuration+"00:";
+		}
 		if(seconds>3600){
 			int hours = Math.round(seconds/3600);
 			if(hours>9){
@@ -76,6 +79,8 @@ public class OurVideo implements Serializable{
 	private int convertToSeconds(String txt){
 	    String re1="(P)";   // Any Single Character 1
 	    String re2="(T)";   // Any Single Character 2
+	    String reh="(\\d+)";
+	    String reh1="(H)";
 	    String re3="(\\d+)";    // Integer Number 1
 	    String re4="(M)";   // Any Single Character 3
 	    String re5="(\\d+)";    // Integer Number 2
@@ -94,6 +99,24 @@ public class OurVideo implements Serializable{
 	        int totalSeconds = Integer.parseInt(minutes) * 60 + Integer.parseInt(seconds);
 		    return totalSeconds;
 		    
+	    }else{
+	    	p = Pattern.compile(re1+re2+re5+re6,Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+	    	m = p.matcher(txt);
+	    	if(m.find()){
+	    		 String seconds=m.group(3); // Seconds are here
+	    		 int totalSeconds = Integer.parseInt(seconds);
+	 		     return totalSeconds;
+	    	}else{
+	    		p = Pattern.compile(re1+re2+reh+reh1+re3+re4+re5+re6,Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+		    	m = p.matcher(txt);
+		    	if(m.find()){
+		    		String hours = m.group(3);
+		    		String minutes=m.group(5); 
+		    		String seconds=m.group(7);
+		    		int totalSeconds = Integer.parseInt(hours)*3600+Integer.parseInt(minutes) * 60 + Integer.parseInt(seconds);
+				    return totalSeconds;
+		    	}
+	    	}
 	    }
 	    return 0;
 	    
