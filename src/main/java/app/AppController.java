@@ -186,7 +186,7 @@ public class AppController {
         
         String fileSeparator = System.getProperty("file.separator");
         String propPath = parentPath + fileSeparator+"youtube.properties";
-        System.out.println(propPath);
+        //System.out.println(propPath);
 		BufferedWriter bw = new BufferedWriter(new FileWriter(new File(propPath)));
 		String nom = "youtube.apikey="+key;
 		bw.write(nom);

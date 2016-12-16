@@ -1,7 +1,10 @@
 package API;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -18,6 +21,7 @@ import com.google.api.services.youtube.model.SearchResult;
 import com.google.api.services.youtube.model.Video;
 import com.google.api.services.youtube.model.VideoListResponse;
 
+import app.AppController;
 import elements.OurVideo;
 
 public class APIManager {
@@ -29,7 +33,14 @@ public class APIManager {
 		// Read the developer key from the properties file.
 	        properties = new Properties();
 	        try {
-	            InputStream in = Search.class.getResourceAsStream("/" +PROPERTIES_FILENAME);
+	        	URL url = APIManager.class.getProtectionDomain().getCodeSource().getLocation();
+	    	    String jarPath = URLDecoder.decode(url.getFile(), "UTF-8");
+	    	    String parentPath = new File(jarPath).getParentFile().getPath();
+	            
+	            String fileSeparator = System.getProperty("file.separator");
+	            String p=parentPath+fileSeparator;
+	        
+	            InputStream in = Search.class.getResourceAsStream(p +PROPERTIES_FILENAME);
 	            properties.load(in);
 
 	        } catch (IOException e) {
