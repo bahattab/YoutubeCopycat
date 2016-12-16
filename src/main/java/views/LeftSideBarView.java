@@ -127,12 +127,12 @@ b6.addMouseListener(new MouseAdapter() {
 	public void suggestionsHelp(){
 		JPanel mainPanel=new JPanel(new BorderLayout());
 		JPanel message=new JPanel(new GridLayout(5,1));
-		JLabel descript=new JLabel("La fonctionnalité de suggestion de vidéos n'est disponible que quand l'espace \"Playlist\" situé à droite de l'écran n'est pas vide. Veuillez donc créer une playlist pour commencer !");
-		JLabel l2=new JLabel(" Pour ajouter des nouvelles vidéos à votre playlist vous pouvez faire une recherche, cliquer sur une vidéo pour la lancer et cliquer sur le bouton situé en dessous du video player");
+		JLabel descript=new JLabel("The suggestion of videos isn't available unless the \"Playlist\" panel at the right of the screen isn't empty. So make a playlist to get started !");
+		JLabel l2=new JLabel("To add some videos to your playlist you can launch a search, click on a video to launch it and click on the 'Add' button at the bottom of the video player");
 		URL add=LeftSideBarView.class.getResource("/icons/add.png");
 		ImageIcon icon1 = new ImageIcon(add);
 		JLabel f=new JLabel(icon1);
-		JLabel l3=new JLabel("En cliquant sur ce bouton vous aurez des suggestions de vidéos qui ressemblent à celles de votre playlist");
+		JLabel l3=new JLabel("You can then click on this button to get some suggestions of videos that ressemble those of yout playlist !");
 		
 		message.add(descript);
 		message.add(l2);

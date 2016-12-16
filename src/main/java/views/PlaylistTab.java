@@ -109,7 +109,7 @@ public class PlaylistTab extends JPanel {
 	}
 	
 	public int removeHelp(){
-		String attention="Êtes vous sûr de vouloir éliminer cette playlist ?";
+		String attention="Are you sure that you want to delete this playlist from your files ?";
 
 		return JOptionPane.showConfirmDialog(null, attention, "Attention !",JOptionPane.YES_NO_CANCEL_OPTION);
 		

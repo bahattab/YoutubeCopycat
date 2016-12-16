@@ -24,6 +24,7 @@ public class PlaylistComponent extends Box {
 	private AppController app;
 	private JLabel jname;
 	private JButton remove;
+	private JLabel miniature;
 
 	public PlaylistComponent(Playlist playlist,final String name, final AppController app){
 		super(0);
@@ -50,9 +51,18 @@ public class PlaylistComponent extends Box {
 				app.deleteFromFile(name,plc);
 			}
 		});
-
+		
+		final BufferedImage mini;
+		try {
+			mini = ImageIO.read(new URL(playlist.getVideos().get(0).getMiniature()));
+			miniature= new JLabel(new ImageIcon(mini));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		
 		vbox2.add(remove);
 		vbox2.add(Box.createVerticalGlue());
+		this.add(miniature);
 		this.add(Box.createHorizontalGlue());
 		this.add(vbox);
 		this.add(Box.createHorizontalGlue());
