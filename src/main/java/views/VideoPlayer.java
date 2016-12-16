@@ -16,7 +16,6 @@ import uk.co.caprica.vlcj.runtime.x.LibXUtil;
 
 
 import com.sun.jna.Native;
-import com.sun.jna.NativeLibrary;
 
 import app.AppController;
 
