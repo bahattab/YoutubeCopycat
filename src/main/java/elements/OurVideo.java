@@ -49,7 +49,7 @@ public class OurVideo implements Serializable{
 		if(seconds<60){
 			fDuration=fDuration+"00:";
 		}
-		if(seconds>3600){
+		if(seconds>=3600){
 			int hours = Math.round(seconds/3600);
 			if(hours>9){
 				fDuration=fDuration+String.valueOf(hours)+":";
@@ -59,7 +59,7 @@ public class OurVideo implements Serializable{
 			}
 			seconds=seconds - hours*3600;
 		}
-		if(seconds>60){
+		if(seconds>=60){
 			int minutes =  Math.round(seconds/60);
 			if(minutes>9){
 				fDuration=fDuration+String.valueOf(minutes)+":";
@@ -115,6 +115,22 @@ public class OurVideo implements Serializable{
 		    		String seconds=m.group(7);
 		    		int totalSeconds = Integer.parseInt(hours)*3600+Integer.parseInt(minutes) * 60 + Integer.parseInt(seconds);
 				    return totalSeconds;
+		    	}else{
+		    		 p = Pattern.compile(re1+re2+re3+re4,Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+		    		 m = p.matcher(txt);
+		    		 if(m.find()){
+		    			 String minutes = m.group(3);
+		    			 int totalSeconds = Integer.parseInt(minutes)*60;
+		    			 return totalSeconds;
+		    		 }else{
+		    			 p = Pattern.compile(re1+re2+reh+reh1,Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+			    		 m = p.matcher(txt);
+			    		 if(m.find()){
+			    			 String hours = m.group(3);
+			    			 int totalSeconds = Integer.parseInt(hours)*3600;
+			    			 return totalSeconds;
+			    		 }
+		    		 }
 		    	}
 	    	}
 	    }
