@@ -197,9 +197,9 @@ public class AppController {
 		if (playlist.getVideos().isEmpty()){
 			JOptionPane.showMessageDialog(null, "Your playlist is empty !");
 		}else{
-		
+		Playlist playlistSave= new Playlist(playlist);
 		String name = JOptionPane.showInputDialog("Please choose a name for this playlist :");
-		saveOnFile(name, playlist);
+		saveOnFile(name, playlistSave);
 		}
 		
 	}

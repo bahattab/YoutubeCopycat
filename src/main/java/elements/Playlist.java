@@ -17,6 +17,13 @@ public class Playlist implements Serializable{
 		currentVideo=-1;
 	}
 	
+	public Playlist(Playlist playlist) {
+		videos = new ArrayList<OurVideo>(playlist.getVideos().size());
+		for (OurVideo ov : playlist.getVideos())
+			videos.add(ov.copy());
+		currentVideo=playlist.currentVideo;
+	}
+
 	public void addVideo(OurVideo video){
 		videos.add(video);
 		//currentVideo++;
@@ -38,6 +45,7 @@ public class Playlist implements Serializable{
 	public boolean existsIn(OurVideo video){
 		for(OurVideo myVideo : videos){
 			if(myVideo.getVideoID().equals(video.getVideoID())){
+				System.out.println(myVideo.getName() + " same as "+ video.getName());
 				return true;
 			}
 		}

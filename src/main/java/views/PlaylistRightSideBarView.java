@@ -125,9 +125,25 @@ public class PlaylistRightSideBarView extends JPanel{
 			bigvbox.repaint();
 			bigvbox.revalidate();
 		}
-		
+	}
+		public void fastUpdatePlaylist(OurVideo video) throws MalformedURLException, IOException{
+			//if(!(playlist.existsIn(video))){
+				System.out.println("adding video");
+				final PlaylistVideoComponent playlistComp = new PlaylistVideoComponent(playlist, video, app);
+				playlistComp.setBackground(backgroundColor);
+				playlistComp.addMouseListener(new MouseAdapter(){
+			    	@Override
+			    	public void mousePressed(MouseEvent e){
+			    		app.activatePlaylistMode(playlistComp.getVideo());
+			    		app.readOurVideo(playlistComp.getVideo());
+			    	}
+			    });
+				
+				bigvbox.add(playlistComp);
+			//}
 
 	}
+		
 	public void remove(PlaylistVideoComponent pvc){
 		this.remove(jsc);
 		this.repaint();
@@ -141,19 +157,20 @@ public class PlaylistRightSideBarView extends JPanel{
 	public void setPlaylist(Playlist playlistChoice) {
 		this.remove(jsc);
 		this.repaint();
-		playlist.removeAll();
+		playlist = playlistChoice;
 		bigvbox.removeAll();
 		if (playlistChoice!=null)
 			for (OurVideo ov : playlistChoice.getVideos()){
 				try {
-					updatePlaylist(ov);
+					fastUpdatePlaylist(ov);
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
 		this.add(jsc);
 		this.repaint();
+		bigvbox.repaint();
+		System.out.println("repainting");
 		
 		
 	}
@@ -164,6 +181,11 @@ public class PlaylistRightSideBarView extends JPanel{
 	
 	public void toggleSave(){
 		savePlaylistButton.doClick();
+	}
+
+	public Playlist newPlaylist() {
+		playlist=new Playlist();
+		return playlist;
 	}
 
 	

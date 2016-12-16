@@ -167,5 +167,12 @@ public class OurVideo implements Serializable{
 	public Boolean isOnline(){
 		return onlineStatus;
 	}
+
+
+	public OurVideo copy() {
+		OurVideo ovcopy = new OurVideo(name, videoID, viewCount, dislikeCount, dislikeCount, commentCount, channelTitle, videoDescription, publishedAt, miniature, duration);
+		ovcopy.setOnlineStatus(this.isOnline());
+		return ovcopy;
+	}
 	
 }
