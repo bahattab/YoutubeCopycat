@@ -2,28 +2,19 @@ package views;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 
-import javax.imageio.ImageIO;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.border.BevelBorder;
 
 import app.AppController;
 import elements.OurVideo;
@@ -74,6 +65,7 @@ public class SearchTab extends JPanel{
 			hbox.addMouseListener(new MouseAdapter(){
 		    	@Override
 		    	public void mousePressed(MouseEvent e){
+		    		app.deactivatePlaylistMode();
 		    		app.readOurVideo(hbox.getVideo());
 		    	}
 		    });

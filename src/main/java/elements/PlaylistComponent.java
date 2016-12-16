@@ -1,14 +1,18 @@
 package elements;
 
+
 import java.awt.Dimension;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-
 import javax.imageio.ImageIO;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.Box;
 import javax.swing.JLabel;
 import javax.swing.border.BevelBorder;
 
@@ -16,22 +20,53 @@ import app.AppController;
 
 public class PlaylistComponent extends Box {
 	
-	Playlist playlist;
-	AppController app;
-	JLabel jname;
+	private Playlist playlist;
+	private AppController app;
+	private JLabel jname;
+	private JButton remove;
+	private JLabel miniature;
 
-	public PlaylistComponent(Playlist playlist,String name, AppController app){
+	public PlaylistComponent(Playlist playlist,final String name, final AppController app){
 		super(0);
 		this.playlist=playlist;
 		this.app=app;
 		Box vbox=Box.createVerticalBox();
-		jname = new JLabel("     Title = "+name);
+		jname = new JLabel(name);
 		vbox.add(jname);
-		this.setMaximumSize(new Dimension(1000,300));
+		this.setMaximumSize(new Dimension(1100,100));
 		BevelBorder border = new BevelBorder(0);
 		this.setBorder(border);
-		//Box vbox=Box.createVerticalBox();
+		
+		Box vbox2= Box.createVerticalBox();
+		ImageIcon cross = new ImageIcon(PlaylistVideoComponent.class.getResource("/icons/remove.png"));
+		remove = new JButton(cross);
+		remove.setToolTipText("Delete this playlist");
+		remove.setBorder(null);
+		remove.setOpaque(false);
+
+		final PlaylistComponent plc = this;
+		remove.addMouseListener(new MouseAdapter(){
+			@Override
+			public void mousePressed(MouseEvent e){
+				app.deleteFromFile(name,plc);
+			}
+		});
+		
+		final BufferedImage mini;
+		try {
+			mini = ImageIO.read(new URL(playlist.getVideos().get(0).getMiniature()));
+			miniature= new JLabel(new ImageIcon(mini));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		
+		vbox2.add(remove);
+		vbox2.add(Box.createVerticalGlue());
+		this.add(miniature);
+		this.add(Box.createHorizontalGlue());
 		this.add(vbox);
+		this.add(Box.createHorizontalGlue());
+		this.add(vbox2);
 	}
 
 	public Playlist getPlaylist() {

@@ -1,13 +1,10 @@
 package views;
 
 import java.awt.BorderLayout;
-import java.awt.CardLayout;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.net.URL;
 
 import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -16,6 +13,7 @@ import app.AppController;
 
 import elements.OurVideo;
 import elements.addToPlaylistButton;
+import elements.makeChangesButton;
 
 public class VideoTab extends JPanel{
 	
@@ -72,10 +70,17 @@ public void setDetails(OurVideo ourVideo){
 		vBox.add(hbox);
 		videoDetails.add(title,BorderLayout.NORTH);
 		videoDetails.add(vBox);
-		URL add=SearchTab.class.getResource("/icons/add.png");
+		JLabel desc = new JLabel(ourVideo.getVideoDescription());
+		videoDetails.add(desc, BorderLayout.SOUTH);
 		
+		Box buttonsBox=Box.createVerticalBox();
+		URL add=SearchTab.class.getResource("/icons/add.png");
 		ImageIcon addI = new ImageIcon(add);
-		videoDetails.add(new addToPlaylistButton(ourVideo, app,addI),BorderLayout.EAST);
+		buttonsBox.add(new addToPlaylistButton(ourVideo, app,addI));
+		URL change=SearchTab.class.getResource("/icons/changes.png");
+		ImageIcon changeI = new ImageIcon(change);
+		buttonsBox.add(new makeChangesButton(ourVideo,app,changeI));
+		videoDetails.add(buttonsBox,BorderLayout.EAST);
 	}
 	
 	
@@ -86,4 +91,10 @@ public void setDetails(OurVideo ourVideo){
 		// Waits until the player window be closed
 		//Thread.currentThread().join();
 	}
+
+	public void setControlPanelPlaylistMode(boolean b) {
+		videoPlayer.setControlPanelPlaylistMode(b);
+		
+	}
+
 }

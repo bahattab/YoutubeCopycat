@@ -1,10 +1,6 @@
 package app;
 
-
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 
 import java.io.File;
@@ -14,6 +10,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.URL;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -24,12 +21,14 @@ import javax.swing.JOptionPane;
 import API.APIManager;
 import elements.OurVideo;
 import elements.Playlist;
+import elements.PlaylistComponent;
 import elements.PlaylistVideoComponent;
 import views.Home;
 
 public class AppController {
 	private UserInterface ui;
 	private APIManager api;
+	private boolean playlistMode;
 	
 	public AppController(){
 		try {
@@ -53,29 +52,51 @@ public class AppController {
 	public void connexVideo() throws IOException{
 		List<OurVideo> list = new ArrayList<>();
 		List<OurVideo> bigList = new ArrayList<>();
-		
-		if (ui.getRight().getPlaylist().getVideos().isEmpty()){
+		List<OurVideo> fatList = new ArrayList<>();
+		fatList = ui.getRight().getPlaylist().getVideos();
+		if (fatList.isEmpty()){
 			ui.getLeft().suggestionsHelp();
 		}
 		else{
-		for(OurVideo v : ui.getRight().getPlaylist().getVideos()){
-			list = api.ConnexVideo(v);
-			for(int i = 0;i<list.size();i++){
-				bigList.add(list.get(i));
+		for(OurVideo v : fatList){
+			if(v.isOnline()){
+				list = api.ConnexVideo(v);
+				for(int i = 0;i<list.size();i++){
+					bigList.add(list.get(i));
+				}
+				Collections.shuffle(bigList);
+				list = new ArrayList<OurVideo>();
+				for(int i=0;i<10;i++){
+					list.add(bigList.get(i));
+				}
+				ui.getCenter().getSearchTab().update(list, "Videos you might like");
+				ui.getCenter().setSelectedIndex(1);
 			}
-			Collections.shuffle(bigList);
-			list = new ArrayList<OurVideo>();
-			for(int i=0;i<10;i++){
-				list.add(bigList.get(i));
-			}
-			ui.getCenter().getSearchTab().update(list, "Videoes you might like");
-			ui.getCenter().setSelectedIndex(1);
 		}
 		Collections.shuffle(bigList);
 		list = new ArrayList<OurVideo>();
 		for(int i=0;i<10;i++){
 			list.add(bigList.get(i));
 		}
+		for(int i=0;i<10;i++){
+			for(int j=0;i<10;j++){
+				//for(int k=0;k<fatList.size();k++)
+				if((i != j) && (list.get(i) == list.get(j) /*|| (list.get(i) == fatList.get(k)))*/)){
+					
+					Collections.shuffle(bigList);
+					list.set(i,bigList.get(0)); 
+					i--;
+					for(int k=0;k<fatList.size();k++){
+						if((i != k) && (list.get(i) == fatList.get(k))){
+							Collections.shuffle(bigList);
+							list.set(i,bigList.get(0));
+							i--;
+						}
+						}
+					}
+				}
+			}
+		
 		ui.getCenter().getSearchTab().update(list, "Videos you might like");
 		ui.getCenter().setSelectedIndex(1);
 		}
@@ -129,13 +150,44 @@ public class AppController {
 	
 	public void playNextVideoFromPlaylist(){
 		if (ui.getRight().getPlaylist().getVideos().isEmpty()){
+			//ui.getCenter().getVideoTab().get
+		} else
+			try {
+				OurVideo ov = ui.getRight().getPlaylist().getNext();
+				readOurVideo(ov);
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	
 			
-		}
+	}
+	
+	public void playPreviousVideoFromPlaylist() {
+		if (ui.getRight().getPlaylist().getVideos().isEmpty()){
+			//ui.getCenter().getVideoTab().get
+		} else
+			try {
+				OurVideo ov = ui.getRight().getPlaylist().getPrevious();
+				readOurVideo(ov);
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
 	}
 
-
 	public void setAPIKey(String key) throws IOException{
-		BufferedWriter bw = new BufferedWriter(new FileWriter(new File("/youtube.properties")));
+		URL url = AppController.class.getProtectionDomain().getCodeSource().getLocation();
+	    String jarPath = URLDecoder.decode(url.getFile(), "UTF-8");
+	    String parentPath = new File(jarPath).getParentFile().getPath();
+        
+        String fileSeparator = System.getProperty("file.separator");
+        String propPath = parentPath + fileSeparator+"youtube.properties";
+        //System.out.println(propPath);
+		BufferedWriter bw = new BufferedWriter(new FileWriter(new File(propPath)));
 		String nom = "youtube.apikey="+key;
 		bw.write(nom);
 		bw.close();
@@ -152,44 +204,90 @@ public class AppController {
 		if (playlist.getVideos().isEmpty()){
 			JOptionPane.showMessageDialog(null, "Your playlist is empty !");
 		}else{
-		
+		Playlist playlistSave= new Playlist(playlist);
 		String name = JOptionPane.showInputDialog("Please choose a name for this playlist :");
-		saveOnFile(name, playlist);
+		saveOnFile(name, playlistSave);
 		}
 		
 	}
 	
 	public void saveOnFile(String fileName, Playlist playlist){
-		URL path = getClass().getProtectionDomain().getCodeSource().getLocation();
-		File dir = new File("playlists");
-		dir.mkdir();
-		File fichier =new  File(dir+ "/"+ fileName);
-	   
-	       try {
-	         ObjectOutputStream flotEcriture = 
-	             new ObjectOutputStream(
-	                new FileOutputStream(fichier));
-	         flotEcriture.writeObject(playlist);
-	         flotEcriture.close();
-	       } catch (IOException e) {
-	         System.out.println(" erreur :" + e.toString());
-	       }
-
+		
+		 try {
+			 URL url = AppController.class.getProtectionDomain().getCodeSource().getLocation();
+		     String jarPath = URLDecoder.decode(url.getFile(), "UTF-8");
+		     String parentPath = new File(jarPath).getParentFile().getPath();
+	         
+	         String fileSeparator = System.getProperty("file.separator");
+	         String newDir = parentPath + fileSeparator + "playlists" + fileSeparator;
+			 File dir = new File(newDir);
+	         dir.mkdir();
+	         File fichier =new  File(dir+ "/"+ fileName);
+		   
+		       try {
+		         ObjectOutputStream flotEcriture = 
+		             new ObjectOutputStream(
+		                new FileOutputStream(fichier));
+		         flotEcriture.writeObject(playlist);
+		         flotEcriture.close();
+		       } catch (IOException e) {
+		         System.out.println(" erreur :" + e.toString());
+		       }
+	         
+	      } catch (IOException e) {
+	         e.printStackTrace();
+	      }
+	}
+	
+	public void deleteFromFile(String fileName, PlaylistComponent plc){
+		
+		int confirm=ui.getCenter().getPlaylistTab().removeHelp();		
+			
+		if (confirm==JOptionPane.YES_OPTION){
+		 try {
+			 URL url = AppController.class.getProtectionDomain().getCodeSource().getLocation();
+		     String jarPath = URLDecoder.decode(url.getFile(), "UTF-8");
+		     String parentPath = new File(jarPath).getParentFile().getPath();
+	         
+	         String fileSeparator = System.getProperty("file.separator");
+	         String newDir = parentPath + fileSeparator + "playlists" + fileSeparator;
+			 File dir = new File(newDir);
+			 
+			 try{
+			 File fichier =new  File(dir+ "/"+fileName);
+			 System.out.println(fichier.getAbsolutePath());
+			 fichier.delete();
+			 ui.getCenter().getPlaylistTab().remove(plc);
+			 
+			 }catch(Exception e){
+				 e.printStackTrace();
+			 }
+		     
+	      } catch (IOException e) {
+	         e.printStackTrace();
+	      }
+		 
+		 
+		}
+		   
 
 	}
 	
 	public HashMap<String, Playlist> loadPlaylist(){
-		System.out.println("loadPlaylist");
-		ArrayList<Playlist> l = new ArrayList<Playlist>();
-		File repertoire = new File("playlists");
-		File[] files=repertoire.listFiles();
-		String[] f = null;
+		String jarPath="";
+		URL url = AppController.class.getProtectionDomain().getCodeSource().getLocation();
+		try{
+			jarPath = URLDecoder.decode(url.getFile(), "UTF-8");
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		String parentPath = new File(jarPath).getParentFile().getPath();
+		String fileSeparator = System.getProperty("file.separator");
+		String newDir = parentPath + fileSeparator + "playlists" + fileSeparator;
+		File dir = new File(newDir);
+		File[] files=dir.listFiles();
 		HashMap<String, Playlist> hm = new HashMap<>(0);
-		//String[] dir = new java.io.File("playlist").list( );
-        /*for (int i=0; i<files.length; i++)
-        {
-            f[i] = files[i].toString();
-	    }*/
+	
 		for(int i=0;i<files.length;i++){
 			try{	
 				ObjectInputStream flotLecture = new ObjectInputStream( new FileInputStream(files[i]));
@@ -199,15 +297,16 @@ public class AppController {
 				} catch (ClassNotFoundException e) {
 					e.printStackTrace();
 				}
-				//f[i] = files[i].toString();
+				flotLecture.close();
 				Playlist playlistChoice=(Playlist)lu;
-				hm.put(files[i].toString(), playlistChoice);				
+				hm.put(files[i].getName(), playlistChoice);				
 			}catch(IOException e){
 				System.out.println(" erreur :" + e.toString());
 		}
 		}
 		return hm;
 	}
+	
 
 	public void fillPlaylistTab() {
 		
@@ -218,6 +317,24 @@ public class AppController {
 			e.printStackTrace();
 		}
 		
+	}
+
+	public void activatePlaylistMode(OurVideo ourVideo) {
+		ui.getCenter().getVideoTab().setControlPanelPlaylistMode(true);
+		ui.getRight().getPlaylist().setCurrent(ourVideo);
+		playlistMode = true;
+	}
+	
+	public void deactivatePlaylistMode(){
+		ui.getCenter().getVideoTab().setControlPanelPlaylistMode(false);
+		playlistMode=false;
+	}
+
+	public void changeVideoTitle(OurVideo ourVideo){
+		
+		String name = JOptionPane.showInputDialog("Veuillez saisir un nouveau titre pour cette vidéo");
+		ourVideo.setName(name);;
+		ui.getCenter().getVideoTab().setDetails(ourVideo);
 	}
 	
 }

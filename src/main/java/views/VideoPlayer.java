@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import javax.swing.JPanel;
 import uk.co.caprica.vlcj.binding.LibVlc;
 import uk.co.caprica.vlcj.discovery.NativeDiscovery;
@@ -16,7 +17,6 @@ import uk.co.caprica.vlcj.runtime.x.LibXUtil;
 
 
 import com.sun.jna.Native;
-import com.sun.jna.NativeLibrary;
 
 import app.AppController;
 
@@ -39,6 +39,7 @@ public class VideoPlayer extends JPanel {
 		this.add(videoSurface,BorderLayout.CENTER);
 		
 		mediaPlayer = createPlayer(vlcArgs, videoSurface);
+		mediaPlayer.setVolume(100);
 		controlsPanel=new PlayerControlsPanel(mediaPlayer,app);
 		this.add(controlsPanel,BorderLayout.SOUTH);
 		}
@@ -113,6 +114,12 @@ public class VideoPlayer extends JPanel {
 
 
 		return embeddedMediaPlayer;
+	}
+
+
+	public void setControlPanelPlaylistMode(boolean b) {
+		controlsPanel.setPlaylistMode(b);
+		
 	}
 	
 }

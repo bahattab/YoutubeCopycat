@@ -1,31 +1,28 @@
 package views;
 
+
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
-import java.util.List;
-
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import app.AppController;
-import elements.OurVideo;
-import elements.OurVideoComponent;
 import elements.Playlist;
 import elements.PlaylistComponent;
+import elements.PlaylistVideoComponent;
 
 public class PlaylistTab extends JPanel {
 	
@@ -33,13 +30,14 @@ public class PlaylistTab extends JPanel {
 	private JPanel result;
 	private JScrollPane jsc;
 	private AppController app;
+	private Box bigvbox;
 	
-	public ImageIcon getSearchIcon() {
+	public ImageIcon getPlaylistIcon() {
 		return PlaylistIcon;
 	}
 
-	public void setSearchIcon(ImageIcon videoIcon) {
-		this.PlaylistIcon = videoIcon;
+	public void setPlaylistIcon(ImageIcon playlistIcon) {
+		this.PlaylistIcon = playlistIcon;
 	}
 	
 	public PlaylistTab(final AppController app){
@@ -76,7 +74,8 @@ public class PlaylistTab extends JPanel {
 		URL PlaylistIconPath=SearchTab.class.getResource("/icons/playlist.png");
 		PlaylistIcon = new ImageIcon(PlaylistIconPath);
 		result = new JPanel(new BorderLayout());
-		JLabel label = new JLabel("This is where search results are displayed. There's no result yet.");
+		JLabel label = new JLabel("Your playlists will be displayed here. You have no playlists yet !");
+		label.setFont(new Font("Corbel",Font.BOLD,15));
 		label.setHorizontalAlignment(WIDTH/2);
 		result.add(label);
 		result.setSize(new Dimension(1000, 700));
@@ -87,11 +86,9 @@ public class PlaylistTab extends JPanel {
 	}
 	
 	public void update(final HashMap<String, Playlist> hashMap, final AppController app) throws IOException{
-		//JLabel resultsTitle=new JLabel(name);
-		//resultsTitle.setFont(new Font("Courier",Font.BOLD + Font.ITALIC,21));
-		
-		//result.setLayout(new GridLayout(25,1));	
-		Box bigvbox=Box.createVerticalBox();
+		JLabel playlist=new JLabel("Your playlists");
+		playlist.setFont(new Font("Courier",Font.BOLD + Font.ITALIC,21));
+	    bigvbox=Box.createVerticalBox();
 		for ( String k : hashMap.keySet()) {
 			final PlaylistComponent plc = new PlaylistComponent(hashMap.get(k),k,app);
 			plc.addMouseListener(new MouseAdapter(){
@@ -104,10 +101,24 @@ public class PlaylistTab extends JPanel {
 			}
 			
 		result.removeAll();
-		result.add(new JLabel("Your playlists"),BorderLayout.NORTH);
+		result.add(playlist,BorderLayout.NORTH);
 		result.add(bigvbox);
 		result.repaint();
 		result.revalidate();
 		
 	}
+	
+	public int removeHelp(){
+		String attention="Are you sure that you want to delete this playlist from your files ?";
+
+		return JOptionPane.showConfirmDialog(null, attention, "Attention !",JOptionPane.YES_NO_CANCEL_OPTION);
+		
+	}
+	
+	public void remove(PlaylistComponent plc){
+		bigvbox.remove(plc);
+		result.repaint();
+		result.revalidate();
+	}
+	
 }

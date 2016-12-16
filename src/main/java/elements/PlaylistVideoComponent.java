@@ -21,6 +21,9 @@ public class PlaylistVideoComponent extends OurVideoComponent{
 	public PlaylistVideoComponent(Playlist playlist, OurVideo video, final AppController app) throws MalformedURLException, IOException {
 		super(video,app);
 		this.video=video;
+		this.playlist=playlist;
+		this.app=app;
+		
 		setMaximumSize(new Dimension(325,150));
 		setPreferredSize(new Dimension(325, 100));
 		if (video.getName().length()>23)
@@ -36,8 +39,7 @@ public class PlaylistVideoComponent extends OurVideoComponent{
 		jchannel.setSize(new Dimension(jchannel.getHeight(),80));
 		
 		setJduration(video.getDuration());
-		this.playlist=playlist;
-		this.app=app;
+		
 
 		Box vbox = Box.createVerticalBox();
 		remove = new JButton();
@@ -48,6 +50,8 @@ public class PlaylistVideoComponent extends OurVideoComponent{
 		remove.setToolTipText("Remove the video below from your playlist");
 		remove.setBorder(null);
 		remove.setOpaque(false);
+		remove.setContentAreaFilled(false);
+		remove.setFocusPainted(false);
 
 		final PlaylistVideoComponent plvc = this;
 		remove.addMouseListener(new MouseAdapter(){
@@ -61,13 +65,13 @@ public class PlaylistVideoComponent extends OurVideoComponent{
 		vbox.add(Box.createVerticalGlue());
 		this.add(Box.createHorizontalGlue());
 		this.add(vbox);
+		this.setOpaque(true);
 
-
-		this.addMouseListener(new MouseAdapter(){
-			public void mousePressed(MouseEvent e){
-				app.readOurVideo(((PlaylistVideoComponent) e.getSource()).getVideo());
-			}
-		});
+//		this.addMouseListener(new MouseAdapter(){
+//			public void mousePressed(MouseEvent e){
+//				app.readOurVideo(((PlaylistVideoComponent) e.getSource()).getVideo());
+//			}
+//		});
 	}
 
 

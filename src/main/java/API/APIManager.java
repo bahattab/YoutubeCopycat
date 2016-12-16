@@ -1,12 +1,14 @@
 package API;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-
-import org.mortbay.jetty.Main;
 
 //import com.google.api.client.googleapis.json.GoogleJsonResponseException;
 import com.google.api.client.http.HttpRequest;
@@ -20,6 +22,7 @@ import com.google.api.services.youtube.model.SearchResult;
 import com.google.api.services.youtube.model.Video;
 import com.google.api.services.youtube.model.VideoListResponse;
 
+import app.AppController;
 import elements.OurVideo;
 
 public class APIManager {
@@ -31,7 +34,15 @@ public class APIManager {
 		// Read the developer key from the properties file.
 	        properties = new Properties();
 	        try {
-	            InputStream in = Search.class.getResourceAsStream("/" +PROPERTIES_FILENAME);
+	        	URL url = APIManager.class.getProtectionDomain().getCodeSource().getLocation();
+	    	    String jarPath = URLDecoder.decode(url.getFile(), "UTF-8");
+	    	    String parentPath = new File(jarPath).getParentFile().getPath();
+	            
+	            String fileSeparator = System.getProperty("file.separator");
+	            String p=parentPath+fileSeparator;
+	        	System.out.println(p);
+	            InputStream in = new FileInputStream(new File(p +PROPERTIES_FILENAME));
+	            System.out.println(in.toString());
 	            properties.load(in);
 
 	        } catch (IOException e) {
@@ -131,16 +142,5 @@ public class APIManager {
         return ourVideoList;
     }
     
-    public static void main(String[] args) throws IOException {
-		APIManager m = new APIManager();
-		System.out.println(m.search("loutre",3).get(0));
-		System.out.println(m.search("loutre",3).get(1));
-		System.out.println(m.search("loutre",3).get(2));
-		System.out.println(m.searchPopular().get(2).getName());
-		
-		//OurVideo o = new OurVideo("9 preuves que les chats sont des GROS CONS (qui nous veulent du mal)", "g86oqxtIYJ4", 1809973, 12206, 39774, 10007, "Topito, videoDescription=C'est un fait les chats sont des GROS CONS et on va vous le prouver ! ---- Crédit musique : \"Brother Jack - JR Tundra - YouTube Audio Library\" ---- Vidéo ...", null, "https://i.ytimg.com/vi/g86oqxtIYJ4/default.jpg")
-		//System.out.println(m.ConnexVideo("chaton nazi",1).get(0));
-		
-		
-	}
+  
 }
