@@ -138,7 +138,12 @@ Groupe NaN : Timothy Garwood, Graziella Husson, Quentin Thareau et Valentina Zel
 	- Amélioration de la fonctionnalité "settings"
 	- Ajouter la fonctionnalité permettant de cliquer sur "suivant" dans une playlist.
 	- Montage Vidéo de Soutenance + Démo finale
+	
 	Resultats :
+	- Des améliorations ont été apportées à l'interface graphique. Le panel contenant la playlist est maintenant légèrement transparent.
+	- Un bouton permettant de changer le titre d'une vidéo a été ajouté
+	- La durée des vidéos est maintenant correctement affichée (si celle-ci dure moins de une minute ou plus d'une heure)
+	- Il est maintenant possible de cliquer sur "suivant" et "précédent" lorsque des vidéos sont disponibles dans la playlist courrante. 
 
 *Install
 
@@ -165,7 +170,7 @@ Enjoy !
   - Une vidéo lancée peut être ajoutée à la Playlist courante (affichée à droite). Cette playlist peut être sauvergardée et rechargée par l'utilisateur ultérieurement. 
   - Un bouton "Suggestions" (avec un icône de coeur) permet de générer des suggestions à partir de la playlist courante que vous avez constituée.
   
-  - RELEASE_DAY_4 : Un .jar contenant une interface utilisateur est fournie. Le fichier youtube.properties contenant la clé d'accès à l'API Youtube doit être placé dans le même dossier que le .jar. Un message d'information s'affiche lorsque on lance l'application et présente les différentes fonctionnalités. On peut le retrouver en cliquant sur le bouton home. Une vidéo est lancée par défaut sur le video player Dans cette version, l'utilisateur peut : 
+ - RELEASE_DAY_4 : Un .jar contenant une interface utilisateur est fournie. Le fichier youtube.properties contenant la clé d'accès à l'API Youtube doit être placé dans le même dossier que le .jar. Un message d'information s'affiche lorsque on lance l'application et présente les différentes fonctionnalités. On peut le retrouver en cliquant sur le bouton home. Une vidéo est lancée par défaut sur le video player Dans cette version, l'utilisateur peut : 
   - rechercher des vidéos par mot clé; et lancer une vidéo depuis les résultats en ciquant dessus.
   - ajouter à la Playlist courante (affichée à droite) la vidéo lue. Cette playlist peut être sauvergardée et rechargée par l'utilisateur ultérieurement. Il peut aussi supprimer la playlist courante d'un seul clique. 
   - voir des suggestions à partir de la playlist courante à l'appuie d'un bouton "Suggestions" (avec un icône de coeur).

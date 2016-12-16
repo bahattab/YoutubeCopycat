@@ -180,7 +180,14 @@ public class AppController {
 	}
 
 	public void setAPIKey(String key) throws IOException{
-		BufferedWriter bw = new BufferedWriter(new FileWriter(new File("/youtube.properties")));
+		URL url = AppController.class.getProtectionDomain().getCodeSource().getLocation();
+	    String jarPath = URLDecoder.decode(url.getFile(), "UTF-8");
+	    String parentPath = new File(jarPath).getParentFile().getPath();
+        
+        String fileSeparator = System.getProperty("file.separator");
+        String propPath = parentPath + fileSeparator+"youtube.properties";
+        System.out.println(propPath);
+		BufferedWriter bw = new BufferedWriter(new FileWriter(new File(propPath)));
 		String nom = "youtube.apikey="+key;
 		bw.write(nom);
 		bw.close();
@@ -323,5 +330,11 @@ public class AppController {
 		playlistMode=false;
 	}
 
+	public void changeVideoTitle(OurVideo ourVideo){
+		
+		String name = JOptionPane.showInputDialog("Veuillez saisir un nouveau titre pour cette vidéo");
+		ourVideo.setName(name);;
+		ui.getCenter().getVideoTab().setDetails(ourVideo);
+	}
 	
 }

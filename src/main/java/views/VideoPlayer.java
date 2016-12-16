@@ -39,7 +39,7 @@ public class VideoPlayer extends JPanel {
 		this.add(videoSurface,BorderLayout.CENTER);
 		
 		mediaPlayer = createPlayer(vlcArgs, videoSurface);
-		mediaPlayer.setVolume(80);
+		mediaPlayer.setVolume(100);
 		controlsPanel=new PlayerControlsPanel(mediaPlayer,app);
 		this.add(controlsPanel,BorderLayout.SOUTH);
 		}
