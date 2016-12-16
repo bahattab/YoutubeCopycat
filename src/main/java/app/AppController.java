@@ -28,6 +28,7 @@ import views.Home;
 public class AppController {
 	private UserInterface ui;
 	private APIManager api;
+	private boolean playlistMode;
 	
 	public AppController(){
 		try {
@@ -149,10 +150,34 @@ public class AppController {
 	
 	public void playNextVideoFromPlaylist(){
 		if (ui.getRight().getPlaylist().getVideos().isEmpty()){
+			//ui.getCenter().getVideoTab().get
+		} else
+			try {
+				OurVideo ov = ui.getRight().getPlaylist().getNext();
+				readOurVideo(ov);
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	
 			
-		}
 	}
-
+	
+	public void playPreviousVideoFromPlaylist() {
+		if (ui.getRight().getPlaylist().getVideos().isEmpty()){
+			//ui.getCenter().getVideoTab().get
+		} else
+			try {
+				OurVideo ov = ui.getRight().getPlaylist().getPrevious();
+				readOurVideo(ov);
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+	}
 
 	public void setAPIKey(String key) throws IOException{
 		BufferedWriter bw = new BufferedWriter(new FileWriter(new File("/youtube.properties")));
@@ -286,5 +311,17 @@ public class AppController {
 		}
 		
 	}
+
+	public void activatePlaylistMode(OurVideo ourVideo) {
+		ui.getCenter().getVideoTab().setControlPanelPlaylistMode(true);
+		ui.getRight().getPlaylist().setCurrent(ourVideo);
+		playlistMode = true;
+	}
+	
+	public void deactivatePlaylistMode(){
+		ui.getCenter().getVideoTab().setControlPanelPlaylistMode(false);
+		playlistMode=false;
+	}
+
 	
 }

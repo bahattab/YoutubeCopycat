@@ -2,6 +2,7 @@ package app;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.net.URL;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -25,7 +26,7 @@ public class UserInterface extends JFrame {
 		setLayout(new BorderLayout());
 		JLabel background = new JLabel();
 		background = new JLabel();
-		java.net.URL u=UserInterface.class.getResource("/icons/Background.jpg");
+		URL u = UserInterface.class.getResource("/icons/Background.jpg");
 		background.setIcon(new ImageIcon(u));
 		
 		this.app=app;
@@ -61,7 +62,7 @@ public class UserInterface extends JFrame {
 
 	public CentralView getCenter() {
 		return center;
-	}
+ 	}
 	
 	public AppController getApp(){
 		return app;
