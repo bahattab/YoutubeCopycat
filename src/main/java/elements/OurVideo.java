@@ -10,6 +10,8 @@ import com.google.api.client.util.DateTime;
 
 public class OurVideo implements Serializable{
 	private String name;
+	
+
 	private String videoID;
 	private BigInteger viewCount;
 	private BigInteger dislikeCount;
@@ -118,6 +120,9 @@ public class OurVideo implements Serializable{
 	}
 	public String getName() {
 		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 
 

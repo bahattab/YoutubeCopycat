@@ -13,6 +13,7 @@ import app.AppController;
 
 import elements.OurVideo;
 import elements.addToPlaylistButton;
+import elements.makeChangesButton;
 
 public class VideoTab extends JPanel{
 	
@@ -71,10 +72,15 @@ public void setDetails(OurVideo ourVideo){
 		videoDetails.add(vBox);
 		JLabel desc = new JLabel(ourVideo.getVideoDescription());
 		videoDetails.add(desc, BorderLayout.SOUTH);
-		URL add=SearchTab.class.getResource("/icons/add.png");
 		
+		Box buttonsBox=Box.createVerticalBox();
+		URL add=SearchTab.class.getResource("/icons/add.png");
 		ImageIcon addI = new ImageIcon(add);
-		videoDetails.add(new addToPlaylistButton(ourVideo, app,addI),BorderLayout.EAST);
+		buttonsBox.add(new addToPlaylistButton(ourVideo, app,addI));
+		URL change=SearchTab.class.getResource("/icons/changes.png");
+		ImageIcon changeI = new ImageIcon(change);
+		buttonsBox.add(new makeChangesButton(ourVideo,app,changeI));
+		videoDetails.add(buttonsBox,BorderLayout.EAST);
 	}
 	
 	

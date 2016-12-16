@@ -323,5 +323,11 @@ public class AppController {
 		playlistMode=false;
 	}
 
+	public void changeVideoTitle(OurVideo ourVideo){
+		
+		String name = JOptionPane.showInputDialog("Veuillez saisir un nouveau titre pour cette vidéo");
+		ourVideo.setName(name);;
+		ui.getCenter().getVideoTab().setDetails(ourVideo);
+	}
 	
 }
