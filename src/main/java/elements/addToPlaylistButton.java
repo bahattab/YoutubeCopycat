@@ -16,12 +16,11 @@ public class addToPlaylistButton extends JButton {
 		super(i);
 		this.ourVideo=ourVideo;
 		this.appController = appController;
+		this.setToolTipText("Add this video at your current playlist");
 		this.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				System.out.println("button to add");
 				appController.addToPlaylist(ourVideo);
 			}
 		});
