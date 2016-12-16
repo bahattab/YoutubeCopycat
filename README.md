@@ -138,7 +138,12 @@ Groupe NaN : Timothy Garwood, Graziella Husson, Quentin Thareau et Valentina Zel
 	- Amélioration de la fonctionnalité "settings"
 	- Ajouter la fonctionnalité permettant de cliquer sur "suivant" dans une playlist.
 	- Montage Vidéo de Soutenance + Démo finale
+	
 	Resultats :
+	- Des améliorations ont été apportées à l'interface graphique. Le panel contenant la playlist est maintenant légèrement transparent.
+	- Un bouton permettant de changer le titre d'une vidéo a été ajouté
+	- La durée des vidéos est maintenant correctement affichée (si celle-ci dure moins de une minute ou plus d'une heure)
+	- Il est maintenant possible de cliquer sur "suivant" et "précédent" lorsque des vidéos sont disponibles dans la playlist courrante. 
 
 *Install
 
