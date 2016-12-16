@@ -39,7 +39,7 @@ public class CentralView extends JTabbedPane {
 	
 		playlistTab = new PlaylistTab(app);
 		JPanel jplInnerPannel3 = playlistTab;
-		this.addTab("My Playlists", playlistTab.getSearchIcon(),jplInnerPannel3);
+		this.addTab("My Playlists", playlistTab.getPlaylistIcon(),jplInnerPannel3);
 		
 	}
 	

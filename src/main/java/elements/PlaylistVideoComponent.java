@@ -21,6 +21,9 @@ public class PlaylistVideoComponent extends OurVideoComponent{
 	public PlaylistVideoComponent(Playlist playlist, OurVideo video, final AppController app) throws MalformedURLException, IOException {
 		super(video,app);
 		this.video=video;
+		this.playlist=playlist;
+		this.app=app;
+		
 		setMaximumSize(new Dimension(325,150));
 		setPreferredSize(new Dimension(325, 100));
 		if (video.getName().length()>23)
@@ -36,8 +39,7 @@ public class PlaylistVideoComponent extends OurVideoComponent{
 		jchannel.setSize(new Dimension(jchannel.getHeight(),80));
 		
 		setJduration(video.getDuration());
-		this.playlist=playlist;
-		this.app=app;
+		
 
 		Box vbox = Box.createVerticalBox();
 		remove = new JButton();

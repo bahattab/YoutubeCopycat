@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.URL;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -24,6 +25,7 @@ import javax.swing.JOptionPane;
 import API.APIManager;
 import elements.OurVideo;
 import elements.Playlist;
+import elements.PlaylistComponent;
 import elements.PlaylistVideoComponent;
 import views.Home;
 
@@ -160,36 +162,82 @@ public class AppController {
 	}
 	
 	public void saveOnFile(String fileName, Playlist playlist){
-		URL path = getClass().getProtectionDomain().getCodeSource().getLocation();
-		File dir = new File("playlists");
-		dir.mkdir();
-		File fichier =new  File(dir+ "/"+ fileName);
-	   
-	       try {
-	         ObjectOutputStream flotEcriture = 
-	             new ObjectOutputStream(
-	                new FileOutputStream(fichier));
-	         flotEcriture.writeObject(playlist);
-	         flotEcriture.close();
-	       } catch (IOException e) {
-	         System.out.println(" erreur :" + e.toString());
-	       }
-
+		
+		 try {
+			 URL url = AppController.class.getProtectionDomain().getCodeSource().getLocation();
+		     String jarPath = URLDecoder.decode(url.getFile(), "UTF-8");
+		     String parentPath = new File(jarPath).getParentFile().getPath();
+	         
+	         String fileSeparator = System.getProperty("file.separator");
+	         String newDir = parentPath + fileSeparator + "playlists" + fileSeparator;
+			 File dir = new File(newDir);
+	         dir.mkdir();
+	         File fichier =new  File(dir+ "/"+ fileName);
+		   
+		       try {
+		         ObjectOutputStream flotEcriture = 
+		             new ObjectOutputStream(
+		                new FileOutputStream(fichier));
+		         flotEcriture.writeObject(playlist);
+		         flotEcriture.close();
+		       } catch (IOException e) {
+		         System.out.println(" erreur :" + e.toString());
+		       }
+	         
+	      } catch (IOException e) {
+	         e.printStackTrace();
+	      }
+	}
+	
+	public void deleteFromFile(String fileName, PlaylistComponent plc){
+		
+		int confirm=ui.getCenter().getPlaylistTab().removeHelp();		
+			
+		if (confirm==JOptionPane.YES_OPTION){
+		 try {
+			 URL url = AppController.class.getProtectionDomain().getCodeSource().getLocation();
+		     String jarPath = URLDecoder.decode(url.getFile(), "UTF-8");
+		     String parentPath = new File(jarPath).getParentFile().getPath();
+	         
+	         String fileSeparator = System.getProperty("file.separator");
+	         String newDir = parentPath + fileSeparator + "playlists" + fileSeparator;
+			 File dir = new File(newDir);
+			 
+			 try{
+			 File fichier =new  File(dir+ "/"+fileName);
+			 System.out.println(fichier.getAbsolutePath());
+			 fichier.delete();
+			 ui.getCenter().getPlaylistTab().remove(plc);
+			 
+			 }catch(Exception e){
+				 e.printStackTrace();
+			 }
+		     
+	      } catch (IOException e) {
+	         e.printStackTrace();
+	      }
+		 
+		 
+		}
+		   
 
 	}
 	
 	public HashMap<String, Playlist> loadPlaylist(){
-		System.out.println("loadPlaylist");
-		ArrayList<Playlist> l = new ArrayList<Playlist>();
-		File repertoire = new File("playlists");
-		File[] files=repertoire.listFiles();
-		String[] f = null;
+		String jarPath="";
+		URL url = AppController.class.getProtectionDomain().getCodeSource().getLocation();
+		try{
+			jarPath = URLDecoder.decode(url.getFile(), "UTF-8");
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		String parentPath = new File(jarPath).getParentFile().getPath();
+		String fileSeparator = System.getProperty("file.separator");
+		String newDir = parentPath + fileSeparator + "playlists" + fileSeparator;
+		File dir = new File(newDir);
+		File[] files=dir.listFiles();
 		HashMap<String, Playlist> hm = new HashMap<>(0);
-		//String[] dir = new java.io.File("playlist").list( );
-        /*for (int i=0; i<files.length; i++)
-        {
-            f[i] = files[i].toString();
-	    }*/
+	
 		for(int i=0;i<files.length;i++){
 			try{	
 				ObjectInputStream flotLecture = new ObjectInputStream( new FileInputStream(files[i]));
@@ -199,15 +247,16 @@ public class AppController {
 				} catch (ClassNotFoundException e) {
 					e.printStackTrace();
 				}
-				//f[i] = files[i].toString();
+				flotLecture.close();
 				Playlist playlistChoice=(Playlist)lu;
-				hm.put(files[i].toString(), playlistChoice);				
+				hm.put(files[i].getName(), playlistChoice);				
 			}catch(IOException e){
 				System.out.println(" erreur :" + e.toString());
 		}
 		}
 		return hm;
 	}
+	
 
 	public void fillPlaylistTab() {
 		

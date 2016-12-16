@@ -17,12 +17,12 @@ import app.AppController;
 
 public class OurVideoComponent extends Box{
 
-	OurVideo video;
-	AppController app;
-	JLabel jname;
-	JLabel jduration;
-	JLabel jchannel;
-	JLabel miniaturelabel;
+	protected OurVideo video;
+	protected AppController app;
+	protected JLabel jname;
+	protected JLabel jduration;
+	protected JLabel jchannel;
+	protected JLabel miniaturelabel;
 
 	public OurVideoComponent(OurVideo video, AppController app) throws MalformedURLException, IOException {
 		super(0);
