@@ -109,6 +109,7 @@ public class PlayerControlsPanel extends JPanel {
         createControls();
         layoutControls();
         registerListeners();
+        setPlaylistMode(false);
     }
 
     private void createControls() {
@@ -328,7 +329,8 @@ public class PlayerControlsPanel extends JPanel {
         previousChapterButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                mediaPlayer.previousChapter();
+            	app.playPreviousVideoFromPlaylist();
+            	//mediaPlayer.previousChapter();
             }
         });
 
@@ -371,7 +373,7 @@ public class PlayerControlsPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
             	app.playNextVideoFromPlaylist();
-                mediaPlayer.nextChapter();
+                //mediaPlayer.nextChapter();
             }
         });
 
@@ -499,5 +501,10 @@ public class PlayerControlsPanel extends JPanel {
     private void updateVolume(int value) {
         volumeSlider.setValue(value);
     }
+
+	public void setPlaylistMode(boolean b) {
+		nextChapterButton.setVisible(b);
+		previousChapterButton.setVisible(b);
+	}
 }
 

@@ -115,5 +115,11 @@ public class VideoPlayer extends JPanel {
 
 		return embeddedMediaPlayer;
 	}
+
+
+	public void setControlPanelPlaylistMode(boolean b) {
+		controlsPanel.setPlaylistMode(b);
+		
+	}
 	
 }

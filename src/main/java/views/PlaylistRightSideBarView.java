@@ -34,8 +34,8 @@ public class PlaylistRightSideBarView extends JPanel{
 	//JLabel label;
 	//private Box bigvbox=Box.createVerticalBox();
 
-	private Box bigvbox=Box.createVerticalBox();
-	
+	private Box bigvbox;
+	Color backgroundColor;
 	
 	public PlaylistRightSideBarView(AppController app){
 		super();
@@ -44,14 +44,19 @@ public class PlaylistRightSideBarView extends JPanel{
 		this.app=app;
 
 		this.setOpaque(false);
-
+		backgroundColor = new Color(255,255,255,100);
+		//this.setBackground(backgroundColor);
 		bigvbox = Box.createVerticalBox();
-		
-
+		//bigvbox.setBackground(backgroundColor);
+		bigvbox.setOpaque(false);
 		Box topPanel = Box.createVerticalBox();
 		
+		Box hboxtitle = Box.createHorizontalBox();
 		JLabel topPanelLabel = new JLabel("Your Playlist");
-		topPanel.add(topPanelLabel);
+		hboxtitle.add(Box.createHorizontalGlue());
+		hboxtitle.add(topPanelLabel);
+		hboxtitle.add(Box.createHorizontalGlue());
+		topPanel.add(hboxtitle);
 		topPanelLabel.setForeground(Color.WHITE);
 		Box hbox = Box.createHorizontalBox();
 		importPlaylistButton = new ImportPlaylistButton(app);
@@ -81,30 +86,19 @@ public class PlaylistRightSideBarView extends JPanel{
 		
 		
 		this.result = new JPanel(new BorderLayout());
+		result.setBackground(backgroundColor);
 		result.add(bigvbox);
-		//result.setLayout(new FlowLayout(FlowLayout.CENTER));
-		//result.getLayout().(new Dimension(335,700));
-		//result.setLayout(new BoxLayout(result,BoxLayout.Y_AXIS));
 		result.setSize(new Dimension(338,100));
-		//result.setPreferredSize(new Dimension(338,100));
-		//result.setMaximumSize(new Dimension(335,10000));
-		//bigvbox.add(result);
+		
 		jsc = new JScrollPane(result);
 		this.add(jsc);
 		
-		//label = new JLabel("You don't have any playlist yet");
-		//label.setFont(new Font("Corbel",Font.BOLD,15));
-		//label.setHorizontalAlignment(WIDTH/2);
-		//result.add(label);
 		jsc.setPreferredSize(new Dimension(355,100));
-		//jsc.setMaximumSize(new Dimension(350,800));
-		//jsc.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		//bigvbox.setSize(new Dimension(350,800));
-
+		
 		jsc.setPreferredSize(new Dimension(355,800));
-		//jsc.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-
+		
 		jsc.setVisible(true);
+		jsc.setOpaque(false);
 	}
 	
 	public Playlist getPlaylist(){
@@ -116,29 +110,37 @@ public class PlaylistRightSideBarView extends JPanel{
 		if(!(playlist.existsIn(video))){
 			playlist.addVideo(video);
 			final PlaylistVideoComponent playlistComp = new PlaylistVideoComponent(playlist, video, app);
+			playlistComp.setBackground(backgroundColor);
 			playlistComp.addMouseListener(new MouseAdapter(){
 		    	@Override
 		    	public void mousePressed(MouseEvent e){
+		    		app.activatePlaylistMode(playlistComp.getVideo());
 		    		app.readOurVideo(playlistComp.getVideo());
 		    	}
 		    });
-			
+			this.remove(jsc);
+			this.repaint();
 			bigvbox.add(playlistComp);
-			result.repaint();
-			result.revalidate();
+			this.add(jsc);
+			bigvbox.repaint();
+			bigvbox.revalidate();
 		}
 		
 
 	}
 	public void remove(PlaylistVideoComponent pvc){
+		this.remove(jsc);
+		this.repaint();
 		playlist.removeVideo(pvc.getVideo());
 		bigvbox.remove(pvc);
-		result.repaint();
-		result.revalidate();
+		this.add(jsc);
+		bigvbox.repaint();
+		bigvbox.revalidate();
 	}
 
 	public void setPlaylist(Playlist playlistChoice) {
-		//result.remove(label);
+		this.remove(jsc);
+		this.repaint();
 		playlist.removeAll();
 		bigvbox.removeAll();
 		if (playlistChoice!=null)
@@ -150,8 +152,8 @@ public class PlaylistRightSideBarView extends JPanel{
 					e.printStackTrace();
 				}
 			}
-		result.repaint();
-		result.revalidate();
+		this.remove(jsc);
+		this.repaint();
 		
 		
 	}
