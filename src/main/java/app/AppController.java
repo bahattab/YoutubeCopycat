@@ -59,17 +59,19 @@ public class AppController {
 		}
 		else{
 		for(OurVideo v : ui.getRight().getPlaylist().getVideos()){
-			list = api.ConnexVideo(v);
-			for(int i = 0;i<list.size();i++){
-				bigList.add(list.get(i));
+			if(v.isOnline()){
+				list = api.ConnexVideo(v);
+				for(int i = 0;i<list.size();i++){
+					bigList.add(list.get(i));
+				}
+				Collections.shuffle(bigList);
+				list = new ArrayList<OurVideo>();
+				for(int i=0;i<10;i++){
+					list.add(bigList.get(i));
+				}
+				ui.getCenter().getSearchTab().update(list, "Videos you might like");
+				ui.getCenter().setSelectedIndex(1);
 			}
-			Collections.shuffle(bigList);
-			list = new ArrayList<OurVideo>();
-			for(int i=0;i<10;i++){
-				list.add(bigList.get(i));
-			}
-			ui.getCenter().getSearchTab().update(list, "Videoes you might like");
-			ui.getCenter().setSelectedIndex(1);
 		}
 		Collections.shuffle(bigList);
 		list = new ArrayList<OurVideo>();
