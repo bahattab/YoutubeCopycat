@@ -3,8 +3,8 @@ package elements;
 
 import java.io.Serializable;
 import java.math.BigInteger;
-//import java.time.Duration;
-//import java.time.Period;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.google.api.client.util.DateTime;
 
@@ -37,18 +37,17 @@ public class OurVideo implements Serializable{
 		this.channelTitle = channelTitle;
 		this.videoDescription = videoDescription;
 		this.publishedAt = publishedAt;
-//		if(!duration.equals("")){
-//			this.duration = convertDuration(duration);
-//		}
-		this.duration=duration;		
+		if(!duration.equals("")){
+			this.duration = convertDuration(convertToSeconds(duration));
+		}
+		
 	}
 
 
-/*	private String convertDuration(String duration2) {
+	private String convertDuration(int seconds) {
 		String fDuration="";
-		long seconds = Duration.parse(duration2).getSeconds();
 		if(seconds>3600){
-			long hours = Math.round((Duration.parse(duration2).getSeconds())/3600);
+			int hours = Math.round(seconds/3600);
 			if(hours>9){
 				fDuration=fDuration+String.valueOf(hours)+":";
 			}
@@ -58,7 +57,7 @@ public class OurVideo implements Serializable{
 			seconds=seconds - hours*3600;
 		}
 		if(seconds>60){
-			long minutes =  Math.round((Duration.parse(duration2).getSeconds())/60);
+			int minutes =  Math.round(seconds/60);
 			if(minutes>9){
 				fDuration=fDuration+String.valueOf(minutes)+":";
 			}else{
@@ -73,7 +72,35 @@ public class OurVideo implements Serializable{
 		}
 		return fDuration;
 	}
-*/
+	
+	private int convertToSeconds(String txt){
+	    String re1="(P)";   // Any Single Character 1
+	    String re2="(T)";   // Any Single Character 2
+	    String re3="(\\d+)";    // Integer Number 1
+	    String re4="(M)";   // Any Single Character 3
+	    String re5="(\\d+)";    // Integer Number 2
+	    String re6="(S)";   // Any Single Character 4
+	
+	    Pattern p = Pattern.compile(re1+re2+re3+re4+re5+re6,Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+	    Matcher m = p.matcher(txt);
+	    if (m.find())
+	    {
+	        String c1=m.group(1);
+	        String c2=m.group(2);
+	        String minutes=m.group(3); // Minutes are here
+	        String c3=m.group(4);
+	        String seconds=m.group(5); // Seconds are here
+	        String c4=m.group(6);
+	        System.out.print("("+c1.toString()+")"+"("+c2.toString()+")"+"("+minutes.toString()+")"+"("+c3.toString()+")"+"("+seconds.toString()+")"+"("+c4.toString()+")"+"\n");
+	
+	        int totalSeconds = Integer.parseInt(minutes) * 60 + Integer.parseInt(seconds);
+		    return totalSeconds;
+		    
+	    }
+	    return 0;
+	    
+	}
+
 
 	@Override
 	public String toString() {
