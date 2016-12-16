@@ -66,22 +66,22 @@ public class Home extends JPanel{
 		s.add(sLabel);
 		s.add(sLabel2);
 		
-		c.add(cLabel);
-		c.add(cLabel2);
 		
 		con.add(conLabel);
 		con.add(conLabel2);
 		
 		most.add(mostLabel);
 		most.add(mostLabel2);
+		c.add(cLabel);
+		c.add(cLabel2);
 		
 		Box vbox= Box.createVerticalBox();
 		
 		vbox.add(h);
 		vbox.add(s);
-		vbox.add(c);
 		vbox.add(con);
 		vbox.add(most);
+		vbox.add(c);
 		
 		featuresPanel.add(vbox);
 		mainPanel.add(descriptPanel,BorderLayout.NORTH);
