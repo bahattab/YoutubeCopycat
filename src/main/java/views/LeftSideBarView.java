@@ -143,7 +143,7 @@ b6.addMouseListener(new MouseAdapter() {
 		mainPanel.add(message);
 		
 
-		JOptionPane.showMessageDialog(null, mainPanel, "Suggestions de vidéos",1);
+		JOptionPane.showMessageDialog(null, mainPanel, "Suggestion of videos",1);
 
 	}
 
