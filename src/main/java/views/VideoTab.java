@@ -72,6 +72,8 @@ public void setDetails(OurVideo ourVideo){
 		vBox.add(hbox);
 		videoDetails.add(title,BorderLayout.NORTH);
 		videoDetails.add(vBox);
+		JLabel desc = new JLabel(ourVideo.getVideoDescription());
+		videoDetails.add(desc, BorderLayout.SOUTH);
 		URL add=SearchTab.class.getResource("/icons/add.png");
 		
 		ImageIcon addI = new ImageIcon(add);
