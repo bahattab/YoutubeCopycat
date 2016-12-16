@@ -1,13 +1,10 @@
 package views;
 
 import java.awt.BorderLayout;
-import java.awt.CardLayout;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.net.URL;
 
 import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -72,6 +69,8 @@ public void setDetails(OurVideo ourVideo){
 		vBox.add(hbox);
 		videoDetails.add(title,BorderLayout.NORTH);
 		videoDetails.add(vBox);
+		JLabel desc = new JLabel(ourVideo.getVideoDescription());
+		videoDetails.add(desc, BorderLayout.SOUTH);
 		URL add=SearchTab.class.getResource("/icons/add.png");
 		
 		ImageIcon addI = new ImageIcon(add);

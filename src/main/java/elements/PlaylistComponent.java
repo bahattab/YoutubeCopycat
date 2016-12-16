@@ -1,5 +1,6 @@
 package elements;
 
+
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -7,11 +8,11 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-
 import javax.imageio.ImageIO;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.Box;
 import javax.swing.JLabel;
 import javax.swing.border.BevelBorder;
 

@@ -1,10 +1,6 @@
 package app;
 
-
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 
 import java.io.File;
@@ -55,29 +51,51 @@ public class AppController {
 	public void connexVideo() throws IOException{
 		List<OurVideo> list = new ArrayList<>();
 		List<OurVideo> bigList = new ArrayList<>();
-		
-		if (ui.getRight().getPlaylist().getVideos().isEmpty()){
+		List<OurVideo> fatList = new ArrayList<>();
+		fatList = ui.getRight().getPlaylist().getVideos();
+		if (fatList.isEmpty()){
 			ui.getLeft().suggestionsHelp();
 		}
 		else{
-		for(OurVideo v : ui.getRight().getPlaylist().getVideos()){
-			list = api.ConnexVideo(v);
-			for(int i = 0;i<list.size();i++){
-				bigList.add(list.get(i));
+		for(OurVideo v : fatList){
+			if(v.isOnline()){
+				list = api.ConnexVideo(v);
+				for(int i = 0;i<list.size();i++){
+					bigList.add(list.get(i));
+				}
+				Collections.shuffle(bigList);
+				list = new ArrayList<OurVideo>();
+				for(int i=0;i<10;i++){
+					list.add(bigList.get(i));
+				}
+				ui.getCenter().getSearchTab().update(list, "Videos you might like");
+				ui.getCenter().setSelectedIndex(1);
 			}
-			Collections.shuffle(bigList);
-			list = new ArrayList<OurVideo>();
-			for(int i=0;i<10;i++){
-				list.add(bigList.get(i));
-			}
-			ui.getCenter().getSearchTab().update(list, "Videoes you might like");
-			ui.getCenter().setSelectedIndex(1);
 		}
 		Collections.shuffle(bigList);
 		list = new ArrayList<OurVideo>();
 		for(int i=0;i<10;i++){
 			list.add(bigList.get(i));
 		}
+		for(int i=0;i<10;i++){
+			for(int j=0;i<10;j++){
+				//for(int k=0;k<fatList.size();k++)
+				if((i != j) && (list.get(i) == list.get(j) /*|| (list.get(i) == fatList.get(k)))*/)){
+					
+					Collections.shuffle(bigList);
+					list.set(i,bigList.get(0)); 
+					i--;
+					for(int k=0;k<fatList.size();k++){
+						if((i != k) && (list.get(i) == fatList.get(k))){
+							Collections.shuffle(bigList);
+							list.set(i,bigList.get(0));
+							i--;
+						}
+						}
+					}
+				}
+			}
+		
 		ui.getCenter().getSearchTab().update(list, "Videos you might like");
 		ui.getCenter().setSelectedIndex(1);
 		}

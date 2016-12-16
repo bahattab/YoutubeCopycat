@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import javax.swing.JPanel;
 import uk.co.caprica.vlcj.binding.LibVlc;
 import uk.co.caprica.vlcj.discovery.NativeDiscovery;
@@ -16,7 +17,6 @@ import uk.co.caprica.vlcj.runtime.x.LibXUtil;
 
 
 import com.sun.jna.Native;
-import com.sun.jna.NativeLibrary;
 
 import app.AppController;
 

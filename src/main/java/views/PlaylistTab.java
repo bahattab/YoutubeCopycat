@@ -1,22 +1,16 @@
 package views;
 
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
-import java.util.List;
-
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -25,8 +19,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import app.AppController;
-import elements.OurVideo;
-import elements.OurVideoComponent;
 import elements.Playlist;
 import elements.PlaylistComponent;
 import elements.PlaylistVideoComponent;

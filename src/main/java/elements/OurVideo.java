@@ -85,14 +85,12 @@ public class OurVideo implements Serializable{
 	    Matcher m = p.matcher(txt);
 	    if (m.find())
 	    {
-	        String c1=m.group(1);
-	        String c2=m.group(2);
+	        //String c1=m.group(1);
+	        //String c2=m.group(2);
 	        String minutes=m.group(3); // Minutes are here
-	        String c3=m.group(4);
+	        //String c3=m.group(4);
 	        String seconds=m.group(5); // Seconds are here
-	        String c4=m.group(6);
-	        System.out.print("("+c1.toString()+")"+"("+c2.toString()+")"+"("+minutes.toString()+")"+"("+c3.toString()+")"+"("+seconds.toString()+")"+"("+c4.toString()+")"+"\n");
-	
+	        //String c4=m.group(6);
 	        int totalSeconds = Integer.parseInt(minutes) * 60 + Integer.parseInt(seconds);
 		    return totalSeconds;
 		    
