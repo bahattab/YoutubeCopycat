@@ -48,6 +48,8 @@ public class PlaylistVideoComponent extends OurVideoComponent{
 		remove.setToolTipText("Remove the video below from your playlist");
 		remove.setBorder(null);
 		remove.setOpaque(false);
+		remove.setContentAreaFilled(false);
+		remove.setFocusPainted(false);
 
 		final PlaylistVideoComponent plvc = this;
 		remove.addMouseListener(new MouseAdapter(){
@@ -61,13 +63,13 @@ public class PlaylistVideoComponent extends OurVideoComponent{
 		vbox.add(Box.createVerticalGlue());
 		this.add(Box.createHorizontalGlue());
 		this.add(vbox);
+		this.setOpaque(true);
 
-
-		this.addMouseListener(new MouseAdapter(){
-			public void mousePressed(MouseEvent e){
-				app.readOurVideo(((PlaylistVideoComponent) e.getSource()).getVideo());
-			}
-		});
+//		this.addMouseListener(new MouseAdapter(){
+//			public void mousePressed(MouseEvent e){
+//				app.readOurVideo(((PlaylistVideoComponent) e.getSource()).getVideo());
+//			}
+//		});
 	}
 
 

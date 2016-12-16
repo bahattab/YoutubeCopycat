@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class Playlist implements Serializable{
 
 	ArrayList<OurVideo> videos;
+	int currentVideo;
 	
 	public ArrayList<OurVideo> getVideos() {
 		return videos;
@@ -13,19 +14,25 @@ public class Playlist implements Serializable{
 
 	public Playlist(){
 		videos = new ArrayList<OurVideo>();
+		currentVideo=-1;
 	}
 	
 	public void addVideo(OurVideo video){
 		videos.add(video);
+		//currentVideo++;
 	}
 	
 	public void removeVideo(OurVideo video){
+		int j = videos.indexOf(video);
 		videos.remove(video);
+		if (j<currentVideo)
+			currentVideo--;
 	}
 	
 	public void removeAll(){
 		for (int i =0; i< videos.size(); i++)
 			videos.remove(i);
+		currentVideo=-1;
 	}
 	
 	public boolean existsIn(OurVideo video){
@@ -45,4 +52,25 @@ public class Playlist implements Serializable{
 	public int size(){
 		return videos.size();
 	}
+
+	public OurVideo getNext() throws Exception {
+		currentVideo++;
+		if (currentVideo<videos.size())
+			return videos.get(currentVideo);
+		else throw new Exception("End of playlist exception");
+		
+	}
+	
+	public OurVideo getPrevious() throws Exception {
+		currentVideo--;
+		if (currentVideo>-1)
+			return videos.get(currentVideo);
+		else throw new Exception("Start of playlist exception");
+	}
+	
+	public void setCurrent(OurVideo ourVideo) {
+		currentVideo=videos.indexOf(ourVideo);
+	}
+
+
 }

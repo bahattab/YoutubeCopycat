@@ -86,4 +86,10 @@ public void setDetails(OurVideo ourVideo){
 		// Waits until the player window be closed
 		//Thread.currentThread().join();
 	}
+
+	public void setControlPanelPlaylistMode(boolean b) {
+		videoPlayer.setControlPanelPlaylistMode(b);
+		
+	}
+
 }
