@@ -3,8 +3,8 @@ package elements;
 
 import java.io.Serializable;
 import java.math.BigInteger;
-import java.time.Duration;
-import java.time.Period;
+//import java.time.Duration;
+//import java.time.Period;
 
 import com.google.api.client.util.DateTime;
 
@@ -37,14 +37,14 @@ public class OurVideo implements Serializable{
 		this.channelTitle = channelTitle;
 		this.videoDescription = videoDescription;
 		this.publishedAt = publishedAt;
-		if(!duration.equals("")){
-			this.duration = convertDuration(duration);
-		}
-		
+//		if(!duration.equals("")){
+//			this.duration = convertDuration(duration);
+//		}
+		this.duration=duration;		
 	}
 
 
-	private String convertDuration(String duration2) {
+/*	private String convertDuration(String duration2) {
 		String fDuration="";
 		long seconds = Duration.parse(duration2).getSeconds();
 		if(seconds>3600){
@@ -73,7 +73,7 @@ public class OurVideo implements Serializable{
 		}
 		return fDuration;
 	}
-
+*/
 
 	@Override
 	public String toString() {
